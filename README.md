@@ -24,3 +24,13 @@ It’s a real puzzle, and it looks something like this:
 * Most drivers dislike working too many late shifts. Therefore, the late shifts should be distributed as fairly as possible among the drivers. You should aim to assign exactly 4 late shifts to each driver over the two-week planning period.
 * According to an agreement with the Transport Workers Union, a driver must not be assigned a late shift followed by an early shift the next day.
 * According to a second agreement with the Transport Workers Union, a driver can work more than three consecutive late shifts, but it will get 10 negative points for every addional late shift. 
+
+<h1> Rules </h1>
+
+* +3	Respect a single shift preference
+* +4	Respect a single driver day-off preference
+* +5	For each allocated long rest (3 or more consecutive days off)
+* -20	For each unassigned shift
+* -30	For each late shift followed immediately by an early shift in a single driver’s schedule
+* -10	For every after the third consecutive late shift assigned to a single driver
+* -8	For every late shift assigned that is not equal to 4
