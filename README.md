@@ -1,7 +1,7 @@
 Bus-driver-planning-challenge
 Quintiq challenge of May 2021: https://careers.3ds.com/puzzle-quintiq
 
-<h1>The Challenge<h1>
+<h1>The Challenge</h1>
   
 The bus-driver-planning challenge You work in the planning department at Big Blue Buses. Every day, for not much money and no glory at all, you take on the challenge of creating an optimum working schedule for Big Blue Buses’ drivers to cover the next 14 days.
 
@@ -9,7 +9,7 @@ The closer your schedule is to optimum, the happier your boss and the drivers wi
 
 If you’re interested to be a part of Quintiq, then take up this challenge and show us your skills. Score 85% or above and we guarantee you an interview with our exciting organization.
 
-<h2> Earn your wage <h2>
+<h2> Earn your wage </h2>
   
 It’s a real puzzle, and it looks something like this:
 
