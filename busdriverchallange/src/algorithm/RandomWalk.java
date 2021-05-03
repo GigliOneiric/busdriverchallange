@@ -1,8 +1,8 @@
-package Algorithm;
+package algorithm;
 
-import busdriverchallange.Config;
-import busdriverchallange.Restrictions;
-import busdriverchallange.Solution;
+import challange.Config;
+import challange.Restrictions;
+import challange.Solution;
 
 public class RandomWalk {
 

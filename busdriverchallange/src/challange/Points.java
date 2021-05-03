@@ -1,4 +1,4 @@
-package busdriverchallange;
+package challange;
 
 /**
  * @author Tobias Stelter This class calculates the total points.

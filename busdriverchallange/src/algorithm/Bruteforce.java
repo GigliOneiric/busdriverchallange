@@ -1,7 +1,7 @@
-package Algorithm;
+package algorithm;
 
-import busdriverchallange.Config;
-import busdriverchallange.Solution;
+import challange.Config;
+import challange.Solution;
 
 public class Bruteforce {
 

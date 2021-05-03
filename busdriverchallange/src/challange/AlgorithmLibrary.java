@@ -1,12 +1,12 @@
-package busdriverchallange;
+package challange;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import Algorithm.Bruteforce;
-import Algorithm.GeneticAlgorithm;
-import Algorithm.RandomWalk;
+import algorithm.Bruteforce;
+import algorithm.GeneticAlgorithm;
+import algorithm.RandomWalk;
 
 /**
  * @author Tobias Stelter This class implement the algorithms.

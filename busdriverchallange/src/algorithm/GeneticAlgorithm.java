@@ -1,11 +1,11 @@
-package Algorithm;
+package algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import busdriverchallange.Config;
-import busdriverchallange.Solution;
+import challange.Config;
+import challange.Solution;
 
 public class GeneticAlgorithm {
 
