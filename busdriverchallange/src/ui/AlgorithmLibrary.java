@@ -1,4 +1,4 @@
-package challange;
+package ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import algorithm.Bruteforce;
 import algorithm.GeneticAlgorithm;
 import algorithm.RandomWalk;
+import model.Default;
+import model.Solution;
 
 /**
  * @author Tobias Stelter This class implement the algorithms.

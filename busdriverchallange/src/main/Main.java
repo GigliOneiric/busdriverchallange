@@ -1,4 +1,6 @@
-package challange;
+package main;
+
+import ui.AlgorithmLibrary;
 
 /**
  * @author Tobias Stelter

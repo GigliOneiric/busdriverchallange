@@ -1,4 +1,4 @@
-package challange;
+package model;
 
 /**
  * @author Tobias Stelter This class calculates the total points.

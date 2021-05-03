@@ -1,4 +1,4 @@
-package challange;
+package ui;
 
 /**
  * @author Tobias Stelter
@@ -6,6 +6,8 @@ package challange;
  */
 
 import java.util.Arrays;
+
+import model.Config;
 
 public class Printer {
 

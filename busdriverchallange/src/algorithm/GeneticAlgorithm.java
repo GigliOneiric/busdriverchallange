@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import challange.Config;
-import challange.Solution;
+import model.Config;
+import model.Solution;
 
 public class GeneticAlgorithm {
 

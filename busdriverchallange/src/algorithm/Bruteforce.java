@@ -1,7 +1,7 @@
 package algorithm;
 
-import challange.Config;
-import challange.Solution;
+import model.Config;
+import model.Solution;
 
 public class Bruteforce {
 

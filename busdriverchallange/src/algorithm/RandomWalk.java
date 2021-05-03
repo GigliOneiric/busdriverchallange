@@ -1,8 +1,8 @@
 package algorithm;
 
-import challange.Config;
-import challange.Restrictions;
-import challange.Solution;
+import model.Config;
+import model.Restrictions;
+import model.Solution;
 
 public class RandomWalk {
 
