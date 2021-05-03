@@ -23,3 +23,4 @@ It’s a real puzzle, and it looks something like this:
 * Drivers may prefer to work an early or late shift on particular days. The yellow nodes in Shift Planning form indicate shift preferences.
 * Most drivers dislike working too many late shifts. Therefore, the late shifts should be distributed as fairly as possible among the drivers. You should aim to assign exactly 4 late shifts to each driver over the two-week planning period.
 * According to an agreement with the Transport Workers Union, a driver must not be assigned a late shift followed by an early shift the next day.
+* According to a second agreement with the Transport Workers Union, a driver can work no more than three consecutive late shiftsIt can work more than 3 night shifts, but it will get 10 negative points for every addional night shift. 
