@@ -65,23 +65,21 @@ public class AlgorithmLibrary {
 
 	public void selectJustZeros() {
 		this.matrix = Default.matrixZeros;
+		this.solutionObj = new Solution(this.matrix);
 
-		Solution solutionObj = new Solution(this.matrix);
-
-		Printer.printPointsConsole(solutionObj.getPoints());
-		Printer.printValidSolutionConsole(solutionObj.getValidSolution());
-		Printer.printMatrixConsole(solutionObj.getMatrix());
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
 	}
 	
 	public void selectDefault() {
 		this.matrix = Default.matrix;
+		this.solutionObj = new Solution(this.matrix);
 
-		Solution solutionObj = new Solution(this.matrix);
-
-		Printer.printPointsConsole(solutionObj.getPoints());
-		Printer.printValidSolutionConsole(solutionObj.getValidSolution());
-		Printer.printMatrixConsole(solutionObj.getMatrix());
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
 	}
 
