@@ -46,7 +46,7 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 2) {
 
-			this.matrix = Default.matrixAmir;
+			this.matrix = Default.matrix;
 			
 			Solution solutionObj = new Solution(this.matrix);
 
