@@ -3,6 +3,10 @@ package algorithm;
 import model.Config;
 import model.Solution;
 
+/**
+ * @author Tobias Stelter This class implement the bruteforce-algorithm.
+ */
+
 public class Bruteforce {
 
 	private Solution solutionObj = new Solution();
@@ -17,6 +21,7 @@ public class Bruteforce {
 
 	/**
 	 * Generates all permutations of the solution
+	 * 
 	 * @return matrix
 	 */
 

@@ -4,6 +4,10 @@ import model.Config;
 import model.Restrictions;
 import model.Solution;
 
+/**
+ * @author Tobias Stelter This class implement the random walk.
+ */
+
 public class RandomWalk {
 
 	/**

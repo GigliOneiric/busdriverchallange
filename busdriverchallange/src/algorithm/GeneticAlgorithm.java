@@ -7,6 +7,10 @@ import java.util.Random;
 import model.Config;
 import model.Solution;
 
+/**
+ * @author Tobias Stelter This class implement the genetic algorithm.
+ */
+
 public class GeneticAlgorithm {
 
 	private Solution solutionObj = new Solution();
