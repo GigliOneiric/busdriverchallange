@@ -73,7 +73,7 @@ public class GeneticAlgorithm {
 		// Find best Child/Parent
 		findBestParent(population);
 
-		return solutionObj;
+		return this.solutionObj;
 
 	}
 
@@ -268,7 +268,7 @@ public class GeneticAlgorithm {
 	 * @return matrix
 	 */
 
-	public Solution findBestParent(List<Solution> population) {
+	private void findBestParent(List<Solution> population) {
 
 		Solution solutionObj = new Solution();
 
@@ -281,8 +281,6 @@ public class GeneticAlgorithm {
 			}
 
 		}
-
-		return this.solutionObj;
 	}
 
 }
