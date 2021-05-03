@@ -11,6 +11,10 @@ import java.util.Random;
  * @author Tobias Stelter This class implement the algorithms.
  */
 
+/**
+ * @author Tobias
+ *
+ */
 public class AlgorithmLibrary {
 
 	private int[][] matrix;
@@ -425,6 +429,11 @@ public class AlgorithmLibrary {
 
 	}
 
+	/**
+	 * Reads a single Integer
+	 * @return integer
+	 */
+	
 	public int readInt() {
 		String input;
 		int number = 0;
