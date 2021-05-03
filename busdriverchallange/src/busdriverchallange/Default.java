@@ -1,8 +1,7 @@
 package busdriverchallange;
 
 /**
- * @author Tobias Stelter This class implement the matrix for the method
- *         "noAlogithm".
+ * @author Tobias Stelter This class implement the default matrix.
  */
 
 public class Default {

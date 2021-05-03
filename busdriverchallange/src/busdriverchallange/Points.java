@@ -17,6 +17,11 @@ public class Points {
 
 		return this.points;
 	}
+	
+	/**
+	 * Calculates the points for the unassigned shift per route
+	 * @return points
+	 */
 
 	private int calculatePointsUnassignedShift() {
 		int points = 0;
@@ -43,6 +48,11 @@ public class Points {
 		}
 		return points;
 	}
+	
+	/**
+	 * Calculates the points for the preferred shift
+	 * @return points
+	 */
 
 	private int calculatePointsPreferredShift() {
 		int points = 0;
@@ -64,6 +74,11 @@ public class Points {
 
 		return points;
 	}
+	
+	/**
+	 * Calculates the points for the preferred holliday
+	 * @return points
+	 */
 
 	private int calculatePointsPrefferedHoliday() {
 		int points = 0;
@@ -103,6 +118,12 @@ public class Points {
 		return points;
 
 	}
+	
+	/**
+	 * Calculates the points for night-shifts followed by day-shifts
+	 * @return points
+	 */
+
 
 	private int calculatePointsNightshiftFollowedByDayshift() {
 		int points = 0;
@@ -118,7 +139,6 @@ public class Points {
 			// Check for single driver
 			for (int f = 1; f < row_len - 1; f = f + Config.shiftsPerDay) {
 
-				// Check holliday for one day
 				for (int i = 0 + f; i < Config.shiftsPerDay + f; i++) {
 
 					for (int j = 0 + l; j < Config.routes + l; j++) {
@@ -141,6 +161,11 @@ public class Points {
 		return points;
 
 	}
+	
+	/**
+	 * Calculates the points for more than three night-shifts
+	 * @return points
+	 */
 
 	private int calculatePointsMoreThanThreeNightShifts() {
 		int points = 0;
@@ -182,6 +207,11 @@ public class Points {
 		return points;
 
 	}
+	
+	/**
+	 * Calculates the points for the long break
+	 * @return points
+	 */
 
 	private int calculatePointsLongBreak() {
 		int points = 0;
@@ -200,7 +230,6 @@ public class Points {
 			// Check for single driver
 			for (int f = 0; f < row_len; f = f + Config.shiftsPerDay) {
 
-				// Check holliday for one day
 				for (int i = 0 + f; i < Config.shiftsPerDay + f; i++) {
 
 					for (int j = 0 + l; j < Config.routes + l; j++) {
@@ -232,6 +261,11 @@ public class Points {
 		return points;
 
 	}
+	
+	/**
+	 * Calculates the points for unbalanced night-shifts
+	 * @return points
+	 */
 
 	private int calculatePointsUnbalancedNightShifts() {
 		int points = (-1 * Config.pointsUnbalancedNightShifts) * ((Config.drivers * Config.equalNightShifts) - (Config.totalDays * Config.routes)) ;

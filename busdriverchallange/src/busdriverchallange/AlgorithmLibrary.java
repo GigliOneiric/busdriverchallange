@@ -11,10 +11,6 @@ import java.util.Random;
  * @author Tobias Stelter This class implement the algorithms.
  */
 
-/**
- * @author Tobias
- *
- */
 public class AlgorithmLibrary {
 
 	private int[][] matrix;
@@ -22,6 +18,11 @@ public class AlgorithmLibrary {
 
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader(isr);
+	
+	/**
+	 * Selects the algorithm
+	 * @return matrix
+	 */
 
 	public void selectAlgorithm() {
 
@@ -45,7 +46,7 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 2) {
 
-			this.matrix = Default.matrix;
+			this.matrix = Default.matrixAmir;
 			
 			Solution solutionObj = new Solution(this.matrix);
 
@@ -125,6 +126,11 @@ public class AlgorithmLibrary {
 		}
 
 	}
+	
+	/**
+	 * Generates all permutations of the solution
+	 * @return matrix
+	 */
 
 	private int brutforce(int[][] matrix, int currentRow, int currentColumn, int acc) {
 
@@ -148,6 +154,11 @@ public class AlgorithmLibrary {
 
 		return brutforce(matrix, currentRow + 1, currentColumn, acc);
 	}
+	
+	/**
+	 * Generates a random solution
+	 * @return matrix
+	 */
 
 	private void randomWalk() {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
@@ -172,6 +183,11 @@ public class AlgorithmLibrary {
 		this.solutionObj = new Solution(matrix);
 
 	}
+	
+	/**
+	 * Finds a solution using the genetic algorithm
+	 * @return matrix
+	 */
 
 	private void geneticAlgorithm(int generationSize, int populationSize, int selection, int crossovermethod,
 			int crossoverPoint, int crossoverPointTWO, int mutationRate, int tournamentSize) {
@@ -226,6 +242,11 @@ public class AlgorithmLibrary {
 		findBestParent(population);
 
 	}
+	
+	/**
+	 * Selects the parents for the genetic algorithm
+	 * @return matrix
+	 */
 
 	private List<int[][]> selectParents(List<Solution> population, int selection, int tournamentSize) {
 		List<int[][]> parents = new ArrayList<int[][]>();
@@ -233,6 +254,7 @@ public class AlgorithmLibrary {
 		int[][] maleParent;
 		int[][] femaleParent;
 
+		// Randomly selection
 		if (selection == 1) {
 			maleParent = population.get(getRandomInt(0, population.size() - 1)).getMatrix();
 			parents.add(maleParent);
@@ -244,11 +266,12 @@ public class AlgorithmLibrary {
 
 			parents.add(femaleParent);
 		}
+		
+		// Randomly select two parents via tournament selection.
 		if (selection == 2) {
 
 			Random rand = new Random(System.currentTimeMillis());
 
-			// Randomly select two parents via tournament selection.
 			for (int i = 0; i < 2; i++) {
 
 				int champion = -1;
@@ -403,6 +426,11 @@ public class AlgorithmLibrary {
 		return matrix;
 
 	}
+	
+	/**
+	 * Finds the parent with the highest points
+	 * @return matrix
+	 */
 
 	public int[][] findBestParent(List<Solution> population) {
 
@@ -420,6 +448,11 @@ public class AlgorithmLibrary {
 
 		return matrix;
 	}
+	
+	/**
+	 * Generates a random int
+	 * @return radomInt
+	 */
 
 	public int getRandomInt(int min, int max) {
 
@@ -430,8 +463,8 @@ public class AlgorithmLibrary {
 	}
 
 	/**
-	 * Reads a single Integer
-	 * @return integer
+	 * Reads a single int
+	 * @return number
 	 */
 	
 	public int readInt() {

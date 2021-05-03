@@ -8,14 +8,10 @@ public class ValidSoultion {
 	private int[][] matrix;
 	private boolean validSoultion;
 
-	private int[][] license;
-	private int[][] holliday;
 
 	public boolean checkValidSoultion(int[][] matrix) {
 		this.matrix = matrix;
 		this.validSoultion = true;
-		this.license = Restrictions.license;
-		this.holliday = Restrictions.holliday;
 
 		checkLicense();
 		checkHolliday();
@@ -26,6 +22,10 @@ public class ValidSoultion {
 
 	}
 
+	/**
+	 * Checks if the solution have valid licenses
+	 */
+
 	private void checkLicense() {
 
 		int col_len = this.matrix.length;
@@ -35,13 +35,17 @@ public class ValidSoultion {
 
 			for (int j = 0; j < col_len; j++) {
 
-				if (this.matrix[j][i] == 1 && this.license[j][i] == 0) {
+				if (this.matrix[j][i] == 1 && Restrictions.license[j][i] == 0) {
 					this.validSoultion = false;
 				}
 			}
 
 		}
 	}
+
+	/**
+	 * Checks if the solution disregarded the holliday from the restrictions
+	 */
 
 	private void checkHolliday() {
 
@@ -52,14 +56,18 @@ public class ValidSoultion {
 
 			for (int j = 0; j < col_len; j++) {
 
-				if (this.matrix[j][i] == 1 && this.holliday[j][i] == 1) {
+				if (this.matrix[j][i] == 1 && Restrictions.holliday[j][i] == 1) {
 					this.validSoultion = false;
-					
+
 				}
 			}
 
 		}
 	}
+
+	/**
+	 * Checks if a route have more than one assigned driver
+	 */
 
 	private void checkMultipleShifts() {
 		int shiftCounter = 0;
@@ -77,8 +85,7 @@ public class ValidSoultion {
 
 				if (shiftCounter > 1) {
 					this.validSoultion = false;
-					
-					
+
 				}
 				shiftCounter = 0;
 
@@ -86,8 +93,11 @@ public class ValidSoultion {
 		}
 	}
 
-	private int checkShiftsPerDay() {
-		int points = 0;
+	/**
+	 * Checks if a driver have more than one shift per day
+	 */
+
+	private void checkShiftsPerDay() {
 
 		int col_len = this.matrix.length;
 		int row_len = this.matrix[0].length;
@@ -105,7 +115,7 @@ public class ValidSoultion {
 
 					for (int j = 0 + l; j < Config.routes + l; j++) {
 
-						if (this.matrix[j][i] == 1 && this.license[j][i] == 1) {
+						if (this.matrix[j][i] == 1 && Restrictions.license[j][i] == 1) {
 							shiftCounter++;
 
 						}
@@ -119,8 +129,6 @@ public class ValidSoultion {
 				shiftCounter = 0;
 			}
 		}
-		return points;
-
 	}
 
 }
