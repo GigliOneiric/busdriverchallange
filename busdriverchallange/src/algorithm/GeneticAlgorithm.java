@@ -86,71 +86,88 @@ public class GeneticAlgorithm {
 	private List<int[][]> selectParents(List<Solution> population, int selection, int tournamentSize) {
 		List<int[][]> parents = new ArrayList<int[][]>();
 
-		int[][] maleParent;
-		int[][] femaleParent;
-
 		// Randomly selection
 		if (selection == 1) {
-			maleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
-			parents.add(maleParent);
-
-			do {
-				femaleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
-
-			} while (maleParent == femaleParent);
-
-			parents.add(femaleParent);
+			parents = randomSelection(population);
 		}
 
 		// Randomly select two parents via tournament selection.
 		if (selection == 2) {
-
-			int champion = -1;
-			int winner = -1;
-			int enemy = -1;
-			boolean contains = false;
-
-			Random rand = new Random(System.currentTimeMillis());
-
-			for (int i = 0; i < 2; i++) {
-				
-				// Creates a list of all current players
-				List<Integer> players = new ArrayList<Integer>();
-				players.add(champion);
-				
-				// Searching for an player who hasnt already won
-				do {
-					contains = false;
-					winner = rand.nextInt(population.size());
-					contains = players.contains(winner);
-				} while (contains == true);
-				
-				players.add(winner);
-				
-				int[][] matrix = population.get(winner).getMatrix();
-				parents.add(matrix);
-
-				for (int j = 0; j < tournamentSize; j++) {
-
-					do {
-						contains = false;
-						enemy = rand.nextInt(population.size());
-						contains = players.contains(enemy);
-					} while (contains == true);
-
-					players.add(enemy);
-
-					if (population.get(enemy).getPoints() > population.get(winner).getPoints()) {
-						matrix = population.get(enemy).getMatrix();
-						parents.set(i, matrix);
-
-						winner = enemy;
-					}
-				}
-				champion = winner;
-			}
+			parents = tournamentSelection(population, tournamentSize);
 		}
 
+		return parents;
+	}
+
+	private List<int[][]> randomSelection(List<Solution> population) {
+
+		List<int[][]> parents = new ArrayList<int[][]>();
+
+		int[][] maleParent;
+		int[][] femaleParent;
+
+		maleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
+		parents.add(maleParent);
+
+		do {
+			femaleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
+
+		} while (maleParent == femaleParent);
+
+		parents.add(femaleParent);
+
+		return parents;
+
+	}
+
+	private List<int[][]> tournamentSelection(List<Solution> population, int tournamentSize) {
+
+		List<int[][]> parents = new ArrayList<int[][]>();
+
+		int champion = -1;
+		int winner = -1;
+		int enemy = -1;
+		boolean contains = false;
+
+		Random rand = new Random(System.currentTimeMillis());
+
+		for (int i = 0; i < 2; i++) {
+
+			// Creates a list of all current players
+			List<Integer> players = new ArrayList<Integer>();
+			players.add(champion);
+
+			// Searching for an player who hasnt already won
+			do {
+				contains = false;
+				winner = rand.nextInt(population.size());
+				contains = players.contains(winner);
+			} while (contains == true);
+
+			players.add(winner);
+
+			int[][] matrix = population.get(winner).getMatrix();
+			parents.add(matrix);
+
+			for (int j = 0; j < tournamentSize; j++) {
+
+				do {
+					contains = false;
+					enemy = rand.nextInt(population.size());
+					contains = players.contains(enemy);
+				} while (contains == true);
+
+				players.add(enemy);
+
+				if (population.get(enemy).getPoints() > population.get(winner).getPoints()) {
+					matrix = population.get(enemy).getMatrix();
+					parents.set(i, matrix);
+
+					winner = enemy;
+				}
+			}
+			champion = winner;
+		}
 		return parents;
 	}
 
