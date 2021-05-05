@@ -162,7 +162,7 @@ public class AlgorithmLibrary {
 		}
 
 		Printer.printGeneticAlgorithmMutationRateConsole();
-		mutationRate = readInt();
+		mutationRate = readDouble();
 		
 		Printer.printGeneticAlgorithmReplacementConsole();
 		replacement = readInt();
@@ -171,11 +171,14 @@ public class AlgorithmLibrary {
 		Printer.printGeneticAlgorithmReplacementElitesConsole();
 		numberOfReplacements = readInt();
 		}
+		
+		Printer.printEmptyRow();
 
 		GeneticAlgorithm g = new GeneticAlgorithm();
 		this.solutionObj = g.geneticAlgorithm(generationSize, populationSize, selection, crossovermethod,
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, children, replacement, numberOfReplacements);
 
+		Printer.printEmptyRow();
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
@@ -226,7 +229,7 @@ public class AlgorithmLibrary {
 		double number = 0;
 
 		try {
-			input = br.readLine();
+			input = br.readLine().replaceAll(",",".");
 			number = Double.parseDouble(input);
 		} catch (IOException e) {
 			// To do

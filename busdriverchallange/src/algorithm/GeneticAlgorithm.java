@@ -27,7 +27,6 @@ public class GeneticAlgorithm {
 			int replacementMethod, int numberOfReplacements) {
 
 		List<Solution> initialPopulation = new ArrayList<Solution>();
-
 		List<Solution> generation = new ArrayList<Solution>();
 
 		int[][] maleParent = null;
@@ -37,7 +36,7 @@ public class GeneticAlgorithm {
 		int[][] femaleChild = null;
 
 		if (replacementMethod == 1 || replacementMethod == 1) {
-			children = children / 2;
+			children = (int) children / 2;
 		}
 
 		// Generates the population of Size N
@@ -65,23 +64,24 @@ public class GeneticAlgorithm {
 				femaleParent = parents.get(1);
 
 				// Crossover
-				maleChild = generateChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO,
-						crossovermethod);
+				maleChild = generateChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO, crossovermethod);
 				femaleChild = generateChild(femaleParent, maleParent, crossoverPoint, crossoverPointTWO,
 						crossovermethod);
 
 				// Mutation
 				maleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
-				femaleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
+				femaleChild = mutation(femaleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
 
 				// Add the children to the population
-				generation = replacement(initialPopulation, generation, maleChild, femaleChild, replacementMethod, numberOfReplacements);
+				generation = replacement(initialPopulation, generation, maleChild, femaleChild, 1,
+						numberOfReplacements);
 
 			}
 
 			if (replacementMethod == 2) {
 				// Add the children to the population
-				generation = replacement(initialPopulation, generation, maleChild, femaleChild, replacementMethod, numberOfReplacements);
+				generation = replacement(initialPopulation, generation, maleChild, femaleChild, replacementMethod,
+						numberOfReplacements);
 			}
 
 			initialPopulation = generation;
@@ -193,8 +193,8 @@ public class GeneticAlgorithm {
 		return parents;
 	}
 
-	private int[][] generateChild(int[][] fristParent, int[][] secondParent, int crossoverPoint,
-			int crossoverPointTWO, int crossovermethod) {
+	private int[][] generateChild(int[][] fristParent, int[][] secondParent, int crossoverPoint, int crossoverPointTWO,
+			int crossovermethod) {
 		int[][] child = fristParent;
 
 		int col_len = fristParent.length;
@@ -222,7 +222,6 @@ public class GeneticAlgorithm {
 
 		return child;
 	}
-
 
 	private int[][] mutation(int[][] matrix, int crossoverPoint, int crossoverPointTWO, int crossovermethod,
 			double mutationRate) {
@@ -287,6 +286,13 @@ public class GeneticAlgorithm {
 
 	}
 
+	/**
+	 * Chooses the replacement method
+	 * https://www.modius-techblog.de/data-science/ersetzungsverfahren-in-kontext-von-genetischen-algorithmen/
+	 * 
+	 * @return generation
+	 */
+
 	public List<Solution> replacement(List<Solution> initialPopulation, List<Solution> generation, int[][] maleChild,
 			int[][] femaleChild, int replacementMethod, int numberOfReplacements) {
 
@@ -317,11 +323,16 @@ public class GeneticAlgorithm {
 
 	}
 
-	private List<Solution> replacementPrincipleOfTheElites(List<Solution> initialPopulation,
-			List<Solution> generation, int numberOfReplacements) {
+	private List<Solution> replacementPrincipleOfTheElites(List<Solution> initialPopulation, List<Solution> generation,
+			int numberOfReplacements) {
 
 		Collections.reverse(initialPopulation);
 		Collections.sort(generation);
+
+		for (int i = 0; i < numberOfReplacements; i++) {
+			Solution solutionObj = generation.get(i);
+			initialPopulation.set(i, solutionObj);
+		}
 
 		return initialPopulation;
 
