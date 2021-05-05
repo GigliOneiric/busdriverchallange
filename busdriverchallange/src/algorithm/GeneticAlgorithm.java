@@ -22,7 +22,7 @@ public class GeneticAlgorithm {
 	 */
 
 	public Solution geneticAlgorithm(int generationSize, int populationSize, int selection, int crossovermethod,
-			int crossoverPoint, int crossoverPointTWO, int mutationRate, int tournamentSize) {
+			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize) {
 
 		List<Solution> population = new ArrayList<Solution>();
 
@@ -216,7 +216,7 @@ public class GeneticAlgorithm {
 	}
 
 	private int[][] mutation(int[][] matrix, int crossoverPoint, int crossoverPointTWO, int crossovermethod,
-			int mutationRate) {
+			double mutationRate) {
 
 		int col_len = matrix.length;
 		int row_len = matrix[0].length;
@@ -230,7 +230,7 @@ public class GeneticAlgorithm {
 					int min = 0;
 					int max = 100;
 
-					int mutation = RandomWalk.getRandomInt(min, max);
+					double mutation = RandomWalk.getRandomDouble(min, max);
 
 					if (mutation <= mutationRate) {
 

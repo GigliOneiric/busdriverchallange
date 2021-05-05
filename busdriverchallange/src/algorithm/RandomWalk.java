@@ -51,5 +51,18 @@ public class RandomWalk {
 		return radomInt;
 
 	}
+	
+	/**
+	 * Generates a random double
+	 * @return radomDouble
+	 */
+
+	public static double getRandomDouble(int min, int max) {
+
+		double radomDouble = (Math.floor(Math.random() * (max - min + 1)) + min);
+
+		return radomDouble;
+
+	}
 
 }

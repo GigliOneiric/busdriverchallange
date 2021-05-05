@@ -124,7 +124,7 @@ public class AlgorithmLibrary {
 		int crossovermethod = 0;
 		int crossoverPoint = 0;
 		int crossoverPointTWO = 0;
-		int mutationRate = 0;
+		double mutationRate = 0;
 		int tournamentSize = 0;
 
 		Printer.printGeneticAlgorithmGenerationSizeConsole();
@@ -193,6 +193,27 @@ public class AlgorithmLibrary {
 		try {
 			input = br.readLine();
 			number = Integer.parseInt(input);
+		} catch (IOException e) {
+			// To do
+		} catch (NumberFormatException e) {
+			// To do
+		}
+		return number;
+	}
+	
+	/**
+	 * Reads a single double
+	 * 
+	 * @return number
+	 */
+
+	public double readDouble() {
+		String input;
+		double number = 0;
+
+		try {
+			input = br.readLine();
+			number = Double.parseDouble(input);
 		} catch (IOException e) {
 			// To do
 		} catch (NumberFormatException e) {
