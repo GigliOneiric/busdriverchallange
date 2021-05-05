@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -22,56 +23,73 @@ public class GeneticAlgorithm {
 	 */
 
 	public Solution geneticAlgorithm(int generationSize, int populationSize, int selection, int crossovermethod,
-			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize) {
+			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize, int children,
+			int replacementMethod, int numberOfReplacements) {
 
-		List<Solution> population = new ArrayList<Solution>();
+		List<Solution> initialPopulation = new ArrayList<Solution>();
 
-		int[][] maleParent;
-		int[][] femaleParent;
+		List<Solution> generation = new ArrayList<Solution>();
 
-		int[][] maleChild;
-		int[][] femaleChild;
+		int[][] maleParent = null;
+		int[][] femaleParent = null;
+
+		int[][] maleChild = null;
+		int[][] femaleChild = null;
+
+		if (replacementMethod == 1 || replacementMethod == 1) {
+			children = children / 2;
+		}
 
 		// Generates the population of Size N
 		for (int i = 0; i < populationSize; i++) {
 			this.solutionObj = RandomWalk.randomWalk();
-			population.add(this.solutionObj);
-		}
-
-		if (crossovermethod == 1) {
-
-			if (crossoverPoint == 0) {
-				int max = (Config.totalDays * Config.shiftsPerDay) - 1;
-				int min = 1;
-
-				crossoverPoint = RandomWalk.getRandomInt(min, max);
-			}
+			initialPopulation.add(this.solutionObj);
 		}
 
 		for (int g = 0; g < generationSize; g++) {
 
-			// Select parents
-			List<int[][]> parents = selectParents(population, selection, tournamentSize);
-			maleParent = parents.get(0);
-			femaleParent = parents.get(1);
+			generation = new ArrayList<Solution>();
 
-			// Crossover
-			maleChild = generateMaleChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO, crossovermethod);
-			femaleChild = generateFemaleChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO,
-					crossovermethod);
+			for (int k = 0; k < children; k++) {
 
-			// Mutation
-			maleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
-			femaleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
+				if (crossovermethod == 1 && crossoverPoint == 0) {
+					int max = (Config.totalDays * Config.shiftsPerDay) - 1;
+					int min = 1;
 
-			// Add the children to the population # incest allowed :D
-			population.add(new Solution(maleChild));
-			population.add(new Solution(femaleChild));
+					crossoverPoint = RandomWalk.getRandomInt(min, max);
+				}
 
+				// Select parents
+				List<int[][]> parents = selectParents(initialPopulation, selection, tournamentSize);
+				maleParent = parents.get(0);
+				femaleParent = parents.get(1);
+
+				// Crossover
+				maleChild = generateChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO,
+						crossovermethod);
+				femaleChild = generateChild(femaleParent, maleParent, crossoverPoint, crossoverPointTWO,
+						crossovermethod);
+
+				// Mutation
+				maleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
+				femaleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
+
+				// Add the children to the population
+				generation = replacement(initialPopulation, generation, maleChild, femaleChild, replacementMethod, numberOfReplacements);
+
+			}
+
+			if (replacementMethod == 2) {
+				// Add the children to the population
+				generation = replacement(initialPopulation, generation, maleChild, femaleChild, replacementMethod, numberOfReplacements);
+			}
+
+			initialPopulation = generation;
+			System.out.println("Generation: " + g + " | Punkte: " + findBestParent(initialPopulation).getPoints());
 		}
 
 		// Find best Child/Parent
-		findBestParent(population);
+		findBestParent(initialPopulation);
 
 		return this.solutionObj;
 
@@ -106,13 +124,17 @@ public class GeneticAlgorithm {
 		int[][] maleParent;
 		int[][] femaleParent;
 
-		maleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
+		int indexONE = RandomWalk.getRandomInt(0, population.size() - 1);
+		int indexTWO;
+
+		maleParent = population.get(indexONE).getMatrix();
 		parents.add(maleParent);
 
 		do {
-			femaleParent = population.get(RandomWalk.getRandomInt(0, population.size() - 1)).getMatrix();
+			indexTWO = RandomWalk.getRandomInt(0, population.size() - 1);
+			femaleParent = population.get(indexTWO).getMatrix();
 
-		} while (maleParent == femaleParent);
+		} while (indexTWO == indexONE);
 
 		parents.add(femaleParent);
 
@@ -171,12 +193,12 @@ public class GeneticAlgorithm {
 		return parents;
 	}
 
-	private int[][] generateMaleChild(int[][] maleParent, int[][] femaleParent, int crossoverPoint,
+	private int[][] generateChild(int[][] fristParent, int[][] secondParent, int crossoverPoint,
 			int crossoverPointTWO, int crossovermethod) {
-		int[][] maleChild = maleParent;
+		int[][] child = fristParent;
 
-		int col_len = maleParent.length;
-		int row_len = maleParent[0].length;
+		int col_len = fristParent.length;
+		int row_len = fristParent[0].length;
 
 		if (crossovermethod == 1) {
 
@@ -184,7 +206,7 @@ public class GeneticAlgorithm {
 
 				for (int j = crossoverPoint; j < col_len; j++) {
 
-					maleChild[j][i] = femaleParent[j][i];
+					child[j][i] = secondParent[j][i];
 				}
 			}
 		}
@@ -193,44 +215,14 @@ public class GeneticAlgorithm {
 
 				for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
 
-					maleChild[j][i] = femaleParent[j][i];
+					child[j][i] = secondParent[j][i];
 				}
 			}
 		}
 
-		return maleChild;
+		return child;
 	}
 
-	private int[][] generateFemaleChild(int[][] maleParent, int[][] femaleParent, int crossoverPoint,
-			int crossoverPointTWO, int crossovermethod) {
-		int[][] femaleChild = femaleParent;
-
-		int col_len = femaleParent.length;
-		int row_len = femaleParent[0].length;
-
-		if (crossovermethod == 1) {
-
-			for (int i = 0; i < row_len; i++) {
-
-				for (int j = crossoverPoint; j < col_len; j++) {
-
-					femaleChild[j][i] = maleParent[j][i];
-				}
-			}
-		}
-		if (crossovermethod == 2) {
-
-			for (int i = 0; i < row_len; i++) {
-				for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
-
-					femaleChild[j][i] = maleParent[j][i];
-				}
-			}
-
-		}
-
-		return femaleChild;
-	}
 
 	private int[][] mutation(int[][] matrix, int crossoverPoint, int crossoverPointTWO, int crossovermethod,
 			double mutationRate) {
@@ -295,13 +287,53 @@ public class GeneticAlgorithm {
 
 	}
 
+	public List<Solution> replacement(List<Solution> initialPopulation, List<Solution> generation, int[][] maleChild,
+			int[][] femaleChild, int replacementMethod, int numberOfReplacements) {
+
+		// General Replacement
+		if (replacementMethod == 1) {
+
+			generation = replacementGeneralReplacement(generation, maleChild, femaleChild);
+
+		}
+
+		// Principle of the Elites
+		if (replacementMethod == 2) {
+
+			generation = replacementPrincipleOfTheElites(initialPopulation, generation, numberOfReplacements);
+
+		}
+
+		return generation;
+	}
+
+	private List<Solution> replacementGeneralReplacement(List<Solution> generation, int[][] maleChild,
+			int[][] femaleChild) {
+
+		generation.add(new Solution(maleChild));
+		generation.add(new Solution(femaleChild));
+
+		return generation;
+
+	}
+
+	private List<Solution> replacementPrincipleOfTheElites(List<Solution> initialPopulation,
+			List<Solution> generation, int numberOfReplacements) {
+
+		Collections.reverse(initialPopulation);
+		Collections.sort(generation);
+
+		return initialPopulation;
+
+	}
+
 	/**
 	 * Finds the parent with the highest points
 	 * 
 	 * @return matrix
 	 */
 
-	private void findBestParent(List<Solution> population) {
+	private Solution findBestParent(List<Solution> population) {
 
 		Solution solutionObj = new Solution();
 
@@ -314,6 +346,7 @@ public class GeneticAlgorithm {
 			}
 
 		}
+		return this.solutionObj;
 	}
 
 }

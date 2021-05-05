@@ -126,12 +126,18 @@ public class AlgorithmLibrary {
 		int crossoverPointTWO = 0;
 		double mutationRate = 0;
 		int tournamentSize = 0;
+		int children = 0;
+		int replacement = 0;
+		int numberOfReplacements = 0;
+		
+		Printer.printGeneticAlgorithmPopulationSizeConsole();
+		populationSize = readInt();
 
 		Printer.printGeneticAlgorithmGenerationSizeConsole();
 		generationSize = readInt();
 
-		Printer.printGeneticAlgorithmPopulationSizeConsole();
-		populationSize = readInt();
+		Printer.printGeneticAlgorithmChildrenConsole();
+		children = readInt();
 
 		Printer.printGeneticAlgorithmParentsConsole();
 		selection = readInt();
@@ -157,10 +163,18 @@ public class AlgorithmLibrary {
 
 		Printer.printGeneticAlgorithmMutationRateConsole();
 		mutationRate = readInt();
+		
+		Printer.printGeneticAlgorithmReplacementConsole();
+		replacement = readInt();
+		
+		if(replacement == 2) {
+		Printer.printGeneticAlgorithmReplacementElitesConsole();
+		numberOfReplacements = readInt();
+		}
 
 		GeneticAlgorithm g = new GeneticAlgorithm();
 		this.solutionObj = g.geneticAlgorithm(generationSize, populationSize, selection, crossovermethod,
-				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize);
+				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, children, replacement, numberOfReplacements);
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());

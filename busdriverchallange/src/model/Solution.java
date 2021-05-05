@@ -4,16 +4,17 @@ package model;
  * @author Tobias Stelter This class represents the solution-object
  */
 
-public class Solution {
+public class Solution implements Comparable<Solution> {
 
 	private int matrix[][];
-	private int points = -10000;
+	private Integer points = -10000;
 	private boolean validSolution = true;
 
 	private Points p = new Points();
 	private ValidSoultion v = new ValidSoultion();
-	
-	public Solution() {}
+
+	public Solution() {
+	}
 
 	public Solution(int matrix[][]) {
 		this.matrix = matrix;
@@ -26,12 +27,17 @@ public class Solution {
 		return matrix;
 	}
 
-	public int getPoints() {
+	public Integer getPoints() {
 		return points;
 	}
 
 	public boolean getValidSolution() {
 		return validSolution;
+	}
+
+	@Override
+	public int compareTo(Solution solutionObj) {
+		return this.getPoints().compareTo(solutionObj.getPoints());
 	}
 
 }

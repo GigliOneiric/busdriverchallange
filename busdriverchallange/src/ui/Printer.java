@@ -31,6 +31,21 @@ public class Printer {
 		System.out.println("Geben Sie die Populationsgröße ein.");
 	}
 	
+	public static void printGeneticAlgorithmChildrenConsole() {
+		System.out.println("Geben Sie die Anzahl der Kinder ein.");
+	}
+	
+	public static void printGeneticAlgorithmReplacementConsole() {
+		System.out.println("Geben Sie das Ersetzungsverfahren an");
+		System.out.println("[1] General Replacement");
+		System.out.println("[2] Principle of the Elites");		
+	}
+	
+	public static void printGeneticAlgorithmReplacementElitesConsole() {
+		System.out.println("Wie viele Individuen mit der schlechtesten Fitness aus der Elterngeneration sollen mit den Kindern ersetzt werden?");		
+	}
+	
+	
 	public static void printGeneticAlgorithmMutationRateConsole() {
 		System.out.println("Geben Sie Wahrscheinlichkeit für eine Mutation ein.");
 	}
