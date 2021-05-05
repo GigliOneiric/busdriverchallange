@@ -39,7 +39,7 @@ public class AlgorithmLibrary {
 		Printer.printEmptyRow();
 
 		if (algorithmNumber == 1) {
-			
+
 			selectJustZeros();
 
 		} else if (algorithmNumber == 2) {
@@ -58,6 +58,18 @@ public class AlgorithmLibrary {
 
 			selectGeneticAlgorithm();
 
+		} else if (algorithmNumber == 6) {
+
+			selectParticleSwarmOptimization();
+
+		} else if (algorithmNumber == 7) {
+
+			selectTabuSearch();
+
+		} else if (algorithmNumber == 8) {
+
+			selectSimulatedAnnealing();
+
 		} else {
 			Printer.printNoAlgorithmSelected();
 
@@ -74,9 +86,9 @@ public class AlgorithmLibrary {
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
 	}
-	
+
 	public void selectDefault() {
-		this.matrix = Default.matrix;
+		this.matrix = Default.matrixMatthias;
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
@@ -154,6 +166,18 @@ public class AlgorithmLibrary {
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
+	}
+
+	private void selectParticleSwarmOptimization() {
+		// particle swarm optimization
+	}
+
+	private void selectTabuSearch() {
+		// Tabu-Suche (Tabu search)
+	}
+
+	private void selectSimulatedAnnealing() {
+		// Simulated Annealing
 	}
 
 	/**

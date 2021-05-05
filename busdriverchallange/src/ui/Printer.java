@@ -18,6 +18,9 @@ public class Printer {
 		System.out.println("[3] Brutforce");
 		System.out.println("[4] Random Walk");
 		System.out.println("[5] Genetischer Algorithmus");
+		System.out.println("[6] Partikelschwarmoptimierung");
+		System.out.println("[7] Tabu-Suche (Tabu search)");
+		System.out.println("[8] Simulated Annealing");
 	}
 	
 	public static void printGeneticAlgorithmGenerationSizeConsole() {
