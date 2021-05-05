@@ -14,7 +14,7 @@ import model.Solution;
 
 public class GeneticAlgorithm {
 
-	private Solution solutionObj = new Solution();
+	Random rand = new Random(System.currentTimeMillis());
 
 	/**
 	 * Finds a solution using the genetic algorithm
@@ -26,6 +26,8 @@ public class GeneticAlgorithm {
 			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize, int children,
 			int replacementMethod, int numberOfReplacements) {
 
+		Solution solutionObj = new Solution();
+
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
 
@@ -35,14 +37,10 @@ public class GeneticAlgorithm {
 		int[][] maleChild = null;
 		int[][] femaleChild = null;
 
-		if (replacementMethod == 1 || replacementMethod == 1) {
-			children = (int) children / 2;
-		}
-
 		// Generates the population of Size N
 		for (int i = 0; i < populationSize; i++) {
-			this.solutionObj = RandomWalk.randomWalk();
-			initialPopulation.add(this.solutionObj);
+			solutionObj = RandomWalk.randomWalk();
+			initialPopulation.add(solutionObj);
 		}
 
 		for (int g = 0; g < generationSize; g++) {
@@ -88,10 +86,7 @@ public class GeneticAlgorithm {
 			System.out.println("Generation: " + g + " | Punkte: " + findBestParent(initialPopulation).getPoints());
 		}
 
-		// Find best Child/Parent
-		findBestParent(initialPopulation);
-
-		return this.solutionObj;
+		return findBestParent(initialPopulation);
 
 	}
 
@@ -124,14 +119,14 @@ public class GeneticAlgorithm {
 		int[][] maleParent;
 		int[][] femaleParent;
 
-		int indexONE = RandomWalk.getRandomInt(0, population.size() - 1);
+		int indexONE = rand.nextInt(population.size());
 		int indexTWO;
 
 		maleParent = population.get(indexONE).getMatrix();
 		parents.add(maleParent);
 
 		do {
-			indexTWO = RandomWalk.getRandomInt(0, population.size() - 1);
+			indexTWO = rand.nextInt(population.size());
 			femaleParent = population.get(indexTWO).getMatrix();
 
 		} while (indexTWO == indexONE);
@@ -150,8 +145,6 @@ public class GeneticAlgorithm {
 		int winner = -1;
 		int enemy = -1;
 		boolean contains = false;
-
-		Random rand = new Random(System.currentTimeMillis());
 
 		for (int i = 0; i < 2; i++) {
 
@@ -264,7 +257,7 @@ public class GeneticAlgorithm {
 					int min = 0;
 					int max = 100;
 
-					int mutation = RandomWalk.getRandomInt(min, max);
+					double mutation = RandomWalk.getRandomDouble(min, max);
 
 					if (mutation <= mutationRate) {
 
@@ -326,8 +319,8 @@ public class GeneticAlgorithm {
 	private List<Solution> replacementPrincipleOfTheElites(List<Solution> initialPopulation, List<Solution> generation,
 			int numberOfReplacements) {
 
-		Collections.reverse(initialPopulation);
-		Collections.sort(generation);
+		Collections.sort(initialPopulation);
+		Collections.sort(generation, Collections.reverseOrder());
 
 		for (int i = 0; i < numberOfReplacements; i++) {
 			Solution solutionObj = generation.get(i);
@@ -346,18 +339,12 @@ public class GeneticAlgorithm {
 
 	private Solution findBestParent(List<Solution> population) {
 
+		Collections.sort(population, Collections.reverseOrder());
+
 		Solution solutionObj = new Solution();
+		solutionObj = population.get(0);
 
-		for (int i = 0; i < population.size(); i++) {
-
-			solutionObj = population.get(i);
-
-			if (solutionObj.getPoints() > this.solutionObj.getPoints()) {
-				this.solutionObj = solutionObj;
-			}
-
-		}
-		return this.solutionObj;
+		return solutionObj;
 	}
 
 }
