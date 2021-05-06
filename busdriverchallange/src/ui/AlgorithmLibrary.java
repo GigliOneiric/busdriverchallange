@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 
 import algorithm.Bruteforce;
 import algorithm.GeneticAlgorithm;
+import algorithm.ParticleSwarmOptimization;
 import algorithm.RandomWalk;
+import algorithm.SimulatedAnnealing;
+import algorithm.TabuSearch;
 import model.Default;
 import model.Solution;
 
@@ -186,15 +189,34 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectParticleSwarmOptimization() {
-		// particle swarm optimization
+		
+		ParticleSwarmOptimization p = new ParticleSwarmOptimization();
+		this.solutionObj = p.particleSwarmOptimization();
+
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		
 	}
 
 	private void selectTabuSearch() {
-		// Tabu-Suche (Tabu search)
+		
+		TabuSearch t = new TabuSearch();
+		this.solutionObj = t.tabuSearch();
+		
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 	}
 
 	private void selectSimulatedAnnealing() {
-		// Simulated Annealing
+		
+		SimulatedAnnealing s = new SimulatedAnnealing();
+		this.solutionObj = s.simulatedAnnealing();
+		
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 	}
 
 	/**
