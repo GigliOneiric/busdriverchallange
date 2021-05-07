@@ -54,6 +54,7 @@ public class Printer {
 		System.out.println("Geben Sie Crossover-Methode ein.");
 		System.out.println("[1] Single-Point");
 		System.out.println("[2] Two-Point");
+		System.out.println("[3] Uniform");
 	}
 	
 	public static void printGeneticAlgorithmSinglePointCrossoverConsole() {
@@ -73,6 +74,18 @@ public class Printer {
 		System.out.println("[1] Zufällig");
 		System.out.println("[2] Tournament");
 	}
+	
+	public static void printGeneticAlgorithmMutationConsole() {
+		System.out.println("Wählen Sie die Option für Mutation aus");
+		System.out.println("[1] Bit Flip Mutation");
+		System.out.println("[2] Swap Mutation");
+	}
+	
+	public static void printGeneticAlgorithmMutationSwapConsole() {
+		System.out.println("Geben Sie die Anzahl der Swaps pro Zeile ein");
+	}
+	
+	
 	
 	public static void printGeneticAlgorithmTournamentSize() {
 		System.out.println("Geben Sie die Tunier-Größe ein.");

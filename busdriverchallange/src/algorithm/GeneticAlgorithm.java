@@ -23,8 +23,8 @@ public class GeneticAlgorithm {
 	 */
 
 	public Solution geneticAlgorithm(int generationSize, int populationSize, int selection, int crossovermethod,
-			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize, int children,
-			int replacementMethod, int numberOfReplacements) {
+			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize, int childrenNumber,
+			int replacementMethod, int numberOfReplacements, int swapsPerRow, int mutationMethod) {
 
 		Solution solutionObj = new Solution();
 
@@ -47,7 +47,7 @@ public class GeneticAlgorithm {
 
 			generation = new ArrayList<Solution>();
 
-			for (int k = 0; k < children; k++) {
+			for (int k = 0; k < childrenNumber; k++) {
 
 				if (crossovermethod == 1 && crossoverPoint == 0) {
 					int max = (Config.totalDays * Config.shiftsPerDay) - 1;
@@ -62,13 +62,14 @@ public class GeneticAlgorithm {
 				femaleParent = parents.get(1);
 
 				// Crossover
-				maleChild = generateChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO, crossovermethod);
-				femaleChild = generateChild(femaleParent, maleParent, crossoverPoint, crossoverPointTWO,
+				List<int[][]> children = generateChild(maleParent, femaleParent, crossoverPoint, crossoverPointTWO,
 						crossovermethod);
+				maleChild = children.get(0);
+				femaleChild = children.get(1);
 
 				// Mutation
-				maleChild = mutation(maleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
-				femaleChild = mutation(femaleChild, crossoverPoint, crossoverPointTWO, crossovermethod, mutationRate);
+				maleChild = mutation(maleChild, mutationRate, mutationMethod, swapsPerRow);
+				femaleChild = mutation(femaleChild, mutationRate, mutationMethod, swapsPerRow);
 
 				// Add the children to the population
 				generation = replacement(initialPopulation, generation, maleChild, femaleChild, 1,
@@ -186,97 +187,191 @@ public class GeneticAlgorithm {
 		return parents;
 	}
 
-	private int[][] generateChild(int[][] fristParent, int[][] secondParent, int crossoverPoint, int crossoverPointTWO,
-			int crossovermethod) {
-		int[][] child = fristParent;
+	private List<int[][]> generateChild(int[][] fristParent, int[][] secondParent, int crossoverPoint,
+			int crossoverPointTWO, int crossovermethod) {
+
+		List<int[][]> children = new ArrayList<int[][]>();
+
+		if (crossovermethod == 1) {
+			children = generateChildSinglePoint(fristParent, secondParent, crossoverPoint);
+		}
+		if (crossovermethod == 2) {
+			children = generateChildTWOPoint(fristParent, secondParent, crossoverPoint, crossoverPointTWO);
+		}
+		if (crossovermethod == 3) {
+			children = generateChildUniform(fristParent, secondParent);
+		}
+
+		return children;
+	}
+
+	private List<int[][]> generateChildSinglePoint(int[][] fristParent, int[][] secondParent, int crossoverPoint) {
+
+		List<int[][]> children = new ArrayList<int[][]>();
+
+		int[][] maleChild = fristParent;
+		int[][] femaleChild = secondParent;
 
 		int col_len = fristParent.length;
 		int row_len = fristParent[0].length;
 
-		if (crossovermethod == 1) {
+		for (int i = 0; i < row_len; i++) {
 
-			for (int i = 0; i < row_len; i++) {
+			for (int j = crossoverPoint; j < col_len; j++) {
 
-				for (int j = crossoverPoint; j < col_len; j++) {
-
-					child[j][i] = secondParent[j][i];
-				}
-			}
-		}
-		if (crossovermethod == 2) {
-			for (int i = 0; i < row_len; i++) {
-
-				for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
-
-					child[j][i] = secondParent[j][i];
-				}
+				maleChild[j][i] = secondParent[j][i];
+				femaleChild[j][i] = fristParent[j][i];
 			}
 		}
 
-		return child;
+		children.add(maleChild);
+		children.add(femaleChild);
+
+		return children;
+
 	}
 
-	private int[][] mutation(int[][] matrix, int crossoverPoint, int crossoverPointTWO, int crossovermethod,
-			double mutationRate) {
+	private List<int[][]> generateChildTWOPoint(int[][] fristParent, int[][] secondParent, int crossoverPoint,
+			int crossoverPointTWO) {
 
-		int col_len = matrix.length;
-		int row_len = matrix[0].length;
+		List<int[][]> children = new ArrayList<int[][]>();
 
-		if (crossovermethod == 1) {
+		int[][] maleChild = fristParent;
+		int[][] femaleChild = secondParent;
 
-			for (int i = 0; i < row_len; i++) {
+		int row_len = fristParent[0].length;
 
-				for (int j = crossoverPoint; j < col_len; j++) {
+		for (int i = 0; i < row_len; i++) {
 
-					int min = 0;
-					int max = 100;
+			for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
 
-					double mutation = RandomWalk.getRandomDouble(min, max);
+				maleChild[j][i] = secondParent[j][i];
+				femaleChild[j][i] = fristParent[j][i];
+			}
+		}
 
-					if (mutation <= mutationRate) {
+		children.add(maleChild);
+		children.add(femaleChild);
 
-						int bit = matrix[j][i];
+		return children;
 
-						if (bit == 0) {
-							matrix[j][i] = 1;
-						} else {
-							matrix[j][i] = 0;
-						}
+	}
 
-					}
+	private List<int[][]> generateChildUniform(int[][] fristParent, int[][] secondParent) {
+
+		List<int[][]> children = new ArrayList<int[][]>();
+
+		int[][] maleChild = fristParent;
+		int[][] femaleChild = secondParent;
+
+		int col_len = fristParent.length;
+		int row_len = fristParent[0].length;
+
+		for (int i = 0; i < row_len; i++) {
+
+			for (int j = 0; j < col_len; j++) {
+
+				int coin = RandomWalk.getRandomInt(0, 1);
+
+				if (coin == 1) {
+
+					maleChild[j][i] = secondParent[j][i];
+					femaleChild[j][i] = fristParent[j][i];
 
 				}
 			}
 		}
-		if (crossovermethod == 2) {
 
-			for (int i = 0; i < row_len; i++) {
+		children.add(maleChild);
+		children.add(femaleChild);
 
-				for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
+		return children;
+	}
 
-					int min = 0;
-					int max = 100;
+	/**
+	 * Mutates the children for the genetic algorithm
+	 * https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.htm
+	 * 
+	 * @return matrix
+	 */
 
-					double mutation = RandomWalk.getRandomDouble(min, max);
+	private int[][] mutation(int[][] matrix, double mutationRate, int mutationMethod, int swapsPerRow) {
 
-					if (mutation <= mutationRate) {
-
-						int bit = matrix[j][i];
-
-						if (bit == 0) {
-							matrix[j][i] = 1;
-						} else {
-							matrix[j][i] = 0;
-						}
-
-					}
-
-				}
-			}
+		if (mutationMethod == 1) {
+			matrix = mutationBitFlip(matrix, mutationRate);
+		}
+		if (mutationMethod == 2) {
+			matrix = mutationSwaps(matrix, swapsPerRow);
 		}
 
 		return matrix;
 
+	}
+
+	private int[][] mutationBitFlip(int[][] matrix, double mutationRate) {
+
+		int col_len = matrix.length;
+		int row_len = matrix[0].length;
+
+		for (int i = 0; i < row_len; i++) {
+
+			for (int j = 0; j < col_len; j++) {
+
+				int min = 0;
+				int max = 100;
+
+				double mutation = RandomWalk.getRandomDouble(min, max);
+
+				if (mutation <= mutationRate) {
+
+					int bit = matrix[j][i];
+
+					if (bit == 0) {
+						matrix[j][i] = 1;
+					} else {
+						matrix[j][i] = 0;
+					}
+
+				}
+
+			}
+		}
+
+		return matrix;
+	}
+
+	private int[][] mutationSwaps(int[][] matrix, int swapsPerRow) {
+
+		int col_len = matrix.length;
+		int row_len = matrix[0].length;
+
+		int swapPointOne = 0;
+		int swapPointTWO = 0;
+
+		for (int i = 0; i < col_len; i++) {
+
+			for (int j = 0; j < row_len; j++) {
+
+				for (int s = 0; s < swapsPerRow; s++) {
+
+					swapPointOne = RandomWalk.getRandomInt(0, (Config.totalDays * 2) - 1);
+
+					do {
+						swapPointTWO = RandomWalk.getRandomInt(0, (Config.totalDays * 2) - 1);
+					} while (swapPointOne == swapPointTWO);
+
+					int swapValueONE = matrix[j][swapPointOne];
+					int swarValueTWO = matrix[j][swapPointTWO];
+
+					matrix[j][swapPointOne] = swapValueONE;
+					matrix[j][swapPointTWO] = swarValueTWO;
+
+				}
+			}
+
+		}
+
+		return matrix;
 	}
 
 	/**

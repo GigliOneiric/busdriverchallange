@@ -132,7 +132,9 @@ public class AlgorithmLibrary {
 		int children = 0;
 		int replacement = 0;
 		int numberOfReplacements = 0;
-		
+		int swapsPerRow = 0;
+		int mutationMethod = 0;
+
 		Printer.printGeneticAlgorithmPopulationSizeConsole();
 		populationSize = readInt();
 
@@ -155,9 +157,7 @@ public class AlgorithmLibrary {
 		if (crossovermethod == 1) {
 			Printer.printGeneticAlgorithmSinglePointCrossoverConsole();
 			crossoverPoint = readInt();
-		}
-
-		if (crossovermethod == 2) {
+		} else if (crossovermethod == 2) {
 			Printer.printGeneticAlgorithmTwoPointCrossoverFirstPointConsole();
 			crossoverPoint = readInt();
 			Printer.printGeneticAlgorithmTwoPointCrossoverSecondPointConsole();
@@ -165,21 +165,30 @@ public class AlgorithmLibrary {
 		}
 
 		Printer.printGeneticAlgorithmMutationRateConsole();
+		mutationMethod = readInt();
+
+		if (mutationMethod == 1) {
+			mutationRate = readDouble();
+		} else if (mutationMethod == 2) {
+			swapsPerRow = readInt();
+		}
+
 		mutationRate = readDouble();
-		
+
 		Printer.printGeneticAlgorithmReplacementConsole();
 		replacement = readInt();
-		
-		if(replacement == 2) {
-		Printer.printGeneticAlgorithmReplacementElitesConsole();
-		numberOfReplacements = readInt();
+
+		if (replacement == 2) {
+			Printer.printGeneticAlgorithmReplacementElitesConsole();
+			numberOfReplacements = readInt();
 		}
-		
+
 		Printer.printEmptyRow();
 
 		GeneticAlgorithm g = new GeneticAlgorithm();
 		this.solutionObj = g.geneticAlgorithm(generationSize, populationSize, selection, crossovermethod,
-				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, children, replacement, numberOfReplacements);
+				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, children, replacement,
+				numberOfReplacements, swapsPerRow, mutationMethod);
 
 		Printer.printEmptyRow();
 		Printer.printPointsConsole(this.solutionObj.getPoints());
@@ -189,31 +198,31 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectParticleSwarmOptimization() {
-		
+
 		ParticleSwarmOptimization p = new ParticleSwarmOptimization();
 		this.solutionObj = p.particleSwarmOptimization();
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
-		
+
 	}
 
 	private void selectTabuSearch() {
-		
+
 		TabuSearch t = new TabuSearch();
 		this.solutionObj = t.tabuSearch();
-		
+
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 	}
 
 	private void selectSimulatedAnnealing() {
-		
+
 		SimulatedAnnealing s = new SimulatedAnnealing();
 		this.solutionObj = s.simulatedAnnealing();
-		
+
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
@@ -239,7 +248,7 @@ public class AlgorithmLibrary {
 		}
 		return number;
 	}
-	
+
 	/**
 	 * Reads a single double
 	 * 
@@ -251,7 +260,7 @@ public class AlgorithmLibrary {
 		double number = 0;
 
 		try {
-			input = br.readLine().replaceAll(",",".");
+			input = br.readLine().replaceAll(",", ".");
 			number = Double.parseDouble(input);
 		} catch (IOException e) {
 			// To do
