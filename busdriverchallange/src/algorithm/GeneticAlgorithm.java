@@ -342,31 +342,27 @@ public class GeneticAlgorithm {
 
 	private int[][] mutationSwaps(int[][] matrix, int swapsPerRow) {
 
-		int col_len = matrix.length;
 		int row_len = matrix[0].length;
 
 		int swapPointOne = 0;
 		int swapPointTWO = 0;
 
-		for (int i = 0; i < col_len; i++) {
+		for (int j = 0; j < row_len; j++) {
 
-			for (int j = 0; j < row_len; j++) {
+			for (int s = 0; s < swapsPerRow; s++) {
 
-				for (int s = 0; s < swapsPerRow; s++) {
+				swapPointOne = RandomWalk.getRandomInt(0, row_len - 1);
 
-					swapPointOne = RandomWalk.getRandomInt(0, (Config.totalDays * 2) - 1);
+				do {
+					swapPointTWO = RandomWalk.getRandomInt(0, row_len - 1);
+				} while (swapPointOne == swapPointTWO);
 
-					do {
-						swapPointTWO = RandomWalk.getRandomInt(0, (Config.totalDays * 2) - 1);
-					} while (swapPointOne == swapPointTWO);
+				int swapValueONE = matrix[j][swapPointOne];
+				int swarValueTWO = matrix[j][swapPointTWO];
 
-					int swapValueONE = matrix[j][swapPointOne];
-					int swarValueTWO = matrix[j][swapPointTWO];
+				matrix[j][swapPointOne] = swarValueTWO;
+				matrix[j][swapPointTWO] = swapValueONE;
 
-					matrix[j][swapPointOne] = swapValueONE;
-					matrix[j][swapPointTWO] = swarValueTWO;
-
-				}
 			}
 
 		}

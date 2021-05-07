@@ -157,23 +157,25 @@ public class AlgorithmLibrary {
 		if (crossovermethod == 1) {
 			Printer.printGeneticAlgorithmSinglePointCrossoverConsole();
 			crossoverPoint = readInt();
-		} else if (crossovermethod == 2) {
+		} 
+		if (crossovermethod == 2) {
 			Printer.printGeneticAlgorithmTwoPointCrossoverFirstPointConsole();
 			crossoverPoint = readInt();
 			Printer.printGeneticAlgorithmTwoPointCrossoverSecondPointConsole();
 			crossoverPointTWO = readInt();
 		}
 
-		Printer.printGeneticAlgorithmMutationRateConsole();
+		Printer.printGeneticAlgorithmMutationConsole();
 		mutationMethod = readInt();
 
 		if (mutationMethod == 1) {
+			Printer.printGeneticAlgorithmMutationRateConsole();
 			mutationRate = readDouble();
-		} else if (mutationMethod == 2) {
+		}
+		if (mutationMethod == 2) {
+			Printer.printGeneticAlgorithmMutationSwapConsole();
 			swapsPerRow = readInt();
 		}
-
-		mutationRate = readDouble();
 
 		Printer.printGeneticAlgorithmReplacementConsole();
 		replacement = readInt();
