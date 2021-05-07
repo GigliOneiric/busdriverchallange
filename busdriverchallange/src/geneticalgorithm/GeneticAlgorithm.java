@@ -1,4 +1,4 @@
-package algorithm;
+package geneticalgorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +29,7 @@ public class GeneticAlgorithm {
 
 		Solution solutionObj = new Solution();
 
+		List<Solution> initialPopulationPool = new ArrayList<Solution>();
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
 
@@ -38,9 +39,17 @@ public class GeneticAlgorithm {
 		int[][] maleChild = null;
 		int[][] femaleChild = null;
 
-		// Generates the population of Size N
-		for (int i = 0; i < populationSize; i++) {
+		// Generates the population of Size N * 100
+		for (int i = 0; i < populationSize * 10; i++) {
 			solutionObj = RandomWalk.randomWalk();
+			initialPopulationPool.add(solutionObj);
+		}
+		
+		// Adds the best parents to the population
+		Collections.sort(initialPopulationPool, Collections.reverseOrder());
+		
+		for (int i = 0; i < populationSize; i++) {
+			solutionObj = initialPopulationPool.get(i);
 			initialPopulation.add(solutionObj);
 		}
 
@@ -324,7 +333,7 @@ public class GeneticAlgorithm {
 					int min = 0;
 					int max = 100;
 
-					double mutation = RandomWalk.getRandomDouble(min, max);
+					double mutation = RandomWalk.getRandomInt(min, max);
 
 					if (mutation <= mutationRate) {
 

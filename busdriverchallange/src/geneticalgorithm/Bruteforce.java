@@ -1,4 +1,4 @@
-package algorithm;
+package geneticalgorithm;
 
 import model.Config;
 import model.Solution;

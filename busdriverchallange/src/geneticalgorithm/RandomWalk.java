@@ -1,4 +1,6 @@
-package algorithm;
+package geneticalgorithm;
+
+import java.util.Random;
 
 import model.Config;
 import model.Restrictions;
@@ -21,16 +23,14 @@ public class RandomWalk {
 		int col_len = matrix.length;
 		int row_len = matrix[0].length;
 
-		int max = 1;
-		int min = 0;
-
 		for (int i = 0; i < row_len; i++) {
 
 			for (int j = 0; j < col_len; j++) {
 
 				if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
 
-					matrix[j][i] = getRandomInt(min, max);
+					Random rand = new Random();
+					matrix[j][i] = rand.nextInt(1);
 				}
 			}
 		}

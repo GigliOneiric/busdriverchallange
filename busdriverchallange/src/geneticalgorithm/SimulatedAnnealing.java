@@ -1,10 +1,10 @@
-package algorithm;
+package geneticalgorithm;
 
 import model.Solution;
 
-public class TabuSearch {
-
-	public Solution tabuSearch() {
+public class SimulatedAnnealing {
+	
+	public Solution simulatedAnnealing() {
 
 		Solution solutionObj = new Solution();
 
