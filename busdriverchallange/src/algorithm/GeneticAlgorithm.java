@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import model.Config;
+import model.Restrictions;
 import model.Solution;
 
 /**
@@ -247,6 +248,7 @@ public class GeneticAlgorithm {
 
 				maleChild[j][i] = secondParent[j][i];
 				femaleChild[j][i] = fristParent[j][i];
+
 			}
 		}
 
@@ -317,26 +319,27 @@ public class GeneticAlgorithm {
 
 			for (int j = 0; j < col_len; j++) {
 
-				int min = 0;
-				int max = 100;
+				if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
 
-				double mutation = RandomWalk.getRandomDouble(min, max);
+					int min = 0;
+					int max = 100;
 
-				if (mutation <= mutationRate) {
+					double mutation = RandomWalk.getRandomDouble(min, max);
 
-					int bit = matrix[j][i];
+					if (mutation <= mutationRate) {
 
-					if (bit == 0) {
-						matrix[j][i] = 1;
-					} else {
-						matrix[j][i] = 0;
+						int bit = matrix[j][i];
+
+						if (bit == 0) {
+							matrix[j][i] = 1;
+						} else {
+							matrix[j][i] = 0;
+						}
+
 					}
-
 				}
-
 			}
 		}
-
 		return matrix;
 	}
 
@@ -362,7 +365,6 @@ public class GeneticAlgorithm {
 
 				matrix[j][swapPointOne] = swarValueTWO;
 				matrix[j][swapPointTWO] = swapValueONE;
-
 			}
 
 		}
