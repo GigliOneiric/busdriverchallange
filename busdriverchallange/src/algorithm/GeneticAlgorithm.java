@@ -267,9 +267,9 @@ public class GeneticAlgorithm {
 		int col_len = fristParent.length;
 		int row_len = fristParent[0].length;
 
-		for (int i = 0; i < row_len; i++) {
+		for (int j = 0; j < col_len; j++) {
 
-			for (int j = 0; j < col_len; j++) {
+			for (int i = 0; i < row_len; i++) {
 
 				int coin = RandomWalk.getRandomInt(0, 1);
 
