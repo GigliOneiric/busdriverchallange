@@ -3,7 +3,6 @@ package algorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import model.Config;
 import model.Restrictions;
@@ -14,8 +13,6 @@ import model.Solution;
  */
 
 public class GeneticAlgorithm {
-
-	Random rand = new Random(System.currentTimeMillis());
 
 	/**
 	 * Finds a solution using the genetic algorithm
@@ -44,10 +41,10 @@ public class GeneticAlgorithm {
 			solutionObj = RandomWalk.randomWalk();
 			initialPopulationPool.add(solutionObj);
 		}
-		
+
 		// Adds the best parents to the population
 		Collections.sort(initialPopulationPool, Collections.reverseOrder());
-		
+
 		for (int i = 0; i < populationSize; i++) {
 			solutionObj = initialPopulationPool.get(i);
 			initialPopulation.add(solutionObj);
@@ -130,17 +127,19 @@ public class GeneticAlgorithm {
 		int[][] maleParent;
 		int[][] femaleParent;
 
-		int indexONE = rand.nextInt(population.size());
+		int indexONE = RandomWalk.getRandomInt(0, population.size() - 1);
+		System.out.println(indexONE);
 		int indexTWO;
 
 		maleParent = population.get(indexONE).getMatrix();
 		parents.add(maleParent);
 
 		do {
-			indexTWO = rand.nextInt(population.size());
+			indexTWO = RandomWalk.getRandomInt(0, population.size() - 1);
 			femaleParent = population.get(indexTWO).getMatrix();
 
 		} while (indexTWO == indexONE);
+		System.out.println(indexTWO);
 
 		parents.add(femaleParent);
 
@@ -166,7 +165,7 @@ public class GeneticAlgorithm {
 			// Searching for an player who hasnt already won
 			do {
 				contains = false;
-				winner = rand.nextInt(population.size());
+				winner = RandomWalk.getRandomInt(0, population.size() - 1);
 				contains = players.contains(winner);
 			} while (contains == true);
 
@@ -179,7 +178,7 @@ public class GeneticAlgorithm {
 
 				do {
 					contains = false;
-					enemy = rand.nextInt(population.size());
+					enemy = RandomWalk.getRandomInt(0, population.size() - 1);
 					contains = players.contains(enemy);
 				} while (contains == true);
 

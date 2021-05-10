@@ -1,7 +1,5 @@
 package algorithm;
 
-import java.util.Random;
-
 import model.Config;
 import model.Restrictions;
 import model.Solution;
@@ -14,6 +12,7 @@ public class RandomWalk {
 
 	/**
 	 * Generates a random solution
+	 * 
 	 * @return matrix
 	 */
 
@@ -29,8 +28,7 @@ public class RandomWalk {
 
 				if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
 
-					Random rand = new Random();
-					matrix[j][i] = rand.nextInt(1);
+					matrix[j][i] = getRandomInt(0, 1);
 				}
 			}
 		}
@@ -41,19 +39,21 @@ public class RandomWalk {
 
 	/**
 	 * Generates a random int
+	 * 
 	 * @return radomInt
 	 */
 
 	public static int getRandomInt(int min, int max) {
 
-		int radomInt = (int) (Math.floor(Math.random() * (max - min + 1)) + min);
+		int radomInt = (int)  (Math.floor(Math.random() * (max - min + 1)) + min);
 
 		return radomInt;
 
 	}
-	
+
 	/**
 	 * Generates a random double
+	 * 
 	 * @return radomDouble
 	 */
 
