@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import geneticalgorithm.Bruteforce;
-import geneticalgorithm.GeneticAlgorithm;
-import geneticalgorithm.ParticleSwarmOptimization;
-import geneticalgorithm.RandomWalk;
-import geneticalgorithm.SimulatedAnnealing;
-import geneticalgorithm.TabuSearch;
+import algorithm.Bruteforce;
+import algorithm.GeneticAlgorithm;
+import algorithm.ParticleSwarmOptimization;
+import algorithm.RandomWalk;
+import algorithm.SimulatedAnnealing;
+import algorithm.TabuSearch;
 import model.Default;
 import model.Solution;
 

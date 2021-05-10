@@ -1,4 +1,4 @@
-package geneticalgorithm;
+package algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,7 +68,7 @@ public class GeneticAlgorithm {
 
 				// Select parents
 				List<int[][]> parents = selectParents(initialPopulation, selection, tournamentSize);
-				maleParent = parents.get(0);
+				maleParent = findBestParent(initialPopulation).getMatrix();
 				femaleParent = parents.get(1);
 
 				// Crossover
