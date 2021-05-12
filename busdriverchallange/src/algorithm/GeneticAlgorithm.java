@@ -229,12 +229,12 @@ public class GeneticAlgorithm {
 		int col_len = fristParent.length;
 		int row_len = fristParent[0].length;
 
-		for (int i = 0; i < row_len; i++) {
+		for (int i = 0; i < col_len; i++) {
 
-			for (int j = crossoverPoint; j < col_len; j++) {
+			for (int j = crossoverPoint; j < row_len; j++) {
 
-				maleChild[j][i] = secondParent[j][i];
-				femaleChild[j][i] = fristParent[j][i];
+				maleChild[i][j] = secondParent[i][j];
+				femaleChild[i][j] = fristParent[i][j];
 			}
 		}
 
@@ -253,14 +253,14 @@ public class GeneticAlgorithm {
 		int[][] maleChild = fristParent;
 		int[][] femaleChild = secondParent;
 
-		int row_len = fristParent[0].length;
+		int col_len = fristParent.length;
 
-		for (int i = 0; i < row_len; i++) {
+		for (int i = 0; i < col_len; i++) {
 
 			for (int j = crossoverPoint; j < crossoverPointTWO; j++) {
 
-				maleChild[j][i] = secondParent[j][i];
-				femaleChild[j][i] = fristParent[j][i];
+				maleChild[i][j] = secondParent[i][j];
+				femaleChild[i][j] = fristParent[i][j];
 
 			}
 		}
