@@ -50,7 +50,10 @@ public class GeneticAlgorithm {
 			initialPopulation.add(solutionObj);
 		}
 
-		for (int g = 0; g < generationSize; g++) {
+		int startPoints = findBestParent(initialPopulation).getPoints();
+		System.out.println("Generation: " + 0 + " | Punkte: " + startPoints);
+
+		for (int g = 1; g <= generationSize; g++) {
 
 			generation = new ArrayList<Solution>();
 
@@ -90,8 +93,10 @@ public class GeneticAlgorithm {
 						numberOfReplacements);
 			}
 
+			int points = findBestParent(generation).getPoints();
+			System.out.println("Generation: " + g + " | Punkte: " + points);
+
 			initialPopulation = generation;
-			System.out.println("Generation: " + g + " | Punkte: " + findBestParent(initialPopulation).getPoints());
 		}
 
 		return findBestParent(initialPopulation);
@@ -424,8 +429,12 @@ public class GeneticAlgorithm {
 		Collections.sort(generation, Collections.reverseOrder());
 
 		for (int i = 0; i < numberOfReplacements; i++) {
+
 			Solution solutionObj = generation.get(i);
-			initialPopulation.set(i, solutionObj);
+
+			if (solutionObj.getPoints() > initialPopulation.get(i).getPoints()) {
+				initialPopulation.set(i, solutionObj);
+			}
 		}
 
 		return initialPopulation;
