@@ -111,6 +111,10 @@ public class Printer {
 	public static void printValidSolutionConsole(boolean validSolution) {
 		System.out.println("Gültig: " + validSolution);
 	}
+	
+	public static void printGeneticAlgorithmPointsPerGen(int generation, int points) {
+		System.out.println("Generation: " + generation + " | Punkte: " + points);
+	}
 
 	public static void printMatrixConsole(int matrix[][]) {
 		int counter = 0;

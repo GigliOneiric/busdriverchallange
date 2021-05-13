@@ -7,6 +7,7 @@ import java.util.List;
 import model.Config;
 import model.Restrictions;
 import model.Solution;
+import ui.Printer;
 
 /**
  * @author Tobias Stelter This class implement the genetic algorithm.
@@ -51,7 +52,7 @@ public class GeneticAlgorithm {
 		}
 
 		int startPoints = findBestParent(initialPopulation).getPoints();
-		System.out.println("Generation: " + 0 + " | Punkte: " + startPoints);
+		Printer.printGeneticAlgorithmPointsPerGen(0, startPoints);
 
 		for (int g = 1; g <= generationSize; g++) {
 
@@ -94,7 +95,7 @@ public class GeneticAlgorithm {
 			}
 
 			int points = findBestParent(generation).getPoints();
-			System.out.println("Generation: " + g + " | Punkte: " + points);
+			Printer.printGeneticAlgorithmPointsPerGen(g, points);
 
 			initialPopulation = generation;
 		}
@@ -133,7 +134,6 @@ public class GeneticAlgorithm {
 		int[][] femaleParent;
 
 		int indexONE = RandomWalk.getRandomInt(0, population.size() - 1);
-		System.out.println(indexONE);
 		int indexTWO;
 
 		maleParent = population.get(indexONE).getMatrix();
@@ -144,7 +144,6 @@ public class GeneticAlgorithm {
 			femaleParent = population.get(indexTWO).getMatrix();
 
 		} while (indexTWO == indexONE);
-		System.out.println(indexTWO);
 
 		parents.add(femaleParent);
 
@@ -318,11 +317,11 @@ public class GeneticAlgorithm {
 		if (mutationMethod == 2) {
 			matrix = mutationSwaps(matrix, swapsPerRow);
 		}
-
 		return matrix;
 
 	}
 
+	
 	private int[][] mutationBitFlip(int[][] matrix, double mutationRate) {
 
 		int col_len = matrix.length;
