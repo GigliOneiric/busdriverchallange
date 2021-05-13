@@ -79,6 +79,7 @@ public class Printer {
 		System.out.println("Wählen Sie die Option für Mutation aus");
 		System.out.println("[1] Bit Flip Mutation");
 		System.out.println("[2] Swap Mutation");
+		System.out.println("[3] Cheating Blocks Mutation");
 	}
 	
 	public static void printGeneticAlgorithmMutationSwapConsole() {

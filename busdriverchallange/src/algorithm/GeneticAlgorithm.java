@@ -317,11 +317,69 @@ public class GeneticAlgorithm {
 		if (mutationMethod == 2) {
 			matrix = mutationSwaps(matrix, swapsPerRow);
 		}
+		if (mutationMethod == 3) {
+			matrix = mutationCheatingBlocks(matrix, mutationRate);
+		}
 		return matrix;
 
 	}
 
-	
+	private int[][] mutationCheatingBlocks(int[][] matrix, double mutationRate) {
+
+		int col_len = matrix.length;
+		int row_len = matrix[0].length;
+
+		int shiftCounter = 0;
+
+		// ChecK for all drivers
+		for (int l = 0; l < col_len; l = l + Config.routes) {
+
+			// Check for single driver
+			for (int f = 0; f < row_len; f = f + Config.shiftsPerDay) {
+
+				// Check shift for one day
+				for (int i = 0 + f; i < Config.shiftsPerDay + f; i++) {
+
+					for (int j = 0 + l; j < Config.routes + l; j++) {
+
+						if (matrix[j][i] == 1 && Restrictions.license[j][i] == 1) {
+							shiftCounter++;
+
+						}
+					}
+				}
+
+				int min = 0;
+				int max = 100;
+
+				double mutation = RandomWalk.getRandomInt(min, max);
+
+				if (mutation <= mutationRate) {
+
+					if (shiftCounter > 0) {
+						matrix[l + 0][f] = 0;
+						matrix[l + 0][f + 1] = 0;
+						matrix[l + 1][f] = 0;
+						matrix[l + 1][f + 1] = 0;
+						matrix[l + 2][f] = 0;
+						matrix[l + 2][f + 1] = 0;
+					}
+
+					if (shiftCounter == 0) {
+						int randRow = RandomWalk.getRandomInt(0, 2);
+						int randCol = RandomWalk.getRandomInt(0, 1);
+
+						matrix[l + randRow][f + randCol] = 1;
+					}
+				}
+
+				shiftCounter = 0;
+			}
+		}
+		return matrix;
+
+	}
+
 	private int[][] mutationBitFlip(int[][] matrix, double mutationRate) {
 
 		int col_len = matrix.length;

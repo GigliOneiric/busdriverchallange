@@ -168,7 +168,7 @@ public class AlgorithmLibrary {
 		Printer.printGeneticAlgorithmMutationConsole();
 		mutationMethod = readInt();
 
-		if (mutationMethod == 1) {
+		if (mutationMethod == 1 || mutationMethod == 3) {
 			Printer.printGeneticAlgorithmMutationRateConsole();
 			mutationRate = readDouble();
 		}
