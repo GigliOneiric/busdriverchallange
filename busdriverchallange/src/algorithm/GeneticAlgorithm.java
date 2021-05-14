@@ -357,20 +357,44 @@ public class GeneticAlgorithm {
 				if (mutation <= mutationRate) {
 
 					if (shiftCounter > 0) {
-						matrix[l + 0][f] = 0; matrix[l + 0][f + 1] = 0;
-						matrix[l + 1][f] = 0; matrix[l + 1][f + 1] = 0;
-						matrix[l + 2][f] = 0; matrix[l + 2][f + 1] = 0;
+						matrix[l + 0][f] = 0;
+						matrix[l + 0][f + 1] = 0;
+						matrix[l + 1][f] = 0;
+						matrix[l + 1][f + 1] = 0;
+						matrix[l + 2][f] = 0;
+						matrix[l + 2][f + 1] = 0;
+
+						shiftCounter = 0;
 					}
 
 					if (shiftCounter == 0) {
-						int randRow = RandomWalk.getRandomInt(0, 2);
-						int randCol = RandomWalk.getRandomInt(0, 1);
 
-						int row = l + randRow;
-						int col = f + randCol;
+						int row;
+						int col;
 
+						int counter = 0;
 
-						matrix[row][col] = 1;
+						do {
+
+							int randRow = RandomWalk.getRandomInt(0, 2);
+							int randCol = RandomWalk.getRandomInt(0, 1);
+
+							row = l + randRow;
+							col = f + randCol;
+
+							counter++;
+
+							if (counter == 50) {
+								break;
+							}
+
+						} while (Restrictions.license[row][col] == 0 || Restrictions.holliday[row][col] == 1);
+
+						if (Restrictions.license[row][col] == 1 && Restrictions.holliday[row][col] == 0) {
+
+							matrix[row][col] = 1;
+
+						}
 					}
 				}
 
