@@ -17,9 +17,10 @@ public class Points {
 
 		return this.points;
 	}
-	
+
 	/**
 	 * Calculates the points for the unassigned shift per route
+	 * 
 	 * @return points
 	 */
 
@@ -35,7 +36,10 @@ public class Points {
 			for (int i = 0; i < row_len; i++) {
 
 				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
-					noShift = noShift + this.matrix[j][i];
+
+					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
+						noShift = noShift + this.matrix[j][i];
+					}
 				}
 
 				if (noShift == 0) {
@@ -48,9 +52,10 @@ public class Points {
 		}
 		return points;
 	}
-	
+
 	/**
 	 * Calculates the points for the preferred shift
+	 * 
 	 * @return points
 	 */
 
@@ -74,9 +79,10 @@ public class Points {
 
 		return points;
 	}
-	
+
 	/**
 	 * Calculates the points for the preferred holliday
+	 * 
 	 * @return points
 	 */
 
@@ -118,12 +124,12 @@ public class Points {
 		return points;
 
 	}
-	
+
 	/**
 	 * Calculates the points for night-shifts followed by day-shifts
+	 * 
 	 * @return points
 	 */
-
 
 	private int calculatePointsNightshiftFollowedByDayshift() {
 		int points = 0;
@@ -161,9 +167,10 @@ public class Points {
 		return points;
 
 	}
-	
+
 	/**
 	 * Calculates the points for more than three night-shifts
+	 * 
 	 * @return points
 	 */
 
@@ -207,9 +214,10 @@ public class Points {
 		return points;
 
 	}
-	
+
 	/**
 	 * Calculates the points for the long break
+	 * 
 	 * @return points
 	 */
 
@@ -224,7 +232,7 @@ public class Points {
 
 		// ChecK for all drivers
 		for (int l = 0; l < col_len; l = l + Config.routes) {
-			
+
 			longBreakCounter = 0;
 
 			// Check for single driver
@@ -244,12 +252,12 @@ public class Points {
 						longBreakCounter = 0;
 						break;
 					}
-					
+
 					if (longBreakCheck == true) {
 						longBreakCounter++;
 					}
 				}
-				
+
 				if (longBreakCounter == Config.longBreak) {
 					points = points + Config.pointsLongBreak;
 				}
@@ -261,14 +269,16 @@ public class Points {
 		return points;
 
 	}
-	
+
 	/**
 	 * Calculates the points for unbalanced night-shifts
+	 * 
 	 * @return points
 	 */
 
 	private int calculatePointsUnbalancedNightShifts() {
-		int points = (-1 * Config.pointsUnbalancedNightShifts) * ((Config.drivers * Config.equalNightShifts) - (Config.totalDays * Config.routes)) ;
+		int points = (-1 * Config.pointsUnbalancedNightShifts)
+				* ((Config.drivers * Config.equalNightShifts) - (Config.totalDays * Config.routes));
 
 		int col_len = this.matrix.length;
 		int row_len = this.matrix[0].length;

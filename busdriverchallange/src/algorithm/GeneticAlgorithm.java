@@ -342,7 +342,7 @@ public class GeneticAlgorithm {
 
 					for (int j = 0 + l; j < Config.routes + l; j++) {
 
-						if (matrix[j][i] == 1 && Restrictions.license[j][i] == 1) {
+						if (matrix[j][i] == 1) {
 							shiftCounter++;
 
 						}

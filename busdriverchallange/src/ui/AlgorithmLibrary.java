@@ -91,7 +91,7 @@ public class AlgorithmLibrary {
 	}
 
 	public void selectDefault() {
-		this.matrix = Default.matrixMatthias;
+		this.matrix = Default.matrix;
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
