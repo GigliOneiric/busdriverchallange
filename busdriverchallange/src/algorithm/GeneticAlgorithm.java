@@ -60,7 +60,7 @@ public class GeneticAlgorithm {
 
 				// Select parents
 				List<int[][]> parents = selectParents(initialPopulation, selection, tournamentSize);
-				maleParent = findBestParent(initialPopulation).getMatrix();
+				maleParent = parents.get(0);
 				femaleParent = parents.get(1);
 
 				// Crossover
