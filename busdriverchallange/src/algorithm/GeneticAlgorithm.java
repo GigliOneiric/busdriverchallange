@@ -27,7 +27,6 @@ public class GeneticAlgorithm {
 
 		Solution solutionObj = new Solution();
 
-		List<Solution> initialPopulationPool = new ArrayList<Solution>();
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
 
@@ -38,16 +37,8 @@ public class GeneticAlgorithm {
 		int[][] femaleChild = null;
 
 		// Generates the population of Size N * 100
-		for (int i = 0; i < populationSize * 10; i++) {
-			solutionObj = RandomWalk.randomWalk();
-			initialPopulationPool.add(solutionObj);
-		}
-
-		// Adds the best parents to the population
-		Collections.sort(initialPopulationPool, Collections.reverseOrder());
-
 		for (int i = 0; i < populationSize; i++) {
-			solutionObj = initialPopulationPool.get(i);
+			solutionObj = RandomWalk.randomWalk();
 			initialPopulation.add(solutionObj);
 		}
 
@@ -227,6 +218,13 @@ public class GeneticAlgorithm {
 
 		int col_len = fristParent.length;
 		int row_len = fristParent[0].length;
+		
+		if (crossoverPoint == 0) {
+			int max = (Config.totalDays * Config.shiftsPerDay) - 1;
+			int min = 1;
+
+			crossoverPoint = RandomWalk.getRandomInt(min, max);
+		}
 
 		for (int i = 0; i < col_len; i++) {
 
