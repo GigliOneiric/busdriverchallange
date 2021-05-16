@@ -55,6 +55,7 @@ public class Printer {
 		System.out.println("[1] Single-Point");
 		System.out.println("[2] Two-Point");
 		System.out.println("[3] Uniform");
+		System.out.println("[4] Driver Day Block");
 	}
 	
 	public static void printGeneticAlgorithmSinglePointCrossoverConsole() {

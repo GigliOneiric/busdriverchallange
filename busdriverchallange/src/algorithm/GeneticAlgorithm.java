@@ -205,6 +205,41 @@ public class GeneticAlgorithm {
 		if (crossovermethod == 3) {
 			children = generateChildUniform(fristParent, secondParent);
 		}
+		if (crossovermethod == 4) {
+			children = generateChildBlock(fristParent, secondParent);
+		}
+
+		return children;
+	}
+
+	private List<int[][]> generateChildBlock(int[][] fristParent, int[][] secondParent) {
+
+		List<int[][]> children = new ArrayList<int[][]>();
+
+		int[][] maleChild = fristParent;
+		int[][] femaleChild = secondParent;
+
+		int col = RandomWalk.getRandomInt(1, Config.drivers);
+		int row = RandomWalk.getRandomInt(1, Config.totalDays);
+
+		if (col > 1) {
+			col = (col * Config.routes) - Config.routes; // 2 * 3 = 6 - 3 = 3 2 * 11 = 33 - 3 = 30 - 1 = 29
+		}
+		col = col - 1;
+
+		row = (row * Config.shiftsPerDay) - Config.shiftsPerDay; // 1 * 2 = 2 - 2 = 0 // 2 * 2 = 4 - 2 = 2
+
+		for (int i = col; i < col + Config.routes; i++) {
+
+			for (int j = row; j < row + Config.shiftsPerDay; j++) {
+
+				maleChild[i][j] = secondParent[i][j];
+				femaleChild[i][j] = fristParent[i][j];
+			}
+		}
+
+		children.add(maleChild);
+		children.add(femaleChild);
 
 		return children;
 	}
@@ -218,7 +253,7 @@ public class GeneticAlgorithm {
 
 		int col_len = fristParent.length;
 		int row_len = fristParent[0].length;
-		
+
 		if (crossoverPoint == 0) {
 			int max = (Config.totalDays * Config.shiftsPerDay) - 1;
 			int min = 1;
@@ -390,8 +425,11 @@ public class GeneticAlgorithm {
 
 						if (Restrictions.license[row][col] == 1 && Restrictions.holliday[row][col] == 0) {
 
-							matrix[row][col] = 1;
+							int coin = RandomWalk.getRandomInt(0, 1);
 
+							if (coin == 1) {
+								matrix[row][col] = 1;
+							}
 						}
 					}
 				}
