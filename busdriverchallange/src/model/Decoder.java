@@ -36,7 +36,7 @@ public class Decoder {
 
 					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
 
-						int driver = j / 3 + 1;
+						int driver = j / Config.routes + 1;
 						System.out.print(driver + " ");
 
 						routeDay.add(driver);
@@ -86,22 +86,21 @@ public class Decoder {
 		System.out.print("[");
 
 		int c = 0;
-
 		int vv = 0;
 
 		for (int y = 0; y < bla.size(); y++) {
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < Config.shiftsPerDay; i++) {
 
 				System.out.print("[" + bla.get(y).get(i) + ", ");
 
-				if (c == 28 || c == 58) {
+				if (c == (Config.totalDays * Config.shiftsPerDay) || c == (Config.totalDays * Config.shiftsPerDay * 2)) {
 					vv++;
 					c = 0;
 
 				}
 
-				int col = bla.get(y).get(i) * 3 - 3 + vv;
+				int col = bla.get(y).get(i) * Config.routes - Config.routes + vv;
 				matrix[col][c] = 1;
 
 				c++;
