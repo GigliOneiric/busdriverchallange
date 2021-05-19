@@ -54,7 +54,7 @@ public class Decoder {
 	}
 	
 	/**
-	 * Encodes an encoded to a matrix
+	 * Encodes an encoded solution to a matrix
 	 * 
 	 * @return matrix
 	 */
