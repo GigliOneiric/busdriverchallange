@@ -38,7 +38,7 @@ public class GeneticAlgorithm {
 
 		// Generates the population of Size N * 100
 		for (int i = 0; i < populationSize; i++) {
-			solutionObj = RandomWalk.randomWalk();
+			solutionObj = RandomWalk.randomDecodedWalk();
 			initialPopulation.add(solutionObj);
 		}
 

@@ -1,5 +1,8 @@
 package algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Config;
 import model.Restrictions;
 import model.Solution;
@@ -8,18 +11,18 @@ import model.Solution;
  * @author Felix Harms,
  * @author Tobias Stelter
  * 
- * This class implements the random walk.
+ *         This class implements the random walk.
  */
 
 public class RandomWalk {
 
 	/**
-	 * Generates a random solution
+	 * Generates a binary random solution
 	 * 
 	 * @return matrix
 	 */
 
-	public static Solution randomWalk() {
+	public static Solution randomDecodedWalk() {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
 		int col_len = matrix.length;
@@ -41,6 +44,39 @@ public class RandomWalk {
 	}
 
 	/**
+	 * Generates a encoded random solution
+	 * 
+	 * @return matrix
+	 */
+
+	public static List<List<Integer>> radomEncodedWalk(List<List<Integer>> driverCombination) {
+
+		List<List<Integer>> encodedSolution = new ArrayList<>();
+		List<Integer> day = new ArrayList<>();
+
+		for (int i = 0; i < driverCombination.size(); i++) {
+
+			day = new ArrayList<>();
+
+			int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
+			int driverNIGHT = -1;
+
+			do {
+
+				driverNIGHT = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
+
+			} while (driverNIGHT == driverDAY);
+
+			day.add(driverCombination.get(i).get(driverDAY));
+			day.add(driverCombination.get(i).get(driverNIGHT));
+			encodedSolution.add(day);
+		}
+
+		return encodedSolution;
+
+	}
+
+	/**
 	 * Generates a random int
 	 * 
 	 * @return radomInt
@@ -48,7 +84,7 @@ public class RandomWalk {
 
 	public static int getRandomInt(int min, int max) {
 
-		int radomInt = (int)  (Math.floor(Math.random() * (max - min + 1)) + min);
+		int radomInt = (int) (Math.floor(Math.random() * (max - min + 1)) + min);
 
 		return radomInt;
 

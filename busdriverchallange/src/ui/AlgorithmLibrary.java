@@ -44,7 +44,7 @@ public class AlgorithmLibrary {
 
 		if (algorithmNumber == 1) {
 			
-			Decoder.encodeMatrix(Decoder.radomString(Decoder.decodeMatrix()));
+			Decoder.encodeMatrix(RandomWalk.radomEncodedWalk(Decoder.extractPossibleDrivers()));
 			//selectJustZeros();
 
 		} else if (algorithmNumber == 2) {
@@ -113,7 +113,7 @@ public class AlgorithmLibrary {
 	}
 
 	public void selectRandomWalk() {
-		this.solutionObj = RandomWalk.randomWalk();
+		this.solutionObj = RandomWalk.randomDecodedWalk();
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());

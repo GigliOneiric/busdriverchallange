@@ -1,11 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import algorithm.RandomWalk;
-import ui.Printer;
 
 /**
  * @author Felix Harms,
@@ -16,10 +12,19 @@ import ui.Printer;
  */
 
 public class Decoder {
+	
+	/**
+	 * Extracts all possible drivers per day
+	 * Route 1: List entry 0  - 13
+	 * Route 2: List entry 14 - 27
+	 * Route 3: List entry 28 - 32
+	 * 
+	 * @return matrix
+	 */
 
-	public static List<List<Integer>> decodeMatrix() {
+	public static List<List<Integer>> extractPossibleDrivers() {
 
-		List<List<Integer>> driverCombination = new ArrayList<>();
+		List<List<Integer>> possibleDrivers = new ArrayList<>();
 		List<Integer> routeDay = new ArrayList<>();
 
 		int matrix[][] = Restrictions.license;
@@ -37,78 +42,48 @@ public class Decoder {
 					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
 
 						int driver = j / Config.routes + 1;
-						System.out.print(driver + " ");
 
 						routeDay.add(driver);
 					}
 				}
-				System.out.println(" ");
-				driverCombination.add(routeDay);
+				possibleDrivers.add(routeDay);
 			}
 
 		}
-		return driverCombination;
+		return possibleDrivers;
 	}
+	
+	/**
+	 * Encodes an encoded to a matrix
+	 * 
+	 * @return matrix
+	 */
 
-	public static List<List<Integer>> radomString(List<List<Integer>> driverCombinatiooon) {
-
-		List<Integer> day = new ArrayList<>();
-		List<List<Integer>> days = new ArrayList<>();
-
-		for (int i = 0; i < driverCombinatiooon.size(); i++) {
-
-			day = new ArrayList<>();
-
-			int driverDAY = RandomWalk.getRandomInt(0, driverCombinatiooon.get(i).size() - 1);
-			int driverNIGHT = -1;
-
-			do {
-
-				driverNIGHT = RandomWalk.getRandomInt(0, driverCombinatiooon.get(i).size() - 1);
-
-			} while (driverNIGHT == driverDAY);
-
-			day.add(driverCombinatiooon.get(i).get(driverDAY));
-			day.add(driverCombinatiooon.get(i).get(driverNIGHT));
-			days.add(day);
-		}
-
-		System.out.print(days + " DDDDDDDDDDDDDD" + days.size());
-		System.out.println("");
-		return days;
-
-	}
-
-	public static int[][] encodeMatrix(List<List<Integer>> bla) {
+	public static int[][] encodeMatrix(List<List<Integer>> encodedSolution) {
 
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
-		System.out.print("[");
+		int shiftCounter = 0;
+		int routeCounter = 0;
 
-		int c = 0;
-		int vv = 0;
-
-		for (int y = 0; y < bla.size(); y++) {
+		for (int y = 0; y < encodedSolution.size(); y++) {
 
 			for (int i = 0; i < Config.shiftsPerDay; i++) {
 
-				System.out.print("[" + bla.get(y).get(i) + ", ");
-
-				if (c == (Config.totalDays * Config.shiftsPerDay) || c == (Config.totalDays * Config.shiftsPerDay * 2)) {
-					vv++;
-					c = 0;
+				if (shiftCounter == (Config.totalDays * Config.shiftsPerDay)
+						|| shiftCounter == (Config.totalDays * Config.shiftsPerDay * 2)) {
+					shiftCounter = 0;
+					routeCounter++;
 
 				}
 
-				int col = bla.get(y).get(i) * Config.routes - Config.routes + vv;
-				matrix[col][c] = 1;
+				int col = encodedSolution.get(y).get(i) * Config.routes - Config.routes + routeCounter;
+				matrix[col][shiftCounter] = 1;
 
-				c++;
+				shiftCounter++;
 
 			}
 		}
-
-		Printer.printMatrixConsole(matrix);
 
 		return matrix;
 
