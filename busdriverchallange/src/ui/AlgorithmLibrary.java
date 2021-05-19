@@ -15,7 +15,7 @@ import model.Default;
 import model.Solution;
 
 /**
- * @author Tobias Stelter This class implement the algorithms.
+ * @author Tobias Stelter This class implements the algorithms.
  */
 
 public class AlgorithmLibrary {

@@ -10,7 +10,7 @@ import model.Solution;
 import ui.Printer;
 
 /**
- * @author Tobias Stelter This class implement the genetic algorithm.
+ * @author Tobias Stelter This class implements the genetic algorithm.
  */
 
 public class GeneticAlgorithm {

@@ -4,7 +4,7 @@ import model.Config;
 import model.Solution;
 
 /**
- * @author Tobias Stelter This class implement the bruteforce-algorithm.
+ * @author Tobias Stelter This class implements the bruteforce-algorithm.
  */
 
 public class Bruteforce {

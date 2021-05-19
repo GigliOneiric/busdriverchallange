@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @author Tobias Stelter This class implement the default matrix.
+ * @author Tobias Stelter This class implements the default matrix.
  */
 
 public class Default {

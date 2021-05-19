@@ -5,7 +5,10 @@ import model.Restrictions;
 import model.Solution;
 
 /**
- * @author Tobias Stelter This class implement the random walk.
+ * @author Felix Harms,
+ * @author Tobias Stelter
+ * 
+ * This class implements the random walk.
  */
 
 public class RandomWalk {

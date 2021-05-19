@@ -11,7 +11,7 @@ import ui.Printer;
  * @author Felix Harms,
  * @author Tobias Stelter
  * 
- *         This class implement the decoding.
+ *         This class implements the decoding.
  * 
  */
 
