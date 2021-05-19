@@ -10,6 +10,7 @@ import algorithm.ParticleSwarmOptimization;
 import algorithm.RandomWalk;
 import algorithm.SimulatedAnnealing;
 import algorithm.TabuSearch;
+import model.Decoder;
 import model.Default;
 import model.Solution;
 
@@ -42,8 +43,9 @@ public class AlgorithmLibrary {
 		Printer.printEmptyRow();
 
 		if (algorithmNumber == 1) {
-
-			selectJustZeros();
+			
+			Decoder.encodeMatrix(Decoder.radomString(Decoder.decodeMatrix()));
+			//selectJustZeros();
 
 		} else if (algorithmNumber == 2) {
 
