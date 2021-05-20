@@ -10,13 +10,13 @@ import model.Solution;
 import ui.Printer;
 
 /**
- * @author Tobias Stelter This class implements the genetic algorithm.
+ * @author Tobias Stelter This class implements the binary genetic algorithm.
  */
 
-public class GeneticAlgorithm {
+public class GeneticAlgorithmBinary {
 
 	/**
-	 * Finds a solution using the genetic algorithm
+	 * Finds a solution using the binary genetic algorithm
 	 * 
 	 * @return matrix
 	 */
@@ -42,7 +42,7 @@ public class GeneticAlgorithm {
 			initialPopulation.add(solutionObj);
 		}
 
-		int startPoints = findBestParent(initialPopulation).getPoints();
+		int startPoints = Solution.findBestSolution(initialPopulation).getPoints();
 		Printer.printGeneticAlgorithmPointsPerGen(0, startPoints);
 
 		for (int g = 1; g <= generationSize; g++) {
@@ -85,13 +85,13 @@ public class GeneticAlgorithm {
 						numberOfReplacements);
 			}
 
-			int points = findBestParent(generation).getPoints();
+			int points = Solution.findBestSolution(generation).getPoints();
 			Printer.printGeneticAlgorithmPointsPerGen(g, points);
 
 			initialPopulation = generation;
 		}
 
-		return findBestParent(initialPopulation);
+		return Solution.findBestSolution(initialPopulation);
 
 	}
 
@@ -455,7 +455,7 @@ public class GeneticAlgorithm {
 					int min = 0;
 					int max = 100;
 
-					double mutation = RandomWalk.getRandomInt(min, max);
+					double mutation = RandomWalk.getRandomDouble(min, max);
 
 					if (mutation <= mutationRate) {
 
@@ -559,20 +559,6 @@ public class GeneticAlgorithm {
 
 	}
 
-	/**
-	 * Finds the parent with the highest points
-	 * 
-	 * @return matrix
-	 */
-
-	private Solution findBestParent(List<Solution> population) {
-
-		Collections.sort(population, Collections.reverseOrder());
-
-		Solution solutionObj = new Solution();
-		solutionObj = population.get(0);
-
-		return solutionObj;
-	}
+	
 
 }

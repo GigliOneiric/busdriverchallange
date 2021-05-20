@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,6 +33,22 @@ public class Solution implements Comparable<Solution> {
 		this.points = p.calculatePoints(this.matrix);
 		this.validSolution = v.checkValidSoultion(this.matrix);
 
+	}
+	
+	/**
+	 * Finds the solution with the highest points
+	 * 
+	 * @return matrix
+	 */
+
+	public static Solution findBestSolution(List<Solution> solutions) {
+
+		Collections.sort(solutions, Collections.reverseOrder());
+
+		Solution solutionObj = new Solution();
+		solutionObj = solutions.get(0);
+
+		return solutionObj;
 	}
 
 	public int[][] getMatrix() {

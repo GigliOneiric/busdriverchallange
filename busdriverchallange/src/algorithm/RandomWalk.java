@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Config;
+import model.Decoder;
 import model.Restrictions;
 import model.Solution;
 
@@ -49,31 +50,41 @@ public class RandomWalk {
 	 * @return matrix
 	 */
 
-	public static List<List<Integer>> radomEncodedWalk(List<List<Integer>> driverCombination) {
+	public static Solution radomEncodedWalk() {
 
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers();
+		
 		List<List<Integer>> encodedSolution = new ArrayList<>();
 		List<Integer> day = new ArrayList<>();
 
 		for (int i = 0; i < driverCombination.size(); i++) {
 
-			day = new ArrayList<>();
-
-			int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
-			int driverNIGHT = -1;
-
-			do {
-
-				driverNIGHT = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
-
-			} while (driverNIGHT == driverDAY);
-
-			day.add(driverCombination.get(i).get(driverDAY));
-			day.add(driverCombination.get(i).get(driverNIGHT));
+			day = randomDriverCombinationForDay(i);
 			encodedSolution.add(day);
 		}
 
-		return encodedSolution;
+		return new Solution(encodedSolution);
 
+	}
+	
+	public static List<Integer> randomDriverCombinationForDay(int i) {
+		
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers();
+		List<Integer> day = new ArrayList<>();
+
+		int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
+		int driverNIGHT = -1;
+
+		do {
+
+			driverNIGHT = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
+
+		} while (driverNIGHT == driverDAY);
+
+		day.add(driverCombination.get(i).get(driverDAY));
+		day.add(driverCombination.get(i).get(driverNIGHT));
+		
+		return day;
 	}
 
 	/**

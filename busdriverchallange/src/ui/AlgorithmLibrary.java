@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import algorithm.Bruteforce;
-import algorithm.GeneticAlgorithm;
+import algorithm.GeneticAlgorithmBinary;
+import algorithm.GeneticAlgorithmEncoded;
 import algorithm.ParticleSwarmOptimization;
 import algorithm.RandomWalk;
 import algorithm.SimulatedAnnealing;
@@ -25,6 +26,20 @@ public class AlgorithmLibrary {
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader(isr);
 
+	int generationSize = 0;
+	int populationSize = 0;
+	int selection = 0;
+	int crossovermethod = 0;
+	int crossoverPoint = 0;
+	int crossoverPointTWO = 0;
+	double mutationRate = 0;
+	int tournamentSize = 0;
+	int childrenNumber = 0;
+	int replacementMethod = 0;
+	int numberOfReplacements = 0;
+	int swapsPerRow = 0;
+	int mutationMethod = 0;
+
 	/**
 	 * Selects the algorithm
 	 * 
@@ -42,7 +57,7 @@ public class AlgorithmLibrary {
 		Printer.printEmptyRow();
 
 		if (algorithmNumber == 1) {
-	
+
 			selectJustZeros();
 
 		} else if (algorithmNumber == 2) {
@@ -59,17 +74,21 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 5) {
 
-			selectGeneticAlgorithm();
+			selectGeneticAlgorithmBinary();
 
 		} else if (algorithmNumber == 6) {
 
-			selectParticleSwarmOptimization();
+			selectGeneticAlgorithmDecoded();
 
 		} else if (algorithmNumber == 7) {
 
-			selectTabuSearch();
+			selectParticleSwarmOptimization();
 
 		} else if (algorithmNumber == 8) {
+
+			selectTabuSearch();
+
+		} else if (algorithmNumber == 9) {
 
 			selectSimulatedAnnealing();
 
@@ -119,21 +138,7 @@ public class AlgorithmLibrary {
 
 	}
 
-	public void selectGeneticAlgorithm() {
-
-		int generationSize = 0;
-		int populationSize = 0;
-		int selection = 0;
-		int crossovermethod = 0;
-		int crossoverPoint = 0;
-		int crossoverPointTWO = 0;
-		double mutationRate = 0;
-		int tournamentSize = 0;
-		int children = 0;
-		int replacement = 0;
-		int numberOfReplacements = 0;
-		int swapsPerRow = 0;
-		int mutationMethod = 0;
+	public void selectGeneticAlgorithmBinary() {
 
 		Printer.printGeneticAlgorithmPopulationSizeConsole();
 		populationSize = readInt();
@@ -142,7 +147,7 @@ public class AlgorithmLibrary {
 		generationSize = readInt();
 
 		Printer.printGeneticAlgorithmChildrenConsole();
-		children = readInt();
+		childrenNumber = readInt();
 
 		Printer.printGeneticAlgorithmParentsConsole();
 		selection = readInt();
@@ -151,13 +156,13 @@ public class AlgorithmLibrary {
 			tournamentSize = readInt();
 		}
 
-		Printer.printGeneticAlgorithmCrossoverMethodConsole();
+		Printer.printGeneticAlgorithmCrossoverMethodBinaryConsole();
 		crossovermethod = readInt();
 
 		if (crossovermethod == 1) {
 			Printer.printGeneticAlgorithmSinglePointCrossoverConsole();
 			crossoverPoint = readInt();
-		} 
+		}
 		if (crossovermethod == 2) {
 			Printer.printGeneticAlgorithmTwoPointCrossoverFirstPointConsole();
 			crossoverPoint = readInt();
@@ -165,7 +170,7 @@ public class AlgorithmLibrary {
 			crossoverPointTWO = readInt();
 		}
 
-		Printer.printGeneticAlgorithmMutationConsole();
+		Printer.printGeneticAlgorithmMutationBinaryConsole();
 		mutationMethod = readInt();
 
 		if (mutationMethod == 1 || mutationMethod == 3) {
@@ -178,19 +183,81 @@ public class AlgorithmLibrary {
 		}
 
 		Printer.printGeneticAlgorithmReplacementConsole();
-		replacement = readInt();
+		replacementMethod = readInt();
 
-		if (replacement == 2) {
+		if (replacementMethod == 2) {
 			Printer.printGeneticAlgorithmReplacementElitesConsole();
 			numberOfReplacements = readInt();
 		}
 
 		Printer.printEmptyRow();
 
-		GeneticAlgorithm g = new GeneticAlgorithm();
+		GeneticAlgorithmBinary g = new GeneticAlgorithmBinary();
 		this.solutionObj = g.geneticAlgorithm(generationSize, populationSize, selection, crossovermethod,
-				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, children, replacement,
+				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
 				numberOfReplacements, swapsPerRow, mutationMethod);
+
+		Printer.printEmptyRow();
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+
+	}
+
+	private void selectGeneticAlgorithmDecoded() {
+
+		Printer.printGeneticAlgorithmPopulationSizeConsole();
+		populationSize = readInt();
+
+		Printer.printGeneticAlgorithmGenerationSizeConsole();
+		generationSize = readInt();
+
+		Printer.printGeneticAlgorithmChildrenConsole();
+		childrenNumber = readInt();
+
+		Printer.printGeneticAlgorithmParentsConsole();
+		selection = readInt();
+		if (selection == 2) {
+			Printer.printGeneticAlgorithmTournamentSize();
+			tournamentSize = readInt();
+		}
+
+		Printer.printGeneticAlgorithmCrossoverMethodDecodedConsole();
+		crossovermethod = readInt();
+
+		if (crossovermethod == 1) {
+			Printer.printGeneticAlgorithmSinglePointCrossoverConsole();
+			crossoverPoint = readInt();
+		}
+		if (crossovermethod == 2) {
+			Printer.printGeneticAlgorithmTwoPointCrossoverFirstPointConsole();
+			crossoverPoint = readInt();
+			Printer.printGeneticAlgorithmTwoPointCrossoverSecondPointConsole();
+			crossoverPointTWO = readInt();
+		}
+
+		Printer.printGeneticAlgorithmMutationEncodedConsole();
+		mutationMethod = readInt();
+
+		if (mutationMethod == 1) {
+			Printer.printGeneticAlgorithmMutationRateConsole();
+			mutationRate = readDouble();
+		}
+
+		Printer.printGeneticAlgorithmReplacementConsole();
+		replacementMethod = readInt();
+
+		if (replacementMethod == 2) {
+			Printer.printGeneticAlgorithmReplacementElitesConsole();
+			numberOfReplacements = readInt();
+		}
+
+		Printer.printEmptyRow();
+
+		GeneticAlgorithmEncoded g = new GeneticAlgorithmEncoded();
+		this.solutionObj = g.geneticAlgorithmEncoded(generationSize, populationSize, selection, crossovermethod,
+				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
+				numberOfReplacements, mutationMethod);
 
 		Printer.printEmptyRow();
 		Printer.printPointsConsole(this.solutionObj.getPoints());
