@@ -20,7 +20,7 @@ public class Printer {
 		System.out.println("[2] Kein Algorithmus");
 		System.out.println("[3] Brutforce");
 		System.out.println("[4] Random Walk");
-		System.out.println("[5] Swip Flip");
+		System.out.println("[5] Swip Flop");
 		System.out.println("[6] Genetischer Algorithmus (Binär)");
 		System.out.println("[7] Genetischer Algorithmus (Decoded)");
 		System.out.println("[8] Partikelschwarmoptimierung");
