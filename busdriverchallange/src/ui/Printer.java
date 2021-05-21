@@ -2,6 +2,9 @@ package ui;
 
 /**
  * @author Tobias Stelter
+ * @author Amir Razagh Khah,
+ * @author Felix Harms
+ * 
  * This class prints outputs.
  */
 
@@ -17,11 +20,12 @@ public class Printer {
 		System.out.println("[2] Kein Algorithmus");
 		System.out.println("[3] Brutforce");
 		System.out.println("[4] Random Walk");
-		System.out.println("[5] Genetischer Algorithmus (Binär)");
-		System.out.println("[6] Genetischer Algorithmus (Decoded)");
-		System.out.println("[7] Partikelschwarmoptimierung");
-		System.out.println("[8] Tabu-Suche (Tabu search)");
-		System.out.println("[9] Simulated Annealing");
+		System.out.println("[5] Swip Flip");
+		System.out.println("[6] Genetischer Algorithmus (Binär)");
+		System.out.println("[7] Genetischer Algorithmus (Decoded)");
+		System.out.println("[8] Partikelschwarmoptimierung");
+		System.out.println("[9] Tabu-Suche (Tabu search)");
+		System.out.println("[10] Simulated Annealing");
 	}
 
 	public static void printGeneticAlgorithmGenerationSizeConsole() {

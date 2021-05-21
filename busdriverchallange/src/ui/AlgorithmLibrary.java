@@ -10,12 +10,18 @@ import algorithm.GeneticAlgorithmEncoded;
 import algorithm.ParticleSwarmOptimization;
 import algorithm.RandomWalk;
 import algorithm.SimulatedAnnealing;
+import algorithm.SwipFlop;
 import algorithm.TabuSearch;
 import model.Default;
 import model.Solution;
 
 /**
- * @author Tobias Stelter This class implements the algorithms.
+ * @author Tobias Stelter
+ * @author Amir Razagh Khah,
+ * @author Felix Harms
+ * 
+ *         This class implements the algorithms.
+ * 
  */
 
 public class AlgorithmLibrary {
@@ -74,21 +80,25 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 5) {
 
-			selectGeneticAlgorithmBinary();
+			selectSwapFlip();
 
 		} else if (algorithmNumber == 6) {
 
-			selectGeneticAlgorithmDecoded();
+			selectGeneticAlgorithmBinary();
 
 		} else if (algorithmNumber == 7) {
 
-			selectParticleSwarmOptimization();
+			selectGeneticAlgorithmDecoded();
 
 		} else if (algorithmNumber == 8) {
 
-			selectTabuSearch();
+			selectParticleSwarmOptimization();
 
 		} else if (algorithmNumber == 9) {
+
+			selectTabuSearch();
+
+		} else if (algorithmNumber == 10) {
 
 			selectSimulatedAnnealing();
 
@@ -110,7 +120,7 @@ public class AlgorithmLibrary {
 	}
 
 	public void selectDefault() {
-		this.matrix = Default.matrix;
+		this.matrix = Default.matrixTobias;
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
@@ -131,6 +141,16 @@ public class AlgorithmLibrary {
 
 	public void selectRandomWalk() {
 		this.solutionObj = RandomWalk.randomDecodedWalk();
+
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+
+	}
+
+	private void selectSwapFlip() {
+		SwipFlop s = new SwipFlop();
+		this.solutionObj = s.swipFlop();
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());

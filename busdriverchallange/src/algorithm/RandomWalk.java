@@ -67,6 +67,12 @@ public class RandomWalk {
 
 	}
 	
+	/**
+	 * Gets a random driver combination for one day
+	 * 
+	 * @return day
+	 */
+	
 	public static List<Integer> randomDriverCombinationForDay(int i) {
 		
 		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers();
