@@ -18,6 +18,9 @@ public class Solution implements Comparable<Solution> {
 	private ValidSoultion v = new ValidSoultion();
 
 	public Solution() {
+		this.matrix = Default.matrixZeros;
+		this.points = p.calculatePoints(this.matrix);
+		this.validSolution = v.checkValidSoultion(this.matrix);
 	}
 
 	public Solution(int matrix[][]) {
