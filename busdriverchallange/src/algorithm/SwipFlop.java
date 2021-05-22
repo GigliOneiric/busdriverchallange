@@ -34,7 +34,7 @@ public class SwipFlop {
 		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
 		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
 
-		for (int i = 0; i < num; i++) {
+		for (int i = 1; i <= num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, 41);
 			List<Integer> day = RandomWalk.randomDriverCombinationForDay(number);
@@ -52,9 +52,9 @@ public class SwipFlop {
 		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
 		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
 
-		System.out.println(encodedSolution);
 
-		for (int i = 0; i < num; i++) {
+
+		for (int i = 1; i <= num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, 41);
 			List<Integer> day = encodedSolution.get(number);

@@ -30,13 +30,13 @@ public class Printer {
 	}
 
 	public static void printSwipFlopSelect() {
-		System.out.println("Bitte wählen Sie die Option aus");
+		System.out.println("Bitte wählen Sie die Option aus:");
 		System.out.println("[1]  Swip");
 		System.out.println("[2]  Flop");
 	}
 
 	public static void printSwipFlopNumber() {
-		System.out.println("Bitte geben Sie ein wie oft die Option wiederholt werden soll");
+		System.out.println("Bitte geben Sie ein wie oft die Option wiederholt werden soll:");
 	}
 
 	public static void printGeneticAlgorithmGenerationSizeConsole() {

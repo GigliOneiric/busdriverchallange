@@ -175,12 +175,14 @@ public class AlgorithmLibrary {
 	private void selectSwapFlip() {
 		Printer.printSwipFlopSelect();
 		int In = readInt();
+		Printer.printEmptyRow();
 		Printer.printSwipFlopNumber();
 		int num = readInt();
-
+		Printer.printEmptyRow();
 		SwipFlop s = new SwipFlop();
 		this.solutionObj = s.swipFlop(num, In);
 
+		Printer.printEmptyRow();
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
