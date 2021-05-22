@@ -35,7 +35,7 @@ public class SwipFlop {
 
 		for (int i = 1; i <= num; i++) {
 
-			int number = RandomWalk.getRandomInt(0, 41);
+			int number = RandomWalk.getRandomInt(0, encodedSolution.size() - 1);
 			List<Integer> day = RandomWalk.randomDriverCombinationForDay(number);
 			encodedSolution.set(number, day);
 			this.solutionObj = new Solution(encodedSolution);
@@ -53,7 +53,7 @@ public class SwipFlop {
 
 		for (int i = 1; i <= num; i++) {
 
-			int number = RandomWalk.getRandomInt(0, 41);
+			int number = RandomWalk.getRandomInt(0, encodedSolution.size() - 1);
 			List<Integer> day = flopDay(encodedSolution, number);
 			encodedSolution.set(number, day);
 
