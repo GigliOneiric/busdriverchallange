@@ -117,9 +117,7 @@ public class AlgorithmLibrary {
 		this.matrix = Default.matrixZeros;
 		this.solutionObj = new Solution(this.matrix);
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -127,9 +125,7 @@ public class AlgorithmLibrary {
 		this.matrix = Default.matrixTobias;
 		this.solutionObj = new Solution(this.matrix);
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -147,9 +143,7 @@ public class AlgorithmLibrary {
 		this.matrix = Reader.readFile(path, pathOption);
 		this.solutionObj = new Solution(this.matrix);
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -157,18 +151,14 @@ public class AlgorithmLibrary {
 		Bruteforce b = new Bruteforce();
 		this.solutionObj = b.brutforce();
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
 	public void selectRandomWalk() {
 		this.solutionObj = RandomWalk.randomDecodedWalk();
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -182,10 +172,7 @@ public class AlgorithmLibrary {
 		SwipFlop s = new SwipFlop();
 		this.solutionObj = s.swipFlop(num, In);
 
-		Printer.printEmptyRow();
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -248,10 +235,7 @@ public class AlgorithmLibrary {
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
 				numberOfReplacements, swapsPerRow, mutationMethod);
 
-		Printer.printEmptyRow();
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -310,10 +294,7 @@ public class AlgorithmLibrary {
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
 				numberOfReplacements, mutationMethod);
 
-		Printer.printEmptyRow();
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -322,9 +303,7 @@ public class AlgorithmLibrary {
 		ParticleSwarmOptimization p = new ParticleSwarmOptimization();
 		this.solutionObj = p.particleSwarmOptimization();
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 
 	}
 
@@ -333,9 +312,7 @@ public class AlgorithmLibrary {
 		TabuSearch t = new TabuSearch();
 		this.solutionObj = t.tabuSearch();
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 	}
 
 	private void selectSimulatedAnnealing() {
@@ -343,9 +320,7 @@ public class AlgorithmLibrary {
 		SimulatedAnnealing s = new SimulatedAnnealing();
 		this.solutionObj = s.simulatedAnnealing();
 
-		Printer.printPointsConsole(this.solutionObj.getPoints());
-		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
-		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		Printer.printResult(this.solutionObj);
 	}
 
 	/**

@@ -11,6 +11,7 @@ package ui;
 import java.util.Arrays;
 
 import model.Config;
+import model.Solution;
 
 public class Printer {
 
@@ -155,7 +156,14 @@ public class Printer {
 	public static void printGeneticAlgorithmPointsPerGen(int generation, int points) {
 		System.out.println("Generation: " + generation + " | Punkte: " + points);
 	}
-
+	
+	public static void printResult(Solution solutionObj) {
+		printEmptyRow();
+		printPointsConsole(solutionObj.getPoints());
+	    printValidSolutionConsole(solutionObj.getValidSolution());
+		printMatrixConsole(solutionObj.getMatrix());
+	}
+	
 	public static void printMatrixConsole(int matrix[][]) {
 		int counter = 0;
 
