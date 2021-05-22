@@ -290,7 +290,7 @@ public class AlgorithmLibrary {
 		Printer.printGeneticAlgorithmMutationEncodedConsole();
 		mutationMethod = readInt();
 
-		if (mutationMethod == 1) {
+		if (mutationMethod == 1 || mutationMethod == 2) {
 			Printer.printGeneticAlgorithmMutationRateConsole();
 			mutationRate = readDouble();
 		}

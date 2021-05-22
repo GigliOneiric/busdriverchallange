@@ -11,7 +11,7 @@ import ui.Printer;
  */
 
 public class GeneticAlgorithmEncoded {
-	
+
 	/**
 	 * Finds a solution using the decoded genetic algorithm
 	 * 
@@ -288,14 +288,38 @@ public class GeneticAlgorithmEncoded {
 	private List<List<Integer>> mutation(List<List<Integer>> matrix, double mutationRate, int mutationMethod) {
 
 		if (mutationMethod == 1) {
-			matrix = mutationStandard(matrix, mutationRate);
+			matrix = mutationSwip(matrix, mutationRate);
+		}
+		if (mutationMethod == 2) {
+			matrix = mutationFlop(matrix, mutationRate);
 		}
 
 		return matrix;
 
 	}
 
-	private List<List<Integer>> mutationStandard(List<List<Integer>> matrix, double mutationRate) {
+	private List<List<Integer>> mutationFlop(List<List<Integer>> matrix, double mutationRate) {
+		List<Integer> day = new ArrayList<>();
+
+		int min = 0;
+		int max = 100;
+
+		for (int i = 0; i < matrix.size(); i++) {
+
+			double mutation = RandomWalk.getRandomDouble(min, max);
+
+			if (mutation <= mutationRate) {
+
+				day = SwipFlop.flopDay(matrix, i);
+				matrix.set(i, day);
+			}
+
+		}
+
+		return matrix;
+	}
+
+	private List<List<Integer>> mutationSwip(List<List<Integer>> matrix, double mutationRate) {
 
 		List<Integer> day = new ArrayList<>();
 

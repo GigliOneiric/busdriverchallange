@@ -120,7 +120,8 @@ public class Printer {
 
 	public static void printGeneticAlgorithmMutationEncodedConsole() {
 		System.out.println("Wählen Sie die Option für Mutation aus");
-		System.out.println("[1] Standard Mutation");
+		System.out.println("[1] Swip");
+		System.out.println("[2] Flop");
 	}
 
 	public static void printGeneticAlgorithmMutationSwapConsole() {
