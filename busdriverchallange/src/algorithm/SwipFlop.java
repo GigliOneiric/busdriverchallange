@@ -1,9 +1,9 @@
 package algorithm;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
 import model.Solution;
+import ui.Printer;
 
 /**
  * @author Amir Razagh Khah
@@ -14,66 +14,61 @@ import model.Solution;
 
 public class SwipFlop {
 
+	Solution solutionObj = new Solution();
+
 	public Solution swipFlop(int num, int In) {
 
-		Solution solutionObj  = new Solution() ;
-		if (In == 1) 
-			{
-			solutionObj = swip(num);
-			}
-		else if (In == 2)
-		{
-		solutionObj = flop(num);
+		this.solutionObj = RandomWalk.radomEncodedWalk();
+
+		if (In == 1) {
+			this.solutionObj = swip(num);
+		} else if (In == 2) {
+			this.solutionObj = flop(num);
 		}
 
-		
-		return solutionObj;
-		}
-	
+		return this.solutionObj;
+	}
 
-	public static Solution swip(int num) {
-		
-		Solution solutionObj = RandomWalk.radomEncodedWalk();
-		System.out.println("points:" + solutionObj.getPoints());
-		List<List<Integer>> encodedSolution = solutionObj.getEncodedMatrix();
+	private Solution swip(int num) {
 
-		
+		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
+		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
+
 		for (int i = 0; i < num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, 41);
 			List<Integer> day = RandomWalk.randomDriverCombinationForDay(number);
 			encodedSolution.set(number, day);
-			solutionObj = new Solution(encodedSolution);
-			System.out.println("points:" + solutionObj.getPoints());
+			this.solutionObj = new Solution(encodedSolution);
+			Printer.printGeneticAlgorithmPointsPerGen(i, this.solutionObj.getPoints());
 
 		}
-		return solutionObj;
+		return this.solutionObj;
 
 	}
-	
-	public static Solution flop(int num) {
-		
-		Solution solutionObj = RandomWalk.radomEncodedWalk();
-		System.out.println("points:" + solutionObj.getPoints());
-		List<List<Integer>> encodedSolution = solutionObj.getEncodedMatrix();
+
+	private Solution flop(int num) {
+
+		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
+		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
 
 		System.out.println(encodedSolution);
 
 		for (int i = 0; i < num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, 41);
-			List<Integer> day= encodedSolution.get(number);
+			List<Integer> day = encodedSolution.get(number);
 			int dayshift = day.get(0);
 			int nightshift = day.get(1);
 			day.set(0, nightshift);
 			day.set(1, dayshift);
 			encodedSolution.set(number, day);
-			
-			solutionObj = new Solution(encodedSolution);
-			
-			System.out.println("points:" + solutionObj.getPoints());
+
+			this.solutionObj = new Solution(encodedSolution);
+
+			Printer.printGeneticAlgorithmPointsPerGen(i, this.solutionObj.getPoints());
 
 		}
-		return solutionObj;
+		return this.solutionObj;
 	}
 }

@@ -30,15 +30,15 @@ public class Printer {
 	}
 
 	public static void printSwipFlopSelect() {
-	System.out.println("Bitte wählen Sie die Option aus");
-	System.out.println("[1]  Swip");
-	System.out.println("[2]  Flop");
+		System.out.println("Bitte wählen Sie die Option aus");
+		System.out.println("[1]  Swip");
+		System.out.println("[2]  Flop");
 	}
-	
+
 	public static void printSwipFlopNumber() {
-	System.out.println("Bitte geben Sie ein wie oft die Option wiederholt werden soll");
+		System.out.println("Bitte geben Sie ein wie oft die Option wiederholt werden soll");
 	}
-	
+
 	public static void printGeneticAlgorithmGenerationSizeConsole() {
 		System.out.println("Geben Sie die Anzahl der Generationen ein.");
 	}
@@ -46,7 +46,7 @@ public class Printer {
 	public static void printGeneticAlgorithmPopulationSizeConsole() {
 		System.out.println("Geben Sie die Populationsgröße ein.");
 	}
-	
+
 	public static void printReaderRules() {
 		System.out.println("Bitte nennen Sie Ihre Datei matrix.txt");
 		System.out.println("Welches Verzeichnis wollen Sie benutzen?");
@@ -54,7 +54,7 @@ public class Printer {
 		System.out.println("[2] Anderes");
 		System.out.println("");
 	}
-	
+
 	public static void printReaderPath() {
 		System.out.println("Geben Sie das Verzeichnis ein");
 	}

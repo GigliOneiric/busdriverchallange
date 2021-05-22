@@ -45,8 +45,6 @@ public class AlgorithmLibrary {
 	int numberOfReplacements = 0;
 	int swapsPerRow = 0;
 	int mutationMethod = 0;
-	int num = 0;
-	int In = 0;
 
 	/**
 	 * Selects the algorithm
@@ -137,10 +135,10 @@ public class AlgorithmLibrary {
 
 	private void selectReadFromFile() {
 		Printer.printReaderRules();
-		
+
 		String path = "";
 		int pathOption = readInt();
-		
+
 		if (pathOption == 2) {
 			Printer.printReaderPath();
 			path = readString();
@@ -176,15 +174,13 @@ public class AlgorithmLibrary {
 
 	private void selectSwapFlip() {
 		Printer.printSwipFlopSelect();
-		In = readInt();
+		int In = readInt();
 		Printer.printSwipFlopNumber();
-		num = readInt();
+		int num = readInt();
 
-		
 		SwipFlop s = new SwipFlop();
 		this.solutionObj = s.swipFlop(num, In);
-		
-		
+
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
