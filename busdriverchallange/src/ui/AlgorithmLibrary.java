@@ -72,33 +72,37 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 3) {
 
-			selectBruteforce();
+			selectReadFromFile();
 
 		} else if (algorithmNumber == 4) {
 
-			selectRandomWalk();
+			selectBruteforce();
 
 		} else if (algorithmNumber == 5) {
 
-			selectSwapFlip();
+			selectRandomWalk();
 
 		} else if (algorithmNumber == 6) {
 
-			selectGeneticAlgorithmBinary();
+			selectSwapFlip();
 
 		} else if (algorithmNumber == 7) {
 
-			selectGeneticAlgorithmDecoded();
+			selectGeneticAlgorithmBinary();
 
 		} else if (algorithmNumber == 8) {
 
-			selectParticleSwarmOptimization();
+			selectGeneticAlgorithmDecoded();
 
 		} else if (algorithmNumber == 9) {
 
-			selectTabuSearch();
+			selectParticleSwarmOptimization();
 
 		} else if (algorithmNumber == 10) {
+
+			selectTabuSearch();
+
+		} else if (algorithmNumber == 11) {
 
 			selectSimulatedAnnealing();
 
@@ -127,6 +131,19 @@ public class AlgorithmLibrary {
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
+	}
+	
+	private void selectReadFromFile() {
+		Printer.printReaderRules();
+		selection = readInt();
+		
+		this.matrix = Reader.readFile();
+		this.solutionObj = new Solution(this.matrix);
+
+		Printer.printPointsConsole(this.solutionObj.getPoints());
+		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
+		Printer.printMatrixConsole(this.solutionObj.getMatrix());
+		
 	}
 
 	public void selectBruteforce() {

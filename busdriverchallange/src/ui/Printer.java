@@ -18,14 +18,15 @@ public class Printer {
 		System.out.println("Wählen Sie einen Algorithmus aus.");
 		System.out.println("[1] Nullen");
 		System.out.println("[2] Kein Algorithmus");
-		System.out.println("[3] Brutforce");
-		System.out.println("[4] Random Walk");
-		System.out.println("[5] Swip Flop");
-		System.out.println("[6] Genetischer Algorithmus (Binär)");
-		System.out.println("[7] Genetischer Algorithmus (Decoded)");
-		System.out.println("[8] Partikelschwarmoptimierung");
-		System.out.println("[9] Tabu-Suche (Tabu search)");
-		System.out.println("[10] Simulated Annealing");
+		System.out.println("[3] Kein Algorithmus (Datei)");
+		System.out.println("[4] Brutforce");
+		System.out.println("[5] Random Walk");
+		System.out.println("[6] Swip Flop");
+		System.out.println("[7] Genetischer Algorithmus (Binär)");
+		System.out.println("[8] Genetischer Algorithmus (Decoded)");
+		System.out.println("[9] Partikelschwarmoptimierung");
+		System.out.println("[10] Tabu-Suche (Tabu search)");
+		System.out.println("[11] Simulated Annealing");
 	}
 
 	public static void printGeneticAlgorithmGenerationSizeConsole() {
@@ -34,6 +35,15 @@ public class Printer {
 
 	public static void printGeneticAlgorithmPopulationSizeConsole() {
 		System.out.println("Geben Sie die Populationsgröße ein.");
+	}
+	
+	public static void printReaderRules() {
+		System.out.println("Bitte nennen Sie Ihre Datei matrix.txt");
+		System.out.println("Bitte legt die matrix.txt auf dem Desktop ab.");
+		System.out.println("");
+		System.out.println("Haben Sie alles geschafft?");
+		System.out.println("[1] Ja");
+		System.out.println("");
 	}
 
 	public static void printGeneticAlgorithmChildrenConsole() {
