@@ -15,17 +15,19 @@ import model.Config;
  */
 
 public class Reader {
-	
+
 	/**
 	 * Reads the file
 	 * 
 	 * @return matrix
 	 */
 
-	public static int[][] readFile() {
+	private static String filename = "matrix.txt";
+
+	public static int[][] readFile(String path, int pathOption) {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
-		String path = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\matrix.txt";
+		path = choosePath(path, pathOption);
 		Path filePath = Paths.get(path);
 
 		// converting to UTF 8
@@ -44,6 +46,19 @@ public class Reader {
 		}
 
 		return matrix;
+	}
+
+	private static String choosePath(String path, int pathOption) {
+
+		if (pathOption == 1) {
+			path = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\" + filename;
+		} else {
+			path = path.concat("\\");path = path.concat(filename);
+			path = path.replaceAll("\\\\|/", "\\\\\\\\");
+		}
+
+		return path;
+
 	}
 
 }

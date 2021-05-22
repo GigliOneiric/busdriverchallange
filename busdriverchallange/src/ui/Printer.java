@@ -39,11 +39,14 @@ public class Printer {
 	
 	public static void printReaderRules() {
 		System.out.println("Bitte nennen Sie Ihre Datei matrix.txt");
-		System.out.println("Bitte legt die matrix.txt auf dem Desktop ab.");
+		System.out.println("Welches Verzeichnis wollen Sie benutzen?");
+		System.out.println("[1] C:\\Users\\[Benutzername]");
+		System.out.println("[2] Anderes");
 		System.out.println("");
-		System.out.println("Haben Sie alles geschafft?");
-		System.out.println("[1] Ja");
-		System.out.println("");
+	}
+	
+	public static void printReaderPath() {
+		System.out.println("Geben Sie das Verzeichnis ein");
 	}
 
 	public static void printGeneticAlgorithmChildrenConsole() {

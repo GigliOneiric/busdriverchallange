@@ -132,18 +132,25 @@ public class AlgorithmLibrary {
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
 
 	}
-	
+
 	private void selectReadFromFile() {
 		Printer.printReaderRules();
-		selection = readInt();
 		
-		this.matrix = Reader.readFile();
+		String path = "";
+		int pathOption = readInt();
+		
+		if (pathOption == 2) {
+			Printer.printReaderPath();
+			path = readString();
+		}
+
+		this.matrix = Reader.readFile(path, pathOption);
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printPointsConsole(this.solutionObj.getPoints());
 		Printer.printValidSolutionConsole(this.solutionObj.getValidSolution());
 		Printer.printMatrixConsole(this.solutionObj.getMatrix());
-		
+
 	}
 
 	public void selectBruteforce() {
@@ -376,4 +383,21 @@ public class AlgorithmLibrary {
 		return number;
 	}
 
+	/**
+	 * Reads a String
+	 * 
+	 * @return input
+	 */
+
+	public String readString() {
+		String input = "";
+
+		try {
+			input = br.readLine();
+		} catch (IOException e) {
+			// To do
+		}
+		return input;
+
+	}
 }
