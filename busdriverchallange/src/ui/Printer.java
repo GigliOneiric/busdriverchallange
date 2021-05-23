@@ -21,13 +21,14 @@ public class Printer {
 		System.out.println("[2] Kein Algorithmus");
 		System.out.println("[3] Kein Algorithmus (Datei)");
 		System.out.println("[4] Brutforce");
-		System.out.println("[5] Random Walk");
-		System.out.println("[6] Swip Flop");
-		System.out.println("[7] Genetischer Algorithmus (Binär)");
-		System.out.println("[8] Genetischer Algorithmus (Decoded)");
-		System.out.println("[9] Partikelschwarmoptimierung");
-		System.out.println("[10] Tabu-Suche (Tabu search)");
-		System.out.println("[11] Simulated Annealing");
+		System.out.println("[5] Random Walk (Binär)");
+		System.out.println("[6] Random Walk (Decoded)");
+		System.out.println("[7] Swip Flop");
+		System.out.println("[8] Genetischer Algorithmus (Binär)");
+		System.out.println("[9] Genetischer Algorithmus (Decoded)");
+		System.out.println("[10] Partikelschwarmoptimierung");
+		System.out.println("[11] Tabu-Suche (Tabu search)");
+		System.out.println("[12] Simulated Annealing");
 	}
 
 	public static void printSwipFlopSelect() {

@@ -80,29 +80,33 @@ public class AlgorithmLibrary {
 
 		} else if (algorithmNumber == 5) {
 
-			selectRandomWalk();
+			selectRandomWalkBinär();
 
 		} else if (algorithmNumber == 6) {
 
-			selectSwapFlip();
+			selectRandomWalkEncoded();
 
 		} else if (algorithmNumber == 7) {
 
-			selectGeneticAlgorithmBinary();
+			selectSwapFlip();
 
 		} else if (algorithmNumber == 8) {
 
-			selectGeneticAlgorithmDecoded();
+			selectGeneticAlgorithmBinary();
 
 		} else if (algorithmNumber == 9) {
 
-			selectParticleSwarmOptimization();
+			selectGeneticAlgorithmDecoded();
 
 		} else if (algorithmNumber == 10) {
 
-			selectTabuSearch();
+			selectParticleSwarmOptimization();
 
 		} else if (algorithmNumber == 11) {
+
+			selectTabuSearch();
+
+		} else if (algorithmNumber == 12) {
 
 			selectSimulatedAnnealing();
 
@@ -122,7 +126,7 @@ public class AlgorithmLibrary {
 	}
 
 	public void selectDefault() {
-		this.matrix = Default.matrixTobias;
+		this.matrix = Default.matrix;
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printResult(this.solutionObj);
@@ -155,12 +159,20 @@ public class AlgorithmLibrary {
 
 	}
 
-	public void selectRandomWalk() {
+	public void selectRandomWalkBinär() {
 		this.solutionObj = RandomWalk.randomDecodedWalk();
 
 		Printer.printResult(this.solutionObj);
 
 	}
+	
+	private void selectRandomWalkEncoded() {
+		this.solutionObj = RandomWalk.radomEncodedWalk();
+
+		Printer.printResult(this.solutionObj);
+		
+	}
+
 
 	private void selectSwapFlip() {
 		Printer.printSwipFlopSelect();
