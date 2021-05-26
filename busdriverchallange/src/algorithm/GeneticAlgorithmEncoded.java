@@ -38,9 +38,9 @@ public class GeneticAlgorithmEncoded {
 			solutionObj = RandomWalk.radomEncodedWalk();
 			initialPopulation.add(solutionObj);
 		}
-
+		
 		int startPoints = Solution.findBestSolution(initialPopulation).getPoints();
-		Printer.printGeneticAlgorithmPointsPerGen(0, startPoints);
+		Printer.printGeneticAlgorithmPointsPerGen(0, startPoints);	
 
 		for (int g = 1; g <= generationSize; g++) {
 

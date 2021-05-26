@@ -10,10 +10,16 @@ public class Points {
 
 	public int calculatePoints(int[][] matrix) {
 		this.matrix = matrix;
-		this.points = calculatePointsUnassignedShift() + calculatePointsPreferredShift()
+
+		int pointsSecondaryCondition = calculatePointsUnassignedShift() + calculatePointsPreferredShift()
 				+ calculatePointsPrefferedHoliday() + calculatePointsNightshiftFollowedByDayshift()
 				+ calculatePointsMoreThanThreeNightShifts() + calculatePointsLongBreak()
 				+ calculatePointsUnbalancedNightShifts();
+
+		int pointsInvalidSolution = calculatePointsLicense() + calculatePointsHolliday()
+				+ calculatePointsMultipleShifts() + calculatePointsShiftsPerDay();
+
+		this.points = pointsSecondaryCondition + pointsInvalidSolution;
 
 		return this.points;
 	}
@@ -321,4 +327,131 @@ public class Points {
 		return points;
 
 	}
+
+	/**
+	 * Calculates the points for an invalid license
+	 * 
+	 * @return points
+	 */
+
+	private int calculatePointsLicense() {
+		int points = 0;
+
+		int col_len = this.matrix.length;
+		int row_len = this.matrix[0].length;
+
+		for (int i = 0; i < row_len; i++) {
+
+			for (int j = 0; j < col_len; j++) {
+
+				if (this.matrix[j][i] == 1 && Restrictions.license[j][i] == 0) {
+					points = points + Config.pointsInvalidSolution;
+				}
+			}
+
+		}
+		return points;
+	}
+
+	/**
+	 * Calculates the points for disregarded the holliday from the restrictions
+	 * 
+	 * @return points
+	 */
+
+	private int calculatePointsHolliday() {
+		int points = 0;
+
+		int col_len = this.matrix.length;
+		int row_len = this.matrix[0].length;
+
+		for (int i = 0; i < row_len; i++) {
+
+			for (int j = 0; j < col_len; j++) {
+
+				if (this.matrix[j][i] == 1 && Restrictions.holliday[j][i] == 1) {
+					points = points + Config.pointsInvalidSolution;
+
+				}
+			}
+
+		}
+		return points;
+	}
+
+	/**
+	 * Calculates the points for a route have more than one assigned driver
+	 * 
+	 * @return points
+	 */
+
+	private int calculatePointsMultipleShifts() {
+		int points = 0;
+
+		int shiftCounter = 0;
+
+		int col_len = this.matrix.length;
+		int row_len = this.matrix[0].length;
+
+		for (int k = 0; k < Config.routes; k++) {
+
+			for (int i = 0; i < row_len; i++) {
+
+				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
+					shiftCounter = shiftCounter + this.matrix[j][i];
+				}
+
+				if (shiftCounter > 1) {
+					points = points + Config.pointsInvalidSolution;
+
+				}
+				shiftCounter = 0;
+
+			}
+		}
+		return points;
+	}
+
+	/**
+	 * Calculates the points for a driver have more than one shift per day
+	 * 
+	 * @return points
+	 */
+
+	private int calculatePointsShiftsPerDay() {
+		int points = 0;
+
+		int col_len = this.matrix.length;
+		int row_len = this.matrix[0].length;
+
+		int shiftCounter = 0;
+
+		// ChecK for all drivers
+		for (int l = 0; l < col_len; l = l + Config.routes) {
+
+			// Check for single driver
+			for (int f = 0; f < row_len; f = f + Config.shiftsPerDay) {
+
+				// Check shift for one day
+				for (int i = 0 + f; i < Config.shiftsPerDay + f; i++) {
+
+					for (int j = 0 + l; j < Config.routes + l; j++) {
+
+						if (this.matrix[j][i] == 1 && Restrictions.license[j][i] == 1) {
+							shiftCounter++;
+
+						}
+					}
+				}
+
+				if (shiftCounter > 1) {
+					points = points + Config.pointsInvalidSolution;
+				}
+
+				shiftCounter = 0;
+			}
+		}
+		return points;
+	}
+
 }

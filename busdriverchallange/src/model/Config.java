@@ -27,5 +27,7 @@ public class Config {
 	public static int pointsNightshiftFollowedByDayshift = -30; // For each late shift followed immediately by an early shift in a single driver’s schedule
 	public static int pointsMoreThanThreeNightShifts = -10; // For every after the third consecutive late shift assigned to a single driver
 	public static int pointsUnbalancedNightShifts = -8; // For every late shift assigned that is not equal to 4
+	
+	public static int pointsInvalidSolution = -50; // For every late shift assigned that is not equal to 4
 
 }
