@@ -7,6 +7,7 @@ import model.Config;
 import model.Decoder;
 import model.Restrictions;
 import model.Solution;
+import ui.Reader;
 
 /**
  * @author Felix Harms,
@@ -16,6 +17,12 @@ import model.Solution;
  */
 
 public class RandomWalk {
+	
+	private Decoder decoder;
+
+	public RandomWalk(Reader fileReader, int moreRestrictions) {
+		this.decoder = new Decoder(fileReader, moreRestrictions);
+	}
 
 	/**
 	 * Generates a binary random solution
@@ -50,32 +57,32 @@ public class RandomWalk {
 	 * @return matrix
 	 */
 
-	public static Solution radomEncodedWalk(String path, int pathOption, int moreRestrictions) {
+	public Solution radomEncodedWalk() {
 
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(path, pathOption, moreRestrictions);
-		
+		List<List<Integer>> driverCombination = decoder.extractPossibleDrivers();
+
 		List<List<Integer>> encodedSolution = new ArrayList<>();
 		List<Integer> day = new ArrayList<>();
 
 		for (int i = 0; i < driverCombination.size(); i++) {
 
-			day = randomDriverCombinationForDay(i, path, pathOption, moreRestrictions);
+			day = randomDriverCombinationForDay(i);
 			encodedSolution.add(day);
 		}
 
 		return new Solution(encodedSolution);
 
 	}
-	
+
 	/**
 	 * Gets a random driver combination for one day
 	 * 
 	 * @return day
 	 */
-	
-	public static List<Integer> randomDriverCombinationForDay(int i, String path, int pathOption, int moreRestrictions) {
-		
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(path, pathOption, moreRestrictions);
+
+	public List<Integer> randomDriverCombinationForDay(int i) {
+
+		List<List<Integer>> driverCombination = decoder.extractPossibleDrivers();
 		List<Integer> day = new ArrayList<>();
 
 		int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);
@@ -89,7 +96,7 @@ public class RandomWalk {
 
 		day.add(driverCombination.get(i).get(driverDAY));
 		day.add(driverCombination.get(i).get(driverNIGHT));
-		
+
 		return day;
 	}
 

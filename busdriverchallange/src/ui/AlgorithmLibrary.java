@@ -46,9 +46,9 @@ public class AlgorithmLibrary {
 	int numberOfReplacements = 0;
 	int swapsPerRow = 0;
 	int mutationMethod = 0;
-	String path = "";
-	int pathOption = 0;
 	int moreRestrictions = 0;
+	
+	Reader fileReader = new Reader();
 
 	/**
 	 * Selects the algorithm
@@ -148,7 +148,9 @@ public class AlgorithmLibrary {
 			path = readString();
 		}
 
-		this.matrix = Reader.readFile(path, pathOption, Config.filenameMatrix);
+		Reader r = new Reader(path, pathOption, Config.filenameMatrix);
+		this.matrix = r.readFile();
+		
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printResult(this.solutionObj);
@@ -173,7 +175,8 @@ public class AlgorithmLibrary {
 	private void selectRandomWalkEncoded() {
 		moreRestrictions();
 
-		this.solutionObj = RandomWalk.radomEncodedWalk(path, pathOption, moreRestrictions);
+		RandomWalk randomWalk = new RandomWalk(fileReader, moreRestrictions);
+		this.solutionObj = randomWalk.radomEncodedWalk();
 
 		Printer.printResult(this.solutionObj);
 
@@ -190,7 +193,8 @@ public class AlgorithmLibrary {
 		int num = readInt();
 		Printer.printEmptyRow();
 		SwipFlop s = new SwipFlop();
-		this.solutionObj = s.swipFlop(num, In, this.path, this.pathOption, this.moreRestrictions);
+		
+		this.solutionObj = s.swipFlop(num, In, fileReader, this.moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -314,7 +318,7 @@ public class AlgorithmLibrary {
 		GeneticAlgorithmEncoded g = new GeneticAlgorithmEncoded();
 		this.solutionObj = g.geneticAlgorithmEncoded(generationSize, populationSize, selection, crossovermethod,
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
-				numberOfReplacements, mutationMethod, path, pathOption, moreRestrictions);
+				numberOfReplacements, mutationMethod, fileReader, moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -323,7 +327,7 @@ public class AlgorithmLibrary {
 	private void selectParticleSwarmOptimization() {
 
 		ParticleSwarmOptimization p = new ParticleSwarmOptimization();
-		this.solutionObj = p.particleSwarmOptimization(path, pathOption, moreRestrictions);
+		this.solutionObj = p.particleSwarmOptimization();
 
 		Printer.printResult(this.solutionObj);
 
@@ -351,12 +355,13 @@ public class AlgorithmLibrary {
 
 		if (moreRestrictions == 2) {
 			Printer.printReaderRules(Config.filenameRestrictions);
+			fileReader.setFilename(Config.filenameRestrictions);
 
-			this.pathOption = readInt();
+			this.fileReader.setPathOption(readInt());
 
-			if (this.pathOption == 2) {
+			if (this.fileReader.getPathOption() == 2) {
 				Printer.printReaderPath();
-				this.path = readString();
+				this.fileReader.setPath(readString());
 			}
 		}
 	}

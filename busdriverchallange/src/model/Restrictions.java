@@ -153,9 +153,9 @@ public class Restrictions {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } // K3
 	};
 
-	public static int[][] additionalHardRestrictions(String path, int pathOption) {
+	public static int[][] additionalHardRestrictions(Reader fileReader) {
 
-		int[][] additionalHardRestrictions = Reader.readFile(path, pathOption, Config.filenameRestrictions);
+		int[][] additionalHardRestrictions = fileReader.readFile();
 
 		return additionalHardRestrictions;
 	}

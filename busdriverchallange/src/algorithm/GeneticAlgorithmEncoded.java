@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import model.Solution;
 import ui.Printer;
+import ui.Reader;
 
 /**
  * @author Tobias Stelter This class implements the decoded genetic algorithm.
@@ -17,12 +18,15 @@ public class GeneticAlgorithmEncoded {
 	 * 
 	 * @return matrix
 	 */
+	
+	RandomWalk radomWalk;
 
 	public Solution geneticAlgorithmEncoded(int generationSize, int populationSize, int selection, int crossovermethod,
 			int crossoverPoint, int crossoverPointTWO, double mutationRate, int tournamentSize, int childrenNumber,
-			int replacementMethod, int numberOfReplacements, int mutationMethod, String path, int pathOption, int moreRestrictions) {
+			int replacementMethod, int numberOfReplacements, int mutationMethod, Reader fileReader, int moreRestrictions) {
 
 		Solution solutionObj = new Solution();
+		this.radomWalk = new RandomWalk(fileReader, moreRestrictions);
 
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
@@ -35,7 +39,7 @@ public class GeneticAlgorithmEncoded {
 
 		// Generates the population of Size N
 		for (int i = 0; i < populationSize; i++) {
-			solutionObj = RandomWalk.radomEncodedWalk(path, pathOption, moreRestrictions);
+			solutionObj = radomWalk.radomEncodedWalk();
 			initialPopulation.add(solutionObj);
 		}
 		
@@ -60,8 +64,8 @@ public class GeneticAlgorithmEncoded {
 				femaleChild = children.get(1);
 
 				// Mutation
-				maleChild = mutation(maleChild, mutationRate, mutationMethod, path, pathOption, moreRestrictions);
-				femaleChild = mutation(femaleChild, mutationRate, mutationMethod, path, pathOption, moreRestrictions);
+				maleChild = mutation(maleChild, mutationRate, mutationMethod, fileReader, moreRestrictions);
+				femaleChild = mutation(femaleChild, mutationRate, mutationMethod, fileReader, moreRestrictions);
 
 				// Add the children to the population
 				generation = replacement(initialPopulation, generation, maleChild, femaleChild, 1,
@@ -285,10 +289,10 @@ public class GeneticAlgorithmEncoded {
 	 * @return matrix
 	 */
 
-	private List<List<Integer>> mutation(List<List<Integer>> matrix, double mutationRate, int mutationMethod,String path, int pathOption, int moreRestrictions) {
+	private List<List<Integer>> mutation(List<List<Integer>> matrix, double mutationRate, int mutationMethod, Reader fileReader, int moreRestrictions) {
 
 		if (mutationMethod == 1) {
-			matrix = mutationSwip(matrix, mutationRate, path, pathOption, moreRestrictions);
+			matrix = mutationSwip(matrix, mutationRate, fileReader, moreRestrictions);
 		}
 		if (mutationMethod == 2) {
 			matrix = mutationFlop(matrix, mutationRate);
@@ -319,7 +323,7 @@ public class GeneticAlgorithmEncoded {
 		return matrix;
 	}
 
-	private List<List<Integer>> mutationSwip(List<List<Integer>> matrix, double mutationRate, String path, int pathOption, int moreRestrictions) {
+	private List<List<Integer>> mutationSwip(List<List<Integer>> matrix, double mutationRate, Reader fileReader, int moreRestrictions) {
 
 		List<Integer> day = new ArrayList<>();
 
@@ -332,7 +336,7 @@ public class GeneticAlgorithmEncoded {
 
 			if (mutation <= mutationRate) {
 
-				day = RandomWalk.randomDriverCombinationForDay(i, path, pathOption, moreRestrictions);
+				day = this.radomWalk.randomDriverCombinationForDay(i);
 				matrix.set(i, day);
 			}
 

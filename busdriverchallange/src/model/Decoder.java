@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.Reader;
+
 /**
  * @author Felix Harms,
  * @author Tobias Stelter
@@ -20,19 +22,23 @@ public class Decoder {
 	 * @return matrix
 	 */
 
-	public static List<List<Integer>> extractPossibleDrivers(String path, int pathOption, int moreRestrictions) {
+	int additionalHardRestrictions[][] = Default.matrixZeros;
+
+	public Decoder(Reader fileReader, int moreRestrictions) {
+
+		if (moreRestrictions == 2) {
+			this.additionalHardRestrictions = Restrictions.additionalHardRestrictions(fileReader);
+		}
+
+	}
+
+	public List<List<Integer>> extractPossibleDrivers() {
 
 		List<List<Integer>> possibleDrivers = new ArrayList<>();
 		List<Integer> routeDay = new ArrayList<>();
 
 		int col_len = Default.matrixZeros.length;
 		int row_len = Default.matrixZeros[0].length;
-
-		int additionalHardRestrictions[][] = Default.matrixZeros;
-
-		if (moreRestrictions == 2) {
-			additionalHardRestrictions = Restrictions.additionalHardRestrictions(path, pathOption);
-		}
 
 		for (int k = 0; k < Config.routes; k++) {
 

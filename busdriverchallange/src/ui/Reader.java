@@ -22,7 +22,21 @@ public class Reader {
 	 * @return matrix
 	 */
 
-	public static int[][] readFile(String path, int pathOption, String filename) {
+	String path;
+	int pathOption;
+	String filename;
+
+	public Reader() {
+
+	}
+
+	public Reader(String path, int pathOption, String filename) {
+		this.path = path;
+		this.pathOption = pathOption;
+		this.filename = filename;
+	}
+
+	public int[][] readFile() {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
 		path = choosePath(path, pathOption, filename);
@@ -46,17 +60,42 @@ public class Reader {
 		return matrix;
 	}
 
-	private static String choosePath(String path, int pathOption, String filename) {
+	private String choosePath(String path, int pathOption, String filename) {
 
 		if (pathOption == 1) {
 			path = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\" + filename;
 		} else {
-			path = path.concat("\\");path = path.concat(filename);
+			path = path.concat("\\");
+			path = path.concat(filename);
 			path = path.replaceAll("\\\\|/", "\\\\\\\\");
 		}
 
 		return path;
 
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public int getPathOption() {
+		return pathOption;
+	}
+
+	public void setPathOption(int pathOption) {
+		this.pathOption = pathOption;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 }
