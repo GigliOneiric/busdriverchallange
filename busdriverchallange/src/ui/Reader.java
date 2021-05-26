@@ -36,7 +36,7 @@ public class Reader {
 			for (int i = 0; i < Config.drivers * Config.routes; i++) {
 				String[] st = bufferedReader.readLine().trim().split(",");
 				for (int j = 0; j < Config.totalDays * Config.shiftsPerDay; j++) {
-					matrix[i][j] = Integer.parseInt(st[j].replaceAll("[\\.$|{|,}|]", ""));
+					matrix[i][j] = Integer.parseInt(st[j].replaceAll("[\\.$|{|\\s|,}|]", ""));
 				}
 			}
 		} catch (IOException ex) {

@@ -190,7 +190,7 @@ public class AlgorithmLibrary {
 		int num = readInt();
 		Printer.printEmptyRow();
 		SwipFlop s = new SwipFlop();
-		this.solutionObj = s.swipFlop(num, In, path, pathOption, moreRestrictions);
+		this.solutionObj = s.swipFlop(num, In, this.path, this.pathOption, this.moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
