@@ -4,23 +4,15 @@ package model;
  * @author Tobias Stelter This class calculates the total points.
  */
 
-public class Points {
+public class Points implements Runnable {
 	private int[][] matrix;
-	private int points;
+	private int points = 0;
 
-	public int calculatePoints(int[][] matrix) {
+	public Points(int[][] matrix) {
 		this.matrix = matrix;
-
-		int pointsSecondaryCondition = calculatePointsUnassignedShift() + calculatePointsPreferredShift()
-				+ calculatePointsPrefferedHoliday() + calculatePointsNightshiftFollowedByDayshift()
-				+ calculatePointsMoreThanThreeNightShifts() + calculatePointsLongBreak()
-				+ calculatePointsUnbalancedNightShifts();
-
-		int pointsInvalidSolution = calculatePointsLicense() + calculatePointsHolliday()
-				+ calculatePointsMultipleShifts() + calculatePointsShiftsPerDay();
-
-		this.points = pointsSecondaryCondition + pointsInvalidSolution;
-
+	}
+	
+	public int getPoints() {
 		return this.points;
 	}
 
@@ -329,90 +321,6 @@ public class Points {
 	}
 
 	/**
-	 * Calculates the points for an invalid license
-	 * 
-	 * @return points
-	 */
-
-	private int calculatePointsLicense() {
-		int points = 0;
-
-		int col_len = this.matrix.length;
-		int row_len = this.matrix[0].length;
-
-		for (int i = 0; i < row_len; i++) {
-
-			for (int j = 0; j < col_len; j++) {
-
-				if (this.matrix[j][i] == 1 && Restrictions.license[j][i] == 0) {
-					points = points + Config.pointsInvalidSolution;
-				}
-			}
-
-		}
-		return points;
-	}
-
-	/**
-	 * Calculates the points for disregarded the holliday from the restrictions
-	 * 
-	 * @return points
-	 */
-
-	private int calculatePointsHolliday() {
-		int points = 0;
-
-		int col_len = this.matrix.length;
-		int row_len = this.matrix[0].length;
-
-		for (int i = 0; i < row_len; i++) {
-
-			for (int j = 0; j < col_len; j++) {
-
-				if (this.matrix[j][i] == 1 && Restrictions.holliday[j][i] == 1) {
-					points = points + Config.pointsInvalidSolution;
-
-				}
-			}
-
-		}
-		return points;
-	}
-
-	/**
-	 * Calculates the points for a route have more than one assigned driver
-	 * 
-	 * @return points
-	 */
-
-	private int calculatePointsMultipleShifts() {
-		int points = 0;
-
-		int shiftCounter = 0;
-
-		int col_len = this.matrix.length;
-		int row_len = this.matrix[0].length;
-
-		for (int k = 0; k < Config.routes; k++) {
-
-			for (int i = 0; i < row_len; i++) {
-
-				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
-					shiftCounter = shiftCounter + this.matrix[j][i];
-				}
-
-				if (shiftCounter > 1) {
-					points = points + Config.pointsInvalidSolution;
-
-				}
-				shiftCounter = 0;
-
-			}
-		}
-		return points;
-	}
-
-	/**
 	 * Calculates the points for a driver have more than one shift per day
 	 * 
 	 * @return points
@@ -452,6 +360,19 @@ public class Points {
 			}
 		}
 		return points;
+	}
+
+	@Override
+	public void run() {
+
+		int pointsSecondaryCondition = calculatePointsUnassignedShift() + calculatePointsPreferredShift()
+				+ calculatePointsPrefferedHoliday() + calculatePointsNightshiftFollowedByDayshift()
+				+ calculatePointsMoreThanThreeNightShifts() + calculatePointsLongBreak()
+				+ calculatePointsUnbalancedNightShifts();
+
+		int pointsInvalidSolution = calculatePointsShiftsPerDay();
+
+		this.points = pointsSecondaryCondition + pointsInvalidSolution;
 	}
 
 }

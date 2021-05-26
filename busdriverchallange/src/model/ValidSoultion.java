@@ -4,19 +4,15 @@ package model;
  * @author Tobias Stelter This class calculates the validity of the solution.
  */
 
-public class ValidSoultion {
+public class ValidSoultion implements Runnable {
 	private int[][] matrix;
-	private boolean validSoultion;
+	private boolean validSoultion = true;
 
-
-	public boolean checkValidSoultion(int[][] matrix) {
+	public ValidSoultion(int[][] matrix) {
 		this.matrix = matrix;
-		this.validSoultion = true;
+	}
 
-		checkLicense();
-		checkHolliday();
-		checkShiftsPerDay();
-		checkMultipleShifts();
+	public boolean getValidSoultion() {
 
 		return this.validSoultion;
 
@@ -129,6 +125,14 @@ public class ValidSoultion {
 				shiftCounter = 0;
 			}
 		}
+	}
+
+	@Override
+	public void run() {
+		checkLicense();
+		checkHolliday();
+		checkShiftsPerDay();
+		checkMultipleShifts();
 	}
 
 }

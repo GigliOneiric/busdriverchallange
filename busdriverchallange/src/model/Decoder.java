@@ -29,7 +29,7 @@ public class Decoder {
 		int row_len = Default.matrixZeros[0].length;
 
 		int additionalHardRestrictions[][] = Default.matrixZeros;
-		
+
 		if (moreRestrictions == 2) {
 			additionalHardRestrictions = Restrictions.additionalHardRestrictions(path, pathOption);
 		}
@@ -42,7 +42,8 @@ public class Decoder {
 
 				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
 
-					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0 && additionalHardRestrictions[j][i] == 0) {
+					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0
+							&& additionalHardRestrictions[j][i] == 0) {
 
 						int driver = j / Config.routes + 1;
 
