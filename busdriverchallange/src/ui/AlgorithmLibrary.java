@@ -146,8 +146,7 @@ public class AlgorithmLibrary {
 			path = readString();
 		}
 
-		Reader r = new Reader(path, pathOption, Config.filenameMatrix);
-		this.matrix = r.readFile();
+		this.matrix = Reader.readFile(path, pathOption, Config.filenameMatrix);
 
 		this.solutionObj = new Solution(this.matrix);
 

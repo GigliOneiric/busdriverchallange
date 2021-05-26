@@ -7,11 +7,11 @@ import java.util.List;
  * @author Felix Harms,
  * @author Tobias Stelter
  * 
- *         This class implements the decoding.
+ *         This class implements the encoding.
  * 
  */
 
-public class Decoder {
+public class Encoder {
 
 	/**
 	 * Extracts all possible drivers per day Route 1: List entry 0 - 13 Route 2:

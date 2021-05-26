@@ -26,17 +26,7 @@ public class Reader {
 	int pathOption;
 	String filename;
 
-	public Reader() {
-
-	}
-
-	public Reader(String path, int pathOption, String filename) {
-		this.path = path;
-		this.pathOption = pathOption;
-		this.filename = filename;
-	}
-
-	public int[][] readFile() {
+	public static int[][] readFile(String path, int pathOption, String filename) {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
 		path = choosePath(path, pathOption, filename);
@@ -60,7 +50,7 @@ public class Reader {
 		return matrix;
 	}
 
-	private String choosePath(String path, int pathOption, String filename) {
+	private static String choosePath(String path, int pathOption, String filename) {
 
 		if (pathOption == 1) {
 			path = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\" + filename;

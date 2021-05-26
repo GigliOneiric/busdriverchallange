@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Config;
-import model.Decoder;
+import model.Encoder;
 import model.Restrictions;
 import model.Solution;
 
@@ -52,7 +52,7 @@ public class RandomWalk {
 
 	public static Solution radomEncodedWalk(boolean additionalRestrictions) {
 
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(additionalRestrictions);
+		List<List<Integer>> driverCombination = Encoder.extractPossibleDrivers(additionalRestrictions);
 
 		List<List<Integer>> encodedSolution = new ArrayList<>();
 		List<Integer> day = new ArrayList<>();
@@ -75,7 +75,7 @@ public class RandomWalk {
 
 	public static List<Integer> randomDriverCombinationForDay(int i, boolean additionalRestrictions) {
 
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(additionalRestrictions);
+		List<List<Integer>> driverCombination = Encoder.extractPossibleDrivers(additionalRestrictions);
 		List<Integer> day = new ArrayList<>();
 
 		int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);

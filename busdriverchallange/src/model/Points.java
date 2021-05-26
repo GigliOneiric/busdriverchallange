@@ -11,7 +11,7 @@ public class Points implements Runnable {
 	public Points(int[][] matrix) {
 		this.matrix = matrix;
 	}
-	
+
 	public int getPoints() {
 		return this.points;
 	}

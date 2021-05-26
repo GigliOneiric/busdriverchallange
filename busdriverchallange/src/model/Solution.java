@@ -19,7 +19,7 @@ public class Solution implements Comparable<Solution> {
 	private Integer points = -10000;
 	private boolean validSolution = true;
 
-	int poolSize = 2;
+	int poolSize = 4;
 	ExecutorService executor = Executors.newFixedThreadPool(poolSize);
 
 	public Solution() {
@@ -34,7 +34,7 @@ public class Solution implements Comparable<Solution> {
 
 	public Solution(List<List<Integer>> encodedMatrix) {
 		this.encodedMatrix = encodedMatrix;
-		this.matrix = Decoder.encodeMatrix(this.encodedMatrix);
+		this.matrix = Encoder.encodeMatrix(this.encodedMatrix);
 		buildSolution();
 
 	}
@@ -60,6 +60,7 @@ public class Solution implements Comparable<Solution> {
 
 		this.validSolution = v.getValidSoultion();
 		this.points = p.getPoints();
+
 	}
 
 	/**
