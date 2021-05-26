@@ -42,7 +42,7 @@ public class Decoder {
 
 				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
 
-					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0 && additionalHardRestrictions[j][i] == 1) {
+					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0 && additionalHardRestrictions[j][i] == 0) {
 
 						int driver = j / Config.routes + 1;
 
