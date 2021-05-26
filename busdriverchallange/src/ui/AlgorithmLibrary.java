@@ -46,9 +46,7 @@ public class AlgorithmLibrary {
 	int numberOfReplacements = 0;
 	int swapsPerRow = 0;
 	int mutationMethod = 0;
-	int moreRestrictions = 0;
-	
-	Reader fileReader = new Reader();
+	boolean additionalRestrictions = false;
 
 	/**
 	 * Selects the algorithm
@@ -150,7 +148,7 @@ public class AlgorithmLibrary {
 
 		Reader r = new Reader(path, pathOption, Config.filenameMatrix);
 		this.matrix = r.readFile();
-		
+
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printResult(this.solutionObj);
@@ -166,17 +164,16 @@ public class AlgorithmLibrary {
 	}
 
 	public void selectRandomWalkBinär() {
-		this.solutionObj = RandomWalk.randomDecodedWalk();
+		this.solutionObj = RandomWalk.randomBinarydWalk();
 
 		Printer.printResult(this.solutionObj);
 
 	}
 
 	private void selectRandomWalkEncoded() {
-		moreRestrictions();
+		additionalRestrictions();
 
-		RandomWalk randomWalk = new RandomWalk(fileReader, moreRestrictions);
-		this.solutionObj = randomWalk.radomEncodedWalk();
+		this.solutionObj = RandomWalk.radomEncodedWalk(additionalRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -184,7 +181,7 @@ public class AlgorithmLibrary {
 
 	private void selectSwapFlip() {
 
-		moreRestrictions();
+		additionalRestrictions();
 
 		Printer.printSwipFlopSelect();
 		int In = readInt();
@@ -193,8 +190,8 @@ public class AlgorithmLibrary {
 		int num = readInt();
 		Printer.printEmptyRow();
 		SwipFlop s = new SwipFlop();
-		
-		this.solutionObj = s.swipFlop(num, In, fileReader, this.moreRestrictions);
+
+		this.solutionObj = s.swipFlop(num, In, additionalRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -265,7 +262,7 @@ public class AlgorithmLibrary {
 
 	private void selectGeneticAlgorithmDecoded() {
 
-		moreRestrictions();
+		additionalRestrictions();
 
 		Printer.printGeneticAlgorithmPopulationSizeConsole();
 		populationSize = readInt();
@@ -318,7 +315,7 @@ public class AlgorithmLibrary {
 		GeneticAlgorithmEncoded g = new GeneticAlgorithmEncoded();
 		this.solutionObj = g.geneticAlgorithmEncoded(generationSize, populationSize, selection, crossovermethod,
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
-				numberOfReplacements, mutationMethod, fileReader, moreRestrictions);
+				numberOfReplacements, mutationMethod, additionalRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -349,20 +346,15 @@ public class AlgorithmLibrary {
 		Printer.printResult(this.solutionObj);
 	}
 
-	private void moreRestrictions() {
+	private void additionalRestrictions() {
+
+		int moreRestrictions = 0;
+
 		Printer.printRestrictions();
-		this.moreRestrictions = readInt();
+		moreRestrictions = readInt();
 
 		if (moreRestrictions == 2) {
-			Printer.printReaderRules(Config.filenameRestrictions);
-			fileReader.setFilename(Config.filenameRestrictions);
-
-			this.fileReader.setPathOption(readInt());
-
-			if (this.fileReader.getPathOption() == 2) {
-				Printer.printReaderPath();
-				this.fileReader.setPath(readString());
-			}
+			this.additionalRestrictions = true;
 		}
 	}
 

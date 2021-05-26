@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import ui.Reader;
-
 /**
  * @author Felix Harms,
  * @author Tobias Stelter
@@ -22,17 +20,13 @@ public class Decoder {
 	 * @return matrix
 	 */
 
-	int additionalHardRestrictions[][] = Default.matrixZeros;
+	public static List<List<Integer>> extractPossibleDrivers(boolean additionalRestrictions) {
 
-	public Decoder(Reader fileReader, int moreRestrictions) {
+		int additionalHardRestrictions[][] = Default.matrixZeros;
 
-		if (moreRestrictions == 2) {
-			this.additionalHardRestrictions = Restrictions.additionalHardRestrictions(fileReader);
+		if (additionalRestrictions == true) {
+			additionalHardRestrictions = Restrictions.addionalRestrictions;
 		}
-
-	}
-
-	public List<List<Integer>> extractPossibleDrivers() {
 
 		List<List<Integer>> possibleDrivers = new ArrayList<>();
 		List<Integer> routeDay = new ArrayList<>();

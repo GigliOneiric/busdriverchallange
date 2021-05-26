@@ -38,7 +38,7 @@ public class GeneticAlgorithmBinary {
 
 		// Generates the population of Size N * 100
 		for (int i = 0; i < populationSize; i++) {
-			solutionObj = RandomWalk.randomDecodedWalk();
+			solutionObj = RandomWalk.randomBinarydWalk();
 			initialPopulation.add(solutionObj);
 		}
 

@@ -7,7 +7,6 @@ import model.Config;
 import model.Decoder;
 import model.Restrictions;
 import model.Solution;
-import ui.Reader;
 
 /**
  * @author Felix Harms,
@@ -17,12 +16,6 @@ import ui.Reader;
  */
 
 public class RandomWalk {
-	
-	private Decoder decoder;
-
-	public RandomWalk(Reader fileReader, int moreRestrictions) {
-		this.decoder = new Decoder(fileReader, moreRestrictions);
-	}
 
 	/**
 	 * Generates a binary random solution
@@ -30,7 +23,7 @@ public class RandomWalk {
 	 * @return matrix
 	 */
 
-	public static Solution randomDecodedWalk() {
+	public static Solution randomBinarydWalk() {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
 		int col_len = matrix.length;
@@ -57,16 +50,16 @@ public class RandomWalk {
 	 * @return matrix
 	 */
 
-	public Solution radomEncodedWalk() {
+	public static Solution radomEncodedWalk(boolean additionalRestrictions) {
 
-		List<List<Integer>> driverCombination = decoder.extractPossibleDrivers();
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(additionalRestrictions);
 
 		List<List<Integer>> encodedSolution = new ArrayList<>();
 		List<Integer> day = new ArrayList<>();
 
 		for (int i = 0; i < driverCombination.size(); i++) {
 
-			day = randomDriverCombinationForDay(i);
+			day = randomDriverCombinationForDay(i, additionalRestrictions);
 			encodedSolution.add(day);
 		}
 
@@ -80,9 +73,9 @@ public class RandomWalk {
 	 * @return day
 	 */
 
-	public List<Integer> randomDriverCombinationForDay(int i) {
+	public static List<Integer> randomDriverCombinationForDay(int i, boolean additionalRestrictions) {
 
-		List<List<Integer>> driverCombination = decoder.extractPossibleDrivers();
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(additionalRestrictions);
 		List<Integer> day = new ArrayList<>();
 
 		int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);

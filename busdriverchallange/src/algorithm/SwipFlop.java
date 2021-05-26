@@ -3,7 +3,6 @@ package algorithm;
 import java.util.List;
 import model.Solution;
 import ui.Printer;
-import ui.Reader;
 
 /**
  * @author Amir Razagh Khah
@@ -15,15 +14,13 @@ import ui.Reader;
 public class SwipFlop {
 
 	Solution solutionObj = new Solution();
-	RandomWalk radomWalk;
 
-	public Solution swipFlop(int num, int In, Reader fileReader, int moreRestrictions) {
+	public Solution swipFlop(int num, int In, boolean additionalRestrictions) {
 
-		this.radomWalk = new RandomWalk(fileReader, moreRestrictions);
-		this.solutionObj = radomWalk.radomEncodedWalk();
+		this.solutionObj = RandomWalk.radomEncodedWalk(additionalRestrictions);
 
 		if (In == 1) {
-			this.solutionObj = swip(num, fileReader, moreRestrictions);
+			this.solutionObj = swip(num, additionalRestrictions);
 		} else if (In == 2) {
 			this.solutionObj = flop(num);
 		}
@@ -31,7 +28,7 @@ public class SwipFlop {
 		return this.solutionObj;
 	}
 
-	private Solution swip(int num, Reader fileReader, int moreRestrictions) {
+	private Solution swip(int num, boolean additionalRestrictions) {
 
 		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
 		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
@@ -39,7 +36,7 @@ public class SwipFlop {
 		for (int i = 1; i <= num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, encodedSolution.size() - 1);
-			List<Integer> day = radomWalk.randomDriverCombinationForDay(number);
+			List<Integer> day = RandomWalk.randomDriverCombinationForDay(number, additionalRestrictions);
 			encodedSolution.set(number, day);
 			this.solutionObj = new Solution(encodedSolution);
 			Printer.printGeneticAlgorithmPointsPerGen(i, this.solutionObj.getPoints());
