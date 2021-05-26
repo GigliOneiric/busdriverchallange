@@ -144,7 +144,7 @@ public class AlgorithmLibrary {
 			path = readString();
 		}
 
-		this.matrix = Reader.readFile(path, pathOption);
+		this.matrix = Reader.readFile(path, pathOption, "matrix.txt");
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printResult(this.solutionObj);
@@ -165,14 +165,13 @@ public class AlgorithmLibrary {
 		Printer.printResult(this.solutionObj);
 
 	}
-	
+
 	private void selectRandomWalkEncoded() {
 		this.solutionObj = RandomWalk.radomEncodedWalk();
 
 		Printer.printResult(this.solutionObj);
-		
-	}
 
+	}
 
 	private void selectSwapFlip() {
 		Printer.printSwipFlopSelect();

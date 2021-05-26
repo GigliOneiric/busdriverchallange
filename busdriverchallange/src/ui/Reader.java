@@ -22,12 +22,10 @@ public class Reader {
 	 * @return matrix
 	 */
 
-	private static String filename = "matrix.txt";
-
-	public static int[][] readFile(String path, int pathOption) {
+	public static int[][] readFile(String path, int pathOption, String filename) {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
-		path = choosePath(path, pathOption);
+		path = choosePath(path, pathOption, filename);
 		Path filePath = Paths.get(path);
 
 		// converting to UTF 8
@@ -48,7 +46,7 @@ public class Reader {
 		return matrix;
 	}
 
-	private static String choosePath(String path, int pathOption) {
+	private static String choosePath(String path, int pathOption, String filename) {
 
 		if (pathOption == 1) {
 			path = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\" + filename;
