@@ -22,10 +22,6 @@ public class Reader {
 	 * @return matrix
 	 */
 
-	String path;
-	int pathOption;
-	String filename;
-
 	public static int[][] readFile(String path, int pathOption, String filename) {
 		int[][] matrix = new int[Config.drivers * Config.routes][Config.totalDays * Config.shiftsPerDay];
 
@@ -62,30 +58,6 @@ public class Reader {
 
 		return path;
 
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public int getPathOption() {
-		return pathOption;
-	}
-
-	public void setPathOption(int pathOption) {
-		this.pathOption = pathOption;
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 
 }
