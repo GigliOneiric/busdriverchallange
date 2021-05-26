@@ -49,8 +49,8 @@ public class Printer {
 		System.out.println("Geben Sie die Populationsgröße ein.");
 	}
 
-	public static void printReaderRules() {
-		System.out.println("Bitte nennen Sie Ihre Datei matrix.txt");
+	public static void printReaderRules(String filename) {
+		System.out.println("Bitte nennen Sie Ihre Datei"+filename);
 		System.out.println("Welches Verzeichnis wollen Sie benutzen?");
 		System.out.println("[1] C:\\Users\\[Benutzername]\\Desktop");
 		System.out.println("[2] Anderes");
@@ -59,6 +59,12 @@ public class Printer {
 
 	public static void printReaderPath() {
 		System.out.println("Geben Sie das Verzeichnis ein");
+	}
+	
+	public static void printRestrictions() {
+		System.out.println("Wollen Sie zusätzliche Restrictions einlesen?");
+		System.out.println("[1] Nein");
+		System.out.println("[2] Ja");
 	}
 
 	public static void printGeneticAlgorithmChildrenConsole() {

@@ -12,24 +12,27 @@ import java.util.List;
  */
 
 public class Decoder {
-	
+
 	/**
-	 * Extracts all possible drivers per day
-	 * Route 1: List entry 0  - 13
-	 * Route 2: List entry 14 - 27
-	 * Route 3: List entry 28 - 32
+	 * Extracts all possible drivers per day Route 1: List entry 0 - 13 Route 2:
+	 * List entry 14 - 27 Route 3: List entry 28 - 32
 	 * 
 	 * @return matrix
 	 */
 
-	public static List<List<Integer>> extractPossibleDrivers() {
+	public static List<List<Integer>> extractPossibleDrivers(String path, int pathOption, int moreRestrictions) {
 
 		List<List<Integer>> possibleDrivers = new ArrayList<>();
 		List<Integer> routeDay = new ArrayList<>();
 
-		int matrix[][] = Restrictions.license;
-		int col_len = matrix.length;
-		int row_len = matrix[0].length;
+		int col_len = Default.matrixZeros.length;
+		int row_len = Default.matrixZeros.length;
+
+		int additionalHardRestrictions[][] = Default.matrixZeros;
+		
+		if (moreRestrictions == 2) {
+			additionalHardRestrictions = Restrictions.additionalHardRestrictions(path, pathOption);
+		}
 
 		for (int k = 0; k < Config.routes; k++) {
 
@@ -39,7 +42,7 @@ public class Decoder {
 
 				for (int j = 0 + k; j < col_len; j = j + Config.routes) {
 
-					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0) {
+					if (Restrictions.license[j][i] == 1 && Restrictions.holliday[j][i] == 0 && additionalHardRestrictions[j][i] == 0) {
 
 						int driver = j / Config.routes + 1;
 
@@ -52,7 +55,7 @@ public class Decoder {
 		}
 		return possibleDrivers;
 	}
-	
+
 	/**
 	 * Encodes an encoded solution to a matrix
 	 * 

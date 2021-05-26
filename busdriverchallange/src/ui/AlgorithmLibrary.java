@@ -12,6 +12,7 @@ import algorithm.RandomWalk;
 import algorithm.SimulatedAnnealing;
 import algorithm.SwipFlop;
 import algorithm.TabuSearch;
+import model.Config;
 import model.Default;
 import model.Solution;
 
@@ -45,6 +46,9 @@ public class AlgorithmLibrary {
 	int numberOfReplacements = 0;
 	int swapsPerRow = 0;
 	int mutationMethod = 0;
+	String path = "";
+	int pathOption = 0;
+	int moreRestrictions = 0;
 
 	/**
 	 * Selects the algorithm
@@ -134,7 +138,7 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectReadFromFile() {
-		Printer.printReaderRules();
+		Printer.printReaderRules(Config.filenameMatrix);
 
 		String path = "";
 		int pathOption = readInt();
@@ -144,7 +148,7 @@ public class AlgorithmLibrary {
 			path = readString();
 		}
 
-		this.matrix = Reader.readFile(path, pathOption, "matrix.txt");
+		this.matrix = Reader.readFile(path, pathOption, Config.filenameMatrix);
 		this.solutionObj = new Solution(this.matrix);
 
 		Printer.printResult(this.solutionObj);
@@ -167,13 +171,18 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectRandomWalkEncoded() {
-		this.solutionObj = RandomWalk.radomEncodedWalk();
+		moreRestrictions();
+
+		this.solutionObj = RandomWalk.radomEncodedWalk(path, pathOption, moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
 	}
 
 	private void selectSwapFlip() {
+
+		moreRestrictions();
+
 		Printer.printSwipFlopSelect();
 		int In = readInt();
 		Printer.printEmptyRow();
@@ -181,7 +190,7 @@ public class AlgorithmLibrary {
 		int num = readInt();
 		Printer.printEmptyRow();
 		SwipFlop s = new SwipFlop();
-		this.solutionObj = s.swipFlop(num, In);
+		this.solutionObj = s.swipFlop(num, In, path, pathOption, moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -252,6 +261,8 @@ public class AlgorithmLibrary {
 
 	private void selectGeneticAlgorithmDecoded() {
 
+		moreRestrictions();
+
 		Printer.printGeneticAlgorithmPopulationSizeConsole();
 		populationSize = readInt();
 
@@ -303,7 +314,7 @@ public class AlgorithmLibrary {
 		GeneticAlgorithmEncoded g = new GeneticAlgorithmEncoded();
 		this.solutionObj = g.geneticAlgorithmEncoded(generationSize, populationSize, selection, crossovermethod,
 				crossoverPoint, crossoverPointTWO, mutationRate, tournamentSize, childrenNumber, replacementMethod,
-				numberOfReplacements, mutationMethod);
+				numberOfReplacements, mutationMethod, path, pathOption, moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -312,7 +323,7 @@ public class AlgorithmLibrary {
 	private void selectParticleSwarmOptimization() {
 
 		ParticleSwarmOptimization p = new ParticleSwarmOptimization();
-		this.solutionObj = p.particleSwarmOptimization();
+		this.solutionObj = p.particleSwarmOptimization(path, pathOption, moreRestrictions);
 
 		Printer.printResult(this.solutionObj);
 
@@ -332,6 +343,22 @@ public class AlgorithmLibrary {
 		this.solutionObj = s.simulatedAnnealing();
 
 		Printer.printResult(this.solutionObj);
+	}
+
+	private void moreRestrictions() {
+		Printer.printRestrictions();
+		this.moreRestrictions = readInt();
+
+		if (moreRestrictions == 2) {
+			Printer.printReaderRules(Config.filenameRestrictions);
+
+			this.pathOption = readInt();
+
+			if (this.pathOption == 2) {
+				Printer.printReaderPath();
+				this.path = readString();
+			}
+		}
 	}
 
 	/**

@@ -1,8 +1,9 @@
 package model;
 
+import ui.Reader;
+
 /**
- * @author Tobias Stelter
- * This class implement the restrictions.
+ * @author Tobias Stelter This class implement the restrictions.
  */
 
 public class Restrictions {
@@ -151,5 +152,12 @@ public class Restrictions {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // K2
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } // K3
 	};
+
+	public static int[][] additionalHardRestrictions(String path, int pathOption) {
+
+		int[][] additionalHardRestrictions = Reader.readFile(path, pathOption, Config.filenameRestrictions);
+
+		return additionalHardRestrictions;
+	}
 
 }

@@ -50,16 +50,16 @@ public class RandomWalk {
 	 * @return matrix
 	 */
 
-	public static Solution radomEncodedWalk() {
+	public static Solution radomEncodedWalk(String path, int pathOption, int moreRestrictions) {
 
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers();
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(path, pathOption, moreRestrictions);
 		
 		List<List<Integer>> encodedSolution = new ArrayList<>();
 		List<Integer> day = new ArrayList<>();
 
 		for (int i = 0; i < driverCombination.size(); i++) {
 
-			day = randomDriverCombinationForDay(i);
+			day = randomDriverCombinationForDay(i, path, pathOption, moreRestrictions);
 			encodedSolution.add(day);
 		}
 
@@ -73,9 +73,9 @@ public class RandomWalk {
 	 * @return day
 	 */
 	
-	public static List<Integer> randomDriverCombinationForDay(int i) {
+	public static List<Integer> randomDriverCombinationForDay(int i, String path, int pathOption, int moreRestrictions) {
 		
-		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers();
+		List<List<Integer>> driverCombination = Decoder.extractPossibleDrivers(path, pathOption, moreRestrictions);
 		List<Integer> day = new ArrayList<>();
 
 		int driverDAY = RandomWalk.getRandomInt(0, driverCombination.get(i).size() - 1);

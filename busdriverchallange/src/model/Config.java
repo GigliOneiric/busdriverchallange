@@ -29,5 +29,8 @@ public class Config {
 	public static int pointsUnbalancedNightShifts = -8; // For every late shift assigned that is not equal to 4
 	
 	public static int pointsInvalidSolution = -50; // For every late shift assigned that is not equal to 4
+	
+	public static String filenameMatrix = "matrix.txt";
+	public static String filenameRestrictions = "restrictions.txt";
 
 }

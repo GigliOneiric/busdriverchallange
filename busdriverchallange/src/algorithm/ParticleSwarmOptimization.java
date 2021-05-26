@@ -6,9 +6,9 @@ import model.Solution;
 
 public class ParticleSwarmOptimization {
 
-	public Solution particleSwarmOptimization() {
+	public Solution particleSwarmOptimization(String path, int pathOption, int moreRestrictions) {
 
-		Solution solutionObj = RandomWalk.radomEncodedWalk();
+		Solution solutionObj = RandomWalk.radomEncodedWalk(path, pathOption, moreRestrictions);
 		List<List<Integer>> myString = solutionObj.getEncodedMatrix();
 		List<Integer> myStringZWO = myString.get(0);
 		int shiftOne = myStringZWO.get(0);
