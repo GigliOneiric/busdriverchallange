@@ -99,7 +99,7 @@ public class SimulatedAnnealing {
 
 			int y = 0;
 
-			while (temp > 1) {
+			while (this.temp > 1) {
 
 				encodedSolution = this.solutionObjCurr.getEncodedMatrix();
 
@@ -158,7 +158,7 @@ public class SimulatedAnnealing {
 
 			int y = 0;
 
-			while (temp > 1) {
+			while (this.temp > 1) {
 
 				for (int i = 0; i < encodedSolution.size(); i++) {
 
@@ -219,7 +219,7 @@ public class SimulatedAnnealing {
 
 			int y = 0;
 
-			while (temp > 1) {
+			while (this.temp > 1) {
 
 				for (int d = 1; d <= Config.drivers; d++) {
 
