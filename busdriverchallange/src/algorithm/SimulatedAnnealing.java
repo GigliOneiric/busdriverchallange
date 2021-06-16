@@ -122,7 +122,7 @@ public class SimulatedAnnealing {
 			}
 		}
 
-		return this.solutionObjCurr;
+		return this.solutionObjBest;
 
 	}
 
@@ -181,7 +181,7 @@ public class SimulatedAnnealing {
 			}
 		}
 
-		return this.solutionObjCurr;
+		return this.solutionObjBest;
 
 	}
 
