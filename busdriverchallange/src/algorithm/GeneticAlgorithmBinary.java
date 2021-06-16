@@ -27,6 +27,8 @@ public class GeneticAlgorithmBinary {
 
 		Solution solutionObj = new Solution();
 
+		int oldPoints = Integer.MIN_VALUE;
+
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
 
@@ -86,7 +88,11 @@ public class GeneticAlgorithmBinary {
 			}
 
 			int points = Solution.findBestSolution(generation).getPoints();
-			Printer.printGeneticAlgorithmPointsPerGen(g, points);
+
+			if (points > oldPoints) {
+				Printer.printGeneticAlgorithmPointsPerGen(g, points);
+				oldPoints = points;
+			}
 
 			initialPopulation = generation;
 		}
@@ -558,7 +564,5 @@ public class GeneticAlgorithmBinary {
 		return initialPopulation;
 
 	}
-
-	
 
 }

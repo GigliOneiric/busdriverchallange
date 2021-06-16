@@ -23,6 +23,8 @@ public class GeneticAlgorithmEncoded {
 			int replacementMethod, int numberOfReplacements, int mutationMethod, boolean additionalRestrictions) {
 
 		Solution solutionObj = new Solution();
+		
+		int oldPoints = Integer.MIN_VALUE;
 
 		List<Solution> initialPopulation = new ArrayList<Solution>();
 		List<Solution> generation = new ArrayList<Solution>();
@@ -76,7 +78,11 @@ public class GeneticAlgorithmEncoded {
 			}
 
 			int points = Solution.findBestSolution(generation).getPoints();
-			Printer.printGeneticAlgorithmPointsPerGen(g, points);
+			
+			if (points > oldPoints) {
+				Printer.printGeneticAlgorithmPointsPerGen(g, points);
+				oldPoints = points;
+			}
 
 			initialPopulation = generation;
 		}

@@ -20,36 +20,36 @@ public class SwipFlop {
 		this.solutionObj = RandomWalk.radomEncodedWalk(additionalRestrictions);
 
 		if (In == 1) {
-			this.solutionObj = swip(num, additionalRestrictions);
+			this.solutionObj = swip(num, additionalRestrictions, this.solutionObj);
 		} else if (In == 2) {
-			this.solutionObj = flop(num);
+			this.solutionObj = flop(num, this.solutionObj);
 		}
 
 		return this.solutionObj;
 	}
 
-	private Solution swip(int num, boolean additionalRestrictions) {
+	public static Solution swip(int num, boolean additionalRestrictions, Solution solutionObj) {
 
-		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
-		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
+		Printer.printGeneticAlgorithmPointsPerGen(0, solutionObj.getPoints());
+		List<List<Integer>> encodedSolution = solutionObj.getEncodedMatrix();
 
 		for (int i = 1; i <= num; i++) {
 
 			int number = RandomWalk.getRandomInt(0, encodedSolution.size() - 1);
 			List<Integer> day = RandomWalk.randomDriverCombinationForDay(number, additionalRestrictions);
 			encodedSolution.set(number, day);
-			this.solutionObj = new Solution(encodedSolution);
-			Printer.printGeneticAlgorithmPointsPerGen(i, this.solutionObj.getPoints());
+			solutionObj = new Solution(encodedSolution);
+			Printer.printGeneticAlgorithmPointsPerGen(i, solutionObj.getPoints());
 
 		}
-		return this.solutionObj;
+		return solutionObj;
 
 	}
 
-	private Solution flop(int num) {
+	public Solution flop(int num, Solution solutionObj) {
 
-		Printer.printGeneticAlgorithmPointsPerGen(0, this.solutionObj.getPoints());
-		List<List<Integer>> encodedSolution = this.solutionObj.getEncodedMatrix();
+		Printer.printGeneticAlgorithmPointsPerGen(0, solutionObj.getPoints());
+		List<List<Integer>> encodedSolution = solutionObj.getEncodedMatrix();
 
 		for (int i = 1; i <= num; i++) {
 
@@ -57,12 +57,12 @@ public class SwipFlop {
 			List<Integer> day = flopDay(encodedSolution, number);
 			encodedSolution.set(number, day);
 
-			this.solutionObj = new Solution(encodedSolution);
+			solutionObj = new Solution(encodedSolution);
 
-			Printer.printGeneticAlgorithmPointsPerGen(i, this.solutionObj.getPoints());
+			Printer.printGeneticAlgorithmPointsPerGen(i, solutionObj.getPoints());
 
 		}
-		return this.solutionObj;
+		return solutionObj;
 	}
 
 	public static List<Integer> flopDay(List<List<Integer>> encodedSolution, int number) {

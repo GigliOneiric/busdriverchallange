@@ -339,8 +339,12 @@ public class AlgorithmLibrary {
 
 	private void selectSimulatedAnnealing() {
 
+		additionalRestrictions();
+
+		int in = 1;
+
 		SimulatedAnnealing s = new SimulatedAnnealing();
-		this.solutionObj = s.simulatedAnnealing();
+		this.solutionObj = s.simulatedAnnealing(in, additionalRestrictions);
 
 		Printer.printResult(this.solutionObj);
 	}

@@ -151,6 +151,11 @@ public class Printer {
 	public static void printError() {
 		System.out.println("Fehler");
 	}
+	
+	public static void changeToSA() {
+		printEmptyRow();
+		System.out.println("Wechsel zum Simulated Annealing Algorithmus");
+	}
 
 	public static void printPointsConsole(int points) {
 		System.out.println("Punkte: " + points);
@@ -162,6 +167,10 @@ public class Printer {
 
 	public static void printGeneticAlgorithmPointsPerGen(int generation, int points) {
 		System.out.println("Generation: " + generation + " | Punkte: " + points);
+	}
+	
+	public static void printSimulatedAnnealingPoints(int iteration, int points) {
+		System.out.println("Iteration: " + iteration + " | Punkte: " + points);
 	}
 	
 	public static void printResult(Solution solutionObj) {
