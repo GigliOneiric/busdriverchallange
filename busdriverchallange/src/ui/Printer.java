@@ -36,6 +36,13 @@ public class Printer {
 		System.out.println("[1]  Swip");
 		System.out.println("[2]  Flop");
 	}
+	
+	public static void printSimulatedAnnealingOption() {
+		System.out.println("Wie sollen Nachbarn erzeugt werden?");
+		System.out.println("[1]  Swip");
+		System.out.println("[2]  Flop");
+		System.out.println("[3]  Fahrertausch");
+	}
 
 	public static void printSwipFlopNumber() {
 		System.out.println("Bitte geben Sie ein wie oft die Option wiederholt werden soll:");
@@ -43,6 +50,25 @@ public class Printer {
 
 	public static void printGeneticAlgorithmGenerationSizeConsole() {
 		System.out.println("Geben Sie die Anzahl der Generationen ein.");
+	}
+	
+	public static void printIteration() {
+		System.out.println("Geben Sie die Anzahl der Iterationen ein.");
+	}
+	
+	public static void printSimulatedAnnealingAcceptance() {
+		System.out.println("Geben Sie das Akzeptanzkriterium ein.");
+		System.out.println("[1]  Metropolis (Dynamic)");
+		System.out.println("[2]  Metropolis (Fixed)");
+		
+	}
+	
+	public static void printSimulatedTemp() {
+		System.out.println("Geben Sie die Temperatur ein.");		
+	}
+	
+	public static void printSimulatedCoolingRate() {
+		System.out.println("Geben Sie die Kühlrate ein.");		
 	}
 
 	public static void printGeneticAlgorithmPopulationSizeConsole() {

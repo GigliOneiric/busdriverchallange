@@ -338,13 +338,36 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectSimulatedAnnealing() {
+		
+		int in = 1;
+		int interation = 10000;
+		int temp = 10000;
+		double coolingRate = 0.003;
 
 		additionalRestrictions();
 
-		int in = 1;
+		Printer.printSimulatedAnnealingAcceptance();
+		int evalOption = readInt();
+
+		if(evalOption == 1) {
+			Printer.printIteration();
+			interation = readInt();
+		}
+		
+		if(evalOption == 2) {
+			
+			Printer.printSimulatedTemp();
+			temp = readInt();
+			
+			Printer.printSimulatedCoolingRate();
+			coolingRate = readDouble();
+		}
+		
+		Printer.printSimulatedAnnealingOption();
+		in = readInt();
 
 		SimulatedAnnealing s = new SimulatedAnnealing();
-		this.solutionObj = s.simulatedAnnealing(in, additionalRestrictions);
+		this.solutionObj = s.simulatedAnnealing(in, additionalRestrictions, evalOption, interation, temp, coolingRate);
 
 		Printer.printResult(this.solutionObj);
 	}
