@@ -111,6 +111,10 @@ public class AlgorithmLibrary {
 		} else if (algorithmNumber == 12) {
 
 			selectSimulatedAnnealing();
+			
+		} else if (algorithmNumber == 13) {
+
+				selectGASA();
 
 		} else {
 			Printer.printNoAlgorithmSelected();
@@ -338,7 +342,7 @@ public class AlgorithmLibrary {
 	}
 
 	private void selectSimulatedAnnealing() {
-		
+
 		int in = 1;
 		int interation = 10000;
 		int temp = 10000;
@@ -349,20 +353,20 @@ public class AlgorithmLibrary {
 		Printer.printSimulatedAnnealingAcceptance();
 		int evalOption = readInt();
 
-		if(evalOption == 1) {
+		if (evalOption == 1) {
 			Printer.printIteration();
 			interation = readInt();
 		}
-		
-		if(evalOption == 2) {
-			
+
+		if (evalOption == 2) {
+
 			Printer.printSimulatedTemp();
 			temp = readInt();
-			
+
 			Printer.printSimulatedCoolingRate();
 			coolingRate = readDouble();
 		}
-		
+
 		Printer.printSimulatedAnnealingOption();
 		in = readInt();
 
@@ -370,6 +374,47 @@ public class AlgorithmLibrary {
 		this.solutionObj = s.simulatedAnnealing(in, additionalRestrictions, evalOption, interation, temp, coolingRate);
 
 		Printer.printResult(this.solutionObj);
+	}
+
+	private void selectSimulatedAnnealingAfterAlgo() {
+
+		int in = 1;
+		int interation = 10000;
+		int temp = 10000;
+		double coolingRate = 0.003;
+
+		additionalRestrictions();
+
+		Printer.printSimulatedAnnealingAcceptance();
+		int evalOption = readInt();
+
+		if (evalOption == 1) {
+			Printer.printIteration();
+			interation = readInt();
+		}
+
+		if (evalOption == 2) {
+
+			Printer.printSimulatedTemp();
+			temp = readInt();
+
+			Printer.printSimulatedCoolingRate();
+			coolingRate = readDouble();
+		}
+
+		Printer.printSimulatedAnnealingOption();
+		in = readInt();
+
+		SimulatedAnnealing s = new SimulatedAnnealing();
+		this.solutionObj = s.simulatedAnnealing(in, this.solutionObj, additionalRestrictions, evalOption, interation, temp, coolingRate);
+
+		Printer.printResult(this.solutionObj);
+	}
+
+	private void selectGASA() {
+		selectGeneticAlgorithmDecoded();
+		Printer.changeToSA();
+		selectSimulatedAnnealingAfterAlgo();
 	}
 
 	private void additionalRestrictions() {

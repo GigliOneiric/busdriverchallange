@@ -29,6 +29,7 @@ public class Printer {
 		System.out.println("[10] Partikelschwarmoptimierung");
 		System.out.println("[11] Tabu-Suche (Tabu search)");
 		System.out.println("[12] Simulated Annealing");
+		System.out.println("[13] GASA");
 	}
 
 	public static void printSwipFlopSelect() {
@@ -39,9 +40,10 @@ public class Printer {
 	
 	public static void printSimulatedAnnealingOption() {
 		System.out.println("Wie sollen Nachbarn erzeugt werden?");
-		System.out.println("[1]  Swip");
-		System.out.println("[2]  Flop");
-		System.out.println("[3]  Fahrertausch");
+		System.out.println("[1]  Swip (Alle Spalten sequentiell)");
+		System.out.println("[2]  Swip (Zufällige Anzahl von Spalten mit zufällig gewählten Spalten)");
+		System.out.println("[3]  Flop");
+		System.out.println("[4]  Fahrertausch");
 	}
 
 	public static void printSwipFlopNumber() {

@@ -33,10 +33,12 @@ public class SimulatedAnnealing {
 		this.additionalRestrictions = additionalRestrictions;
 
 		if (In == 1) {
-			this.solutionObjBest = swip(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swipSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 2) {
-			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swipRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 3) {
+			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+		} else if (In == 4) {
 			this.solutionObjBest = changeDrivers(this.solutionObjCurr, evalOption, temp, coolingRate);
 		}
 
@@ -50,16 +52,18 @@ public class SimulatedAnnealing {
 		this.solutionObjCurr = solutionObj;
 		this.solutionObjInital = solutionObj;
 		this.solutionObjBest = solutionObj;
-		
+
 		this.interation = interation;
 		this.temp = temp;
 		this.coolingRate = coolingRate;
 
 		if (In == 1) {
-			this.solutionObjBest = swip(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swipSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 2) {
-			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swipRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 3) {
+			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+		} else if (In == 4) {
 			this.solutionObjBest = changeDrivers(this.solutionObjCurr, evalOption, temp, coolingRate);
 		}
 
@@ -126,7 +130,7 @@ public class SimulatedAnnealing {
 
 	}
 
-	private Solution swip(Solution solutionObj, int evalOption, int temp, double coolingRate) {
+	private Solution swipSequential(Solution solutionObj, int evalOption, int temp, double coolingRate) {
 
 		Solution solutionObjNeighbour = this.solutionObjCurr;
 
@@ -174,6 +178,97 @@ public class SimulatedAnnealing {
 						this.solutionObjBest = storeBest(encodedSolution, solutionObjBest, solutionObj, y);
 					}
 
+				}
+
+				this.temp *= 1 - this.coolingRate;
+				y++;
+			}
+		}
+
+		return this.solutionObjBest;
+
+	}
+
+	private Solution swipRandom(Solution solutionObj, int evalOption, int temp, double coolingRate) {
+
+		Solution solutionObjNeighbour = this.solutionObjCurr;
+
+		List<List<Integer>> encodedSolution = this.solutionObjCurr.getEncodedMatrix();
+
+		if (evalOption == 1) {
+
+			for (int y = 0; y < interation; y++) {
+
+				int numberOfSwips = RandomWalk.getRandomInt(0, encodedSolution.size());
+				int counter = 0;
+
+				while (counter < numberOfSwips) {
+
+					for (int i = 0; i < encodedSolution.size(); i++) {
+
+						double coin = RandomWalk.getRandomDouble(0, 1);
+
+						if (coin > 0.5) {
+
+							encodedSolution = this.solutionObjCurr.getEncodedMatrix();
+
+							List<Integer> day = RandomWalk.randomDriverCombinationForDay(i, additionalRestrictions);
+							encodedSolution.set(i, day);
+							solutionObjNeighbour = new Solution(encodedSolution);
+
+							if (evalCanditat(evalOption, solutionObj, solutionObjNeighbour, y, temp, coolingRate)) {
+								this.solutionObjCurr = solutionObjNeighbour;
+
+								this.solutionObjBest = storeBest(encodedSolution, solutionObjBest, solutionObj, y);
+							}
+
+							counter++;
+						}
+						if (i == numberOfSwips) {
+							break;
+						}
+
+					}
+				}
+			}
+		}
+
+		if (evalOption == 2) {
+
+			int y = 0;
+
+			while (this.temp > 1) {
+
+				int numberOfSwips = RandomWalk.getRandomInt(0, encodedSolution.size());
+				int counter = 0;
+
+				while (counter < numberOfSwips) {
+
+					for (int i = 0; i < encodedSolution.size(); i++) {
+
+						double coin = RandomWalk.getRandomDouble(0, 1);
+
+						if (coin > 0.5) {
+
+							encodedSolution = this.solutionObjCurr.getEncodedMatrix();
+
+							List<Integer> day = RandomWalk.randomDriverCombinationForDay(i, additionalRestrictions);
+							encodedSolution.set(i, day);
+							solutionObjNeighbour = new Solution(encodedSolution);
+
+							if (evalCanditat(evalOption, solutionObj, solutionObjNeighbour, y, temp, coolingRate)) {
+								this.solutionObjCurr = solutionObjNeighbour;
+
+								this.solutionObjBest = storeBest(encodedSolution, solutionObjBest, solutionObj, y);
+							}
+
+							counter++;
+						}
+						if (i == numberOfSwips) {
+							break;
+						}
+
+					}
 				}
 
 				this.temp *= 1 - this.coolingRate;
@@ -282,8 +377,8 @@ public class SimulatedAnnealing {
 		// https://machinelearningmastery.com/simulated-annealing-from-scratch-in-python/
 		if (evalOption == 1) {
 			store = evalCanditatMetropolis(solutionObjCurr, solutionObjNeighbour, itersation);
-			
-		// https://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6	
+
+			// https://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
 		} else if (evalOption == 2) {
 			store = evalCanditatTemp(solutionObjCurr, solutionObjNeighbour, temp, coolingRate);
 		}
