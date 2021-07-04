@@ -40,9 +40,9 @@ public class Printer {
 	
 	public static void printSimulatedAnnealingOption() {
 		System.out.println("Wie sollen Nachbarn erzeugt werden?");
-		System.out.println("[1]  Swip (Alle Spalten sequentiell)");
-		System.out.println("[2]  Swip (Zufällige Anzahl von Spalten mit zufällig gewählten Spalten)");
-		System.out.println("[3]  Flop");
+		System.out.println("[1]  Flop (Alle Spalten sequentiell)");
+		System.out.println("[2]  Flop (Zufällige Anzahl von Spalten mit zufällig gewählten Spalten)");
+		System.out.println("[3]  Swip");
 		System.out.println("[4]  Fahrertausch");
 	}
 

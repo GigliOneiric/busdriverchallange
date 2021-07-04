@@ -33,11 +33,11 @@ public class SimulatedAnnealing {
 		this.additionalRestrictions = additionalRestrictions;
 
 		if (In == 1) {
-			this.solutionObjBest = swipSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = flopSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 2) {
-			this.solutionObjBest = swipRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = flopRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 3) {
-			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swip(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 4) {
 			this.solutionObjBest = changeDrivers(this.solutionObjCurr, evalOption, temp, coolingRate);
 		}
@@ -58,11 +58,11 @@ public class SimulatedAnnealing {
 		this.coolingRate = coolingRate;
 
 		if (In == 1) {
-			this.solutionObjBest = swipSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = flopSequential(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 2) {
-			this.solutionObjBest = swipRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = flopRandom(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 3) {
-			this.solutionObjBest = flop(this.solutionObjCurr, evalOption, temp, coolingRate);
+			this.solutionObjBest = swip(this.solutionObjCurr, evalOption, temp, coolingRate);
 		} else if (In == 4) {
 			this.solutionObjBest = changeDrivers(this.solutionObjCurr, evalOption, temp, coolingRate);
 		}
@@ -71,7 +71,7 @@ public class SimulatedAnnealing {
 
 	}
 
-	private Solution flop(Solution solutionObj, int evalOption, int temp, double coolingRate) {
+	private Solution swip(Solution solutionObj, int evalOption, int temp, double coolingRate) {
 
 		Solution solutionObjNeighbour = solutionObj;
 
@@ -130,7 +130,7 @@ public class SimulatedAnnealing {
 
 	}
 
-	private Solution swipSequential(Solution solutionObj, int evalOption, int temp, double coolingRate) {
+	private Solution flopSequential(Solution solutionObj, int evalOption, int temp, double coolingRate) {
 
 		Solution solutionObjNeighbour = this.solutionObjCurr;
 
@@ -189,7 +189,7 @@ public class SimulatedAnnealing {
 
 	}
 
-	private Solution swipRandom(Solution solutionObj, int evalOption, int temp, double coolingRate) {
+	private Solution flopRandom(Solution solutionObj, int evalOption, int temp, double coolingRate) {
 
 		Solution solutionObjNeighbour = this.solutionObjCurr;
 
