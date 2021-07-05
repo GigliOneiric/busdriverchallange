@@ -5,6 +5,7 @@ import model.Solution;
 
 /**
  * @author Tobias Stelter This class implements the bruteforce-algorithm.
+ * 
  */
 
 public class Bruteforce {
