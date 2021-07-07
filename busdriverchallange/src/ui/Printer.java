@@ -26,8 +26,8 @@ public class Printer {
 		System.out.println("[7] Swip Flop");
 		System.out.println("[8] Genetischer Algorithmus (Binär)");
 		System.out.println("[9] Genetischer Algorithmus (Decoded)");
-		System.out.println("[10] Partikelschwarmoptimierung");
-		System.out.println("[11] Tabu-Suche (Tabu search)");
+		System.out.println("[10] Partikelschwarmoptimierung - Nicht implementiert");
+		System.out.println("[11] Tabu-Suche (Tabu search) - Nicht implementiert");
 		System.out.println("[12] Simulated Annealing");
 		System.out.println("[13] GASA");
 	}
